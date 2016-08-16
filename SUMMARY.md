@@ -9,7 +9,6 @@
    * [NIO](nio.md)
 * [Spring 관련 정리](spring_ad00_b828_c815_b9ac.md)
    * Bean init, destroy 순서
-   * Bean init, destroy 순서
 * [코드 리팩토링](cf54_b4dc_b9ac_d329_d1a0_b9c1.md)
    * [한번에 하나씩](d55c_bc88_c5d0_d558_b098_c529.md)
 * [지속적 통합 (CI)](c9c0_c18d_c801_d1b5_d569__ci.md)
