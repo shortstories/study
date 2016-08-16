@@ -17,5 +17,5 @@
    * [Flume 테스트](flume_d14c_c2a4_d2b8.md)
    * [Fluentd 테스트](fluentd_d14c_c2a4_d2b8.md)
 * [Web Socket 정리](web_socket_c815_b9ac.md)
-* Akka
+* [Akka](akka.md)
 
