@@ -7,9 +7,9 @@
 * [Java 관련 정리](java_ad00_b828_c815_b9ac.md)
    * [Primitive Wrapper class](primitive_wrapper_class.md)
    * [NIO](nio.md)
+* [Flume 정리](flume_c815_b9ac.md)
 * [코드 리팩토링](cf54_b4dc_b9ac_d329_d1a0_b9c1.md)
    * [한번에 하나씩](d55c_bc88_c5d0_d558_b098_c529.md)
 * [지속적 통합 (CI)](c9c0_c18d_c801_d1b5_d569__ci.md)
    * [Jenkins pipeline 삽질기](jenkins_pipeline_c0bd_c9c8_ae30.md)
-* [Flume 정리](flume_c815_b9ac.md)
 
