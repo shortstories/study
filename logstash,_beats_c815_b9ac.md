@@ -164,32 +164,6 @@ filebeat:
 
 **2. 큰 파일이 여러개 존재하는 경우 CPU 자원을 지나치게 많이 소비함. 쓰로틀링을 거는 방법도 존재하지 않음.**
 
-### 대안 비교
-
-||filebeat|node.js|java|linux tail|
-|---|---------|------|----|-----------|
-|파일 감시|directory 통째로, 일부 파일 와일드카드, 정규식 사용해서 감시하는 것이 가능|fs라이브러리를 사용해서 감시 가능|WatchService 사용해서 감시 가능|불가능|
-|로그 롤링|기본적으로 파일을 busy상태로 만들기 때문에 불가능. 문서대로 ignore_older 값을 설정하더라도 tps가 높아지면 제대로 롤링이 이루어지지 않음.|파일을 read상태로 감시하는 것이 아니므로 문제 없음.|node.js와 동일|filebeat와 마찬가지로 불가능|
-|쓰로틀링|자체적으로 지원하지 않음|구현 가능|구현 가능|자체적으로 지원하지 않음|
-|언어|GO|Javascript|Java|C|
-|특징|ignore상태의 파일 이름을 바꿨을 때, 정상적으로 작동하지 않는 이슈가 추가적으로 있음.|생산성이 뛰어남|안정적이고 사내에서 주로 사용되는 언어||
-
-### node.js 삽질
-
-filebeat가 가진 여러 한계 때문에 다른 모듈을 찾아다니다가, [Log.io](https://github.com/NarrativeScience/Log.io) 의 코드를 보니 생각보다 간단하였음. 이 정도면 직접 구현해도 오래 걸리지 않을 것이라 판단되어 filebeat와 log.io, 그리고 node-tail 코드를 참고해가면서 새로 작성.
-
-1. 파일을 즉시 처리할 필요가 없기 때문에 파일을 하나씩만 보도록 코드 작성.
--> 그럼에도 불구하고 cpu점유율이 높음
--> file input stream을 읽어올 때, interval로 읽어오도록 하여 큰 파일을 읽을 때 cpu점유율을 낮춤
--> 상대적으로 파일 처리하는 속도는 느려짐
-2. 파일이 빠르게 수정될 때, cpu 점유율이 큰 폭으로 상승함
--> 이벤트가 발생할 때마다 fs.stat을 호출하여 파일 stat을 받아오는데 이 과정에서 병목이 일어나는 것으로 판단됨
--> fs.watch을 써서 watch 관련 이벤트가 발생할 때마다 처리하는 것에서 setInterval로 지정된 기간마다 한번씩 directory을 탐색하도록 하여 해결
-3. Registrar.writeRegistryFile에서 사용하는 fs.writeFile에 memory allocate 에러 발생
--> fs.writeFile 대신에 fs.createWriteStream으로 stream을 만들어서 거기에 쓰도록 변경
--> Registry가 하나만 유지되어야하는데 stream 특성상 계속해서 이어 써내려가는 문제가 있음
--> 다시 fs.writeFile을 쓰되 사이에 Queue를 하나 놓고 순차적으로 파일에 쓰도록 변경
-
 ### filebeat cpu, line size에 따른 테스트
 
 **vCPU 4EA, Memory 8GB
