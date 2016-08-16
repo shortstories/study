@@ -1,3 +1,2 @@
-# My Awesome Book
-
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+# Study book
+개발자로 일하며 공부하는 것들.
