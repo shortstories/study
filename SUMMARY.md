@@ -13,5 +13,5 @@
    * [Jenkins pipeline 삽질기](jenkins_pipeline_c0bd_c9c8_ae30.md)
 * [Flume 정리](flume_c815_b9ac.md)
 * [Log Aggregator 정리](log_aggregator_c815_b9ac.md)
-   * Flume 테스트
+   * [Flume 테스트](flume_d14c_c2a4_d2b8.md)
 
