@@ -1,6 +1,5 @@
 # Logstash
-
-
+![](pipeline.png)
 입출력 도구. input plugin을 통해 받은 데이터를 주어진 filter를 통과시켜 필요한 형태로 가공하고 주어진 output plugin을 향해서 내보냄.
 
 ## Inputs
@@ -35,7 +34,7 @@
 기본적으로 모든 과정이 메인 메모리상에서 일어나기 때문에 강제 종료나 프로세스 크래쉬 등의 사태가 벌어지면 데이터를 잃어버리게 된다. 그러나 SIGTERM 등 시그널을 받아 종료하게 되면 input을 먼저 종료하고 모든 output 과정이 끝날 때까지 잠시 대기하도록 한다. 그러나 만약 output의 대상이 접속이 불가능한 database인 등의 사태가 발생하게 되면, SIGTERM 을 받고도 무한히 대기하게 될 수도 있다.
 
 ## Execution Model
-![그림1.png](/files/121876)
+
 Input Threads + Worker Threads
 Synchronous Queue에서는 이벤트를 즉각적으로 비어있는 워커 쓰레드로 보내는 역할. 만약 모든 워커 쓰레드가 바쁜 상황이라면 가능해질 때까지 작업을 중지함.
 Worker Thread에서 Filter, Output 작업 수행
