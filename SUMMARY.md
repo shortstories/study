@@ -18,5 +18,5 @@
    * [Fluentd 테스트](fluentd_d14c_c2a4_d2b8.md)
 * [Web Socket 정리](web_socket_c815_b9ac.md)
 * [Akka](akka.md)
-* 실무 하며 깨닫는 부분 정리
+* [실무 하며 깨닫는 부분 정리](c2e4_bb34_d558_ba70_ae68_b2eb_b294_bd80_bd84_c815_.md)
 
