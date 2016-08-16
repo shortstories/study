@@ -105,7 +105,7 @@ node {
 	- `sudo make install`
 	- `git --version` 1.7.13 이상인지 확인
 
-## OSS Push 연동 실패
+## Github Push 연동 실패
 ### URL 문제
 ![](985148764890.png)
 - Item 설정에서 GitHub project 하위 Project url을 다시 재확인
