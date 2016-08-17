@@ -7,6 +7,7 @@
 * [Java 관련 정리](java_ad00_b828_c815_b9ac.md)
    * [Primitive Wrapper class](primitive_wrapper_class.md)
    * [NIO](nio.md)
+   * Double colon operator
 * [Spring 관련 정리](spring_ad00_b828_c815_b9ac.md)
    * [Bean init, destroy 순서](bean_init,_destroy_c21c_c11c.md)
    * [Async Controller](async_controller.md)
