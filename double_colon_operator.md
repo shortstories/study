@@ -8,4 +8,4 @@
 - 패러미터와 반환 여부, 반환 타입에 따라 `@FunctionalInterface` 중 하나와 대응됨
 
 ## 유의점
-- 패러미터가 없고, 반환 값이 있을 때 Double colon operator은 `Supplier`, `Callable` 두 가지 모두에 대응된다.
+- 패러미터가 없고, 반환 값이 있을 때 Double colon operator은 `Supplier`, `Callable` 두 가지 모두에 대응됨
