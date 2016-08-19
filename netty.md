@@ -52,3 +52,29 @@ public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 }
 ```
 
+## Echo 서버
+- Discard 서버와 대부분 동일. 입력받은 메세지를 그대로 돌려줌
+- SimpleChannelInboundHandler 대신에 ChannelInboundHandlerAdapter 사용
+
+``` java
+public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+  private static final Logger logger = LoggerFactory.getLogger(EchoServerHandler.class);
+
+  @Override
+  public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    logger.debug("receive message \"{}\"", ((ByteBuf)msg).toString(Charset.defaultCharset()));
+    ctx.write(msg); // 버퍼에 쓰기
+  }
+
+  @Override
+  public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    ctx.flush(); // 채널 파이프라인에 저장된 버퍼 전송
+  }
+
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    logger.error("exceptionCaught", cause);
+    ctx.close();
+  }
+}
+```
