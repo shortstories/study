@@ -27,6 +27,6 @@
 * [함수형 프로그래밍](d568_c218_d615_d504_b85c_adf8_b798_bc0d.md)
    * [모나드](baa8_b098_b4dc.md)
 * [Netty](netty.md)
-   * [Netty 기본 예제](netty_ae30_bcf8_c608_c81c.md)
+   * [기본 예제](netty_ae30_bcf8_c608_c81c.md)
    * 주요 특징
 
