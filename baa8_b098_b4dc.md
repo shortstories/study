@@ -24,4 +24,8 @@
 ### 모나드 법칙
 - bind(unit(x), f) ≡ f(x)
 - bind(m, unit) ≡ m
+  - 이 두 법칙은 unit이 neutral element이라는 것을 의미
 - bind(bind(m, f), g) ≡ bind(m, x ⇒ bind(f(x), g))
+  - 이 법칙은 bind의 순서에 상관없이 결합 법칙을 만족시켜야 한다는 것을 보여줌
+  - ex) 8 + ( 4 + 2 ) == ( 8 + 4 ) + 2
+
