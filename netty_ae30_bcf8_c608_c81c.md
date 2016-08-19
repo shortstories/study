@@ -1,4 +1,4 @@
-# Netty 기본 예제
+# 기본 예제
 ## Discard 서버
 - 8888 port를 listen하는 web server. 데이터를 받기만 할 뿐 아무런 동작도 하지 않음.
 - port와 handler를 설정하는 main server
