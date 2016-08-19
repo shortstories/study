@@ -53,9 +53,11 @@ public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 ```
 
 ## Echo 서버, 클라이언트
-- 입력받은 메세지를 그대로 돌려줌
+- 서버는 입력 받은 메세지를 그대로 다시 클라이언트에게 돌려줌
 - SimpleChannelInboundHandler 대신에 ChannelInboundHandlerAdapter 사용
+- 클라이언트는 채널이 활성화되면 "Hello, Netty!" 메세지를 서버에게 전송
 
+### Server
 ``` java
 public class EchoServer {
   private static final Logger logger = LoggerFactory.getLogger(EchoServer.class);
@@ -116,6 +118,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
   }
 }
 ```
+
+### Client
 ```java
 public class EchoClient {
   private static final Logger logger = LoggerFactory.getLogger(EchoClient.class);
@@ -148,6 +152,43 @@ public class EchoClient {
     if (group != null) {
       group.shutdownGracefully();
     }
+  }
+}
+```
+```java
+public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+  private static final Logger logger = LoggerFactory.getLogger(EchoClientHandler.class);
+
+  @Override
+  public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    String sendMessage = "Hello, Netty!";
+
+    ByteBuf messageBuffer = Unpooled.buffer();
+    messageBuffer.writeBytes(sendMessage.getBytes());
+
+    ctx.writeAndFlush(messageBuffer);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug("send message \"{}\"", sendMessage);
+    }
+  }
+
+  @Override
+  public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    if (logger.isDebugEnabled()) {
+      logger.debug("receive message \"{}\"", ((ByteBuf) msg).toString(Charset.defaultCharset()));
+    }
+  }
+
+  @Override
+  public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+    ctx.close();
+  }
+
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    logger.error("exceptionCaught", cause);
+    ctx.close();
   }
 }
 ```
