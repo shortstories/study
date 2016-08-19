@@ -52,10 +52,48 @@ public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 }
 ```
 
-## Echo 서버
-- Discard 서버와 대부분 동일. 입력받은 메세지를 그대로 돌려줌
+## Echo 서버, 클라이언트
+- 입력받은 메세지를 그대로 돌려줌
 - SimpleChannelInboundHandler 대신에 ChannelInboundHandlerAdapter 사용
 
+``` java
+public class EchoServer {
+  private static final Logger logger = LoggerFactory.getLogger(EchoServer.class);
+
+  private EventLoopGroup bossGroup;
+  private EventLoopGroup workerGroup;
+  private ServerBootstrap bootstrap;
+
+  public EchoServer() {
+    bossGroup = new NioEventLoopGroup(1);
+    workerGroup = new NioEventLoopGroup();
+
+    bootstrap = new ServerBootstrap();
+    bootstrap.group(bossGroup, workerGroup)
+        .channel(NioServerSocketChannel.class)
+        .childHandler(new ChannelInitializer<SocketChannel>() {
+          @Override
+          protected void initChannel(SocketChannel socketChannel) throws Exception {
+            ChannelPipeline pipeline = socketChannel.pipeline();
+            // 핸들러 설정
+            pipeline.addLast(new EchoServerHandler());
+          }
+        });
+  }
+
+  public void start(final int port) throws InterruptedException {
+    logger.info("start server...");
+    ChannelFuture future = bootstrap.bind(port).sync();
+    future.channel().closeFuture().sync();
+  }
+
+  public void close() {
+    logger.info("close server...");
+    workerGroup.shutdownGracefully();
+    bossGroup.shutdownGracefully();
+  }
+}
+```
 ``` java
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
   private static final Logger logger = LoggerFactory.getLogger(EchoServerHandler.class);
@@ -75,6 +113,41 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
     logger.error("exceptionCaught", cause);
     ctx.close();
+  }
+}
+```
+```java
+public class EchoClient {
+  private static final Logger logger = LoggerFactory.getLogger(EchoClient.class);
+
+  private EventLoopGroup group;
+  private Bootstrap bootstrap;
+
+  public EchoClient() {
+    group = new NioEventLoopGroup();
+
+    bootstrap = new Bootstrap();
+    bootstrap.group(group)
+        .channel(NioSocketChannel.class)
+        .handler(new ChannelInitializer<SocketChannel>() {
+          protected void initChannel(SocketChannel socketChannel) throws Exception {
+            ChannelPipeline pipeline = socketChannel.pipeline();
+            pipeline.addLast(new EchoClientHandler());
+          }
+        });
+  }
+
+  public void connect(final String host, final int port) throws InterruptedException {
+    logger.info("connect to {}:{}", host, port);
+    ChannelFuture future = bootstrap.connect(host, port).sync();
+    future.channel().closeFuture().sync();
+  }
+
+  public void close() {
+    logger.info("close client...");
+    if (group != null) {
+      group.shutdownGracefully();
+    }
   }
 }
 ```
