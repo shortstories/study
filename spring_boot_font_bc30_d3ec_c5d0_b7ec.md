@@ -12,10 +12,15 @@
 
 ### 에러 메세지
 > Failed to decode downloaded font: {font file path}/myfont.woff2
+> 
 > OTS parsing error: Failed to convert WOFF 2.0 font to SFNT
+> 
 > Failed to decode downloaded font: {font file path}/myfont.woff
+> 
 > OTS parsing error: incorrect file size in WOFF header
+> 
 > Failed to decode downloaded font: {font file path}/myfont.ttf
+> 
 > OTS parsing error: incorrect entrySelector for table directory
 
 ## 원인
