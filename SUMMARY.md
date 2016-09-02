@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-   * IE 8 대응 정리
+   * [IE 8 대응 정리](ie_8_b300_c751_c815_b9ac.md)
 * [Logstash, Beats 정리](logstash,_beats_c815_b9ac.md)
 * [Zookeeper 정리](zookeeper_c815_b9ac.md)
 * [Message Queue 정리](message_queue_c815_b9ac.md)
