@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * [IE 8 대응 정리](ie_8_b300_c751_c815_b9ac.md)
 * [Logstash, Beats 정리](logstash,_beats_c815_b9ac.md)
 * [Zookeeper 정리](zookeeper_c815_b9ac.md)
 * [Message Queue 정리](message_queue_c815_b9ac.md)
@@ -23,6 +22,7 @@
    * [Fluentd 테스트](fluentd_d14c_c2a4_d2b8.md)
 * [Web Socket 정리](web_socket_c815_b9ac.md)
 * [Akka](akka.md)
+* [IE 8 대응 정리](ie_8_b300_c751_c815_b9ac.md)
 * [실무 하며 깨닫는 부분 정리](c2e4_bb34_d558_ba70_ae68_b2eb_b294_bd80_bd84_c815_.md)
    * [옵션에 대해서](c635_c158_c5d0_b300_d574_c11c.md)
    * [코드 작성의 순서](cf54_b4dc_c791_c131_c758_c21c_c11c.md)
