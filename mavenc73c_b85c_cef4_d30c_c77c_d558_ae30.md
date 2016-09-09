@@ -1,4 +1,4 @@
-# Maven으로 컴파일하기
+# Maven으로 스칼라 컴파일하기
 ## scala-maven-plugin
 - pom.xml에 추가
 - scala 설치 되어있을 필요 없음
