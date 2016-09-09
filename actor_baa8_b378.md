@@ -27,4 +27,13 @@
 - single thread 일 때처럼 코드를 작성할 수 있게 도와줌
 - Immutable message와 더불어 Actor을 thread-safe하게 만드는 이유 중 하나
 
-### 
+### Internal State
+- Actor는 각자의 properties와 fields를 가짐.
+- Actor는 재시작할 때마다 언제나 새로운 인스턴스를 생성함
+
+### Life-cycle
+![](https://petabridge.com/images/2015/what-is-an-actor/akka-actor-lifecycle.png)
+
+- 만약에 actor가 예상치 못하게 죽으면 (Exception을 던진다면) actor의 supervisor가 scratch로부터 자동적으로 life cycle를 재시작함. 따라서 mailbox에 남아있던 데이터를 유실하지 않음.
+
+### Hierarchy
