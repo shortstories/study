@@ -1,6 +1,10 @@
 # Summary
 
 * [Introduction](README.md)
+* [실무 하며 깨닫는 부분 정리](c2e4_bb34_d558_ba70_ae68_b2eb_b294_bd80_bd84_c815_.md)
+   * [옵션에 대해서](c635_c158_c5d0_b300_d574_c11c.md)
+   * [코드 작성의 순서](cf54_b4dc_c791_c131_c758_c21c_c11c.md)
+   * [자바 프로그램에 문제가 생겼다면](c790_bc14_d504_b85c_adf8_b7a8_c5d0_bb38_c81c_ac00_.md)
 * [Logstash, Beats 정리](logstash,_beats_c815_b9ac.md)
 * [Zookeeper 정리](zookeeper_c815_b9ac.md)
 * [Message Queue 정리](message_queue_c815_b9ac.md)
@@ -25,10 +29,6 @@
 * [Akka](akka.md)
    * [Actor 모델](actor_baa8_b378.md)
 * [IE 8 대응 정리](ie_8_b300_c751_c815_b9ac.md)
-* [실무 하며 깨닫는 부분 정리](c2e4_bb34_d558_ba70_ae68_b2eb_b294_bd80_bd84_c815_.md)
-   * [옵션에 대해서](c635_c158_c5d0_b300_d574_c11c.md)
-   * [코드 작성의 순서](cf54_b4dc_c791_c131_c758_c21c_c11c.md)
-   * [자바 프로그램에 문제가 생겼다면](c790_bc14_d504_b85c_adf8_b7a8_c5d0_bb38_c81c_ac00_.md)
 * [함수형 프로그래밍](d568_c218_d615_d504_b85c_adf8_b798_bc0d.md)
    * [모나드](baa8_b098_b4dc.md)
 * [Netty](netty.md)
