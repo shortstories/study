@@ -15,3 +15,16 @@
 - message는 기록을 저장해둘 수도 있고, 어떤 특정 message들은 미래에 실행하도록 미룰 수도 있게 됨
 
 ### address
+- Actor는 'Location transparency' 를 가짐
+  - 실제 위치를 몰라도 네트워크 자원에 접근할 수 있도록 별도의 이름을 붙여 쓰는 것
+
+### Mailbox
+- message를 보내면 직접적으로 actor의 `onReceive`으로 전달되는 것이 아니라 'Mailbox'라는 일종의 큐에 쌓임.
+- mailbox는 오직 message를 받고 actor가 작업을 처리할 수 있게 될 때 까지 잠시 보관하는 역할만 수행
+
+### Serial process
+- Actor은 순서대로 언제나 한번에 한 동작만 수행함
+- single thread 일 때처럼 코드를 작성할 수 있게 도와줌
+- Immutable message와 더불어 Actor을 thread-safe하게 만드는 이유 중 하나
+
+### 
