@@ -34,7 +34,7 @@
 ## Life-cycle
 ![](https://petabridge.com/images/2015/what-is-an-actor/akka-actor-lifecycle.png)
 
-- 만약에 actor가 예상치 못하게 죽으면 (Exception을 던진다면) actor의 supervisor가 scratch로부터 자동적으로 life cycle를 재시작함. 따라서 mailbox에 남아있던 데이터를 유실하지 않음.
+- 만약에 actor가 예상치 못하게 죽으면 (Exception을 던진다면) actor의 supervisor가 scratch로부터 자동적으로 life cycle를 재시작함. 이 경우 mailbox에 남아있던 데이터를 유실하지 않음.
 
 ## Hierarchy
 ![](https://petabridge.com/images/2015/what-is-an-actor/actor-family-tree.png)
