@@ -41,5 +41,5 @@
 * [스칼라 관련 정리](c2a4_ce7c_b77c_ad00_b828_c815_b9ac.md)
    * [Maven으로 컴파일하기](mavenc73c_b85c_cef4_d30c_c77c_d558_ae30.md)
    * [method 정의 괄호 여부의 차이](method_c815_c758_ad04_d638_c5ec_bd80_c758_cc28_c77.md)
-* J2S 컨퍼런스
+* [J2S 컨퍼런스](j2s_cee8_d37c_b7f0_c2a4.md)
 
