@@ -34,4 +34,4 @@
     - 왜 동작 하는지, 왜 안 동작 하는지
 
 
-## 자바스크립트
+## Javascript everywhere
