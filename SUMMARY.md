@@ -42,5 +42,6 @@
    * [Maven으로 컴파일하기](mavenc73c_b85c_cef4_d30c_c77c_d558_ae30.md)
    * [Scala def 괄호 여부의 차이](method_c815_c758_ad04_d638_c5ec_bd80_c758_cc28_c77.md)
    * [스칼라 function, method 차이점](c2a4_ce7c_b77c_function_,_method_cc28_c774_c810.md)
+   * ScalaTest와 Spring 연동하기
 * [J2S 컨퍼런스](j2s_cee8_d37c_b7f0_c2a4.md)
 
