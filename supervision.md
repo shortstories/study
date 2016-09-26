@@ -56,6 +56,18 @@
 - 재시작과 생성이 모두 내부적으로 이루어지기 때문에 오직 actor가 살아있는지 죽었는지에 대한 모니터링만 가능함
 - supervisor가 실패에 대해 반응하는 것과 달리 모니터링은 종료에 반응함
 - 일반적으로는 `Terminated` 메세지를 사용함
+- `ActorContext.watch(targetActorRef)` 를 호출해서 모니터링 시작
+- `ActorContext.unwatch(targetActorRef)` 를 호출해서 모니터링 종료
 
+## One-For-One Strategy vs. All-For-One Strategy
+### 공통점
+- Exception이 발생할 때, 그 Exception의 타입을 특정 감시 수행 동작과 매핑
+- 특정 자식이 종료되기 전까지 발생하는 실패의 허용치 제한
 
+### 차이점
+- One-For-One은 실패가 발생한 해당 자식에게만 감시 수행 동작이 적용됨
+- All-For-One은 실패가 발생한 자식의 모든 형제까지 감시 수행 동작이 적용됨
 
+### 주의점
+- All-For-One에서 한 자식을 직접 종료하면 다른 자식들에게 영향이 없음. 만약에 이러한 경우에도 모두 영향 받기를 원한다면 직접 watch를 써서 모니터링 해야 함
+- All-For-One에서 일회용 actor을 만들었다가 실패가 발생하면 다른 모든 영구적인 actor에도 영향을 미치게 됨. 이러한 경우에는 가운데에 supervisor를 추가로 두는 것이 좋음. 
