@@ -30,3 +30,12 @@
 - 그 외의 모든 throwable가 넘어가게 되면 전체 시스템이 종료됨
 
 ### / : The Root Guardian
+- 모든 "Top-level" actor들의 부모이며 superviser
+- SupervisorStrategy.stoppingStrategy을 통해 종류를 막론하고 `Exception`이 발생하면 자식을 종료하게 만듬
+
+## 재시작의 의미
+- 어떠한 작업 도중 실패가 일어나게 되면 보통 그 원인을 세가지로 분류할 수 있음
+  - 특정 메세지를 받았을 때 발생하는 프로그래밍적 에러
+  - 메세지를 처리하기 위해 외부 자원을 사용할 때 발생하는 에러
+  - actor의 내부 상태가 오염되어서 발생하는 에러
+
