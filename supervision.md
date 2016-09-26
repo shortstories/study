@@ -53,3 +53,9 @@
 7. actor을 재시작함 (message 처리 시작)
 
 ## Lifecycle Monitoring
+- 재시작과 생성이 모두 내부적으로 이루어지기 때문에 오직 actor가 살아있는지 죽었는지에 대한 모니터링만 가능함
+- supervisor가 실패에 대해 반응하는 것과 달리 모니터링은 종료에 반응함
+- 일반적으로는 `Terminated` 메세지를 사용함
+
+
+
