@@ -28,7 +28,7 @@
 * [Web Socket 정리](web_socket_c815_b9ac.md)
 * [Akka](akka.md)
    * [Actor 모델](actor_baa8_b378.md)
-   * Supervision
+   * [Supervision](supervision.md)
 * [IE 8 대응 정리](ie_8_b300_c751_c815_b9ac.md)
 * [함수형 프로그래밍](d568_c218_d615_d504_b85c_adf8_b798_bc0d.md)
    * [모나드](baa8_b098_b4dc.md)
