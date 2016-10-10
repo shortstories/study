@@ -24,13 +24,16 @@
   - 만약에 Unit을 반환하는 함수가 있다면 주의할 것
 
 ## 4장
-### Class
+### Class, Field, Method
 - Scala의 모든 필드는 기본적으로 public
 - 메소드 패러미터는 기본적으로 val
 - return을 되도록 쓰지말고, 쓰더라도 1번 이상 쓰지 않을 것. 각 메소드가 한 값을 계산하는 표현식이 되도록 구현
 - side effect을 위한 메소드라면 결과타입을 생략하고 = 도 떼어서 프로시저처럼 보이는게 좋음
-  - ```scala
+  ```scala
   def procedure(params: Any) {
-    // something
+    {// something
   }
-```
+  ```
+- =를 빼먹으면 무조건 `Unit`을 반환하므로 주의
+
+### Semicolon
