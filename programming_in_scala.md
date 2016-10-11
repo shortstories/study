@@ -51,3 +51,9 @@
   ```
   
 ### Singleton object
+- 자바의 static을 대체
+- 같은 이름의 class와 object가 동시에 존재할 때, 이들을 각각 companion class, companion object라고 부르며 언제나 같은 파일에 위치해야 함
+- companion class, companion object은 서로의 private field에 접근 가능
+- singleton object는 패러미터를 받을 수 없음
+- companion class가 없는 singleton object는 standalone object라고 부름
+
