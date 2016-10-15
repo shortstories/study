@@ -57,3 +57,13 @@
 - singleton object는 패러미터를 받을 수 없음
 - companion class가 없는 singleton object는 standalone object라고 부름
 
+## 5장
+### 객체 동일성
+- 자바랑 다르게 `==`로 객체의 비교도 가능
+- primitive type은 자바와 동일하게 동작
+- reference type에서 자바랑 다르게 동작
+  - 우선 null 체크
+  - 그 다음 `equals` 호출
+- 만약에 인스턴스 자체를 비교하고자 한다면 `eq`, `nq` 사용
+  - 자바 객체에 직접 매핑했을 때만 동작
+
