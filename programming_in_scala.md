@@ -168,3 +168,8 @@ for (
 #### 패턴 매치로 예외 처리
 - `try {...} catch {case ex: Exception => {...} ...}`
 
+### match-case
+- 자바의 switch-case문과 유사
+- 자바의 switch-case는 정수나 Enum만 되는 반면 모든 상수 사용 가능
+- break문이 암시적으로 존재함
+- 다른 표현식들과 마찬가지로 값을 반환
