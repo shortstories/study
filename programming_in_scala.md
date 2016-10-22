@@ -156,3 +156,15 @@ for (
     sumFunc(affectedSubElement)
 }
 ```
+
+#### 새로운 collection 반환하기
+- for 루프문 코드 블록의 중괄호 앞에 `yield` 선언
+- ex) `for (...) yield {...}`, `for () yield ...`
+
+### try-catch-finally
+- 자바랑 다르게 checked excetpion도 별도의 throws를 붙이거나 반드시 catch할 필요가 없음
+- 결과로 값을 반환. try가 성공하면 당연히 try의 반환값이고, 만약에 도중에 예외가 발생하였다면 case 수행 결과가 반환값
+- finally에서 return을 명시적으로 호출하지 않는 이상 반환값은 버려짐. finally에서 try나 catch의 결과를 바꾸지 않도록 주의해야 함
+#### 패턴 매치로 예외 처리
+- `try {...} catch {case ex: Exception => {...} ...}`
+
