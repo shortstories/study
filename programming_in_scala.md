@@ -141,3 +141,18 @@ for (
     sumFunc(subElement)
 }
 ```
+
+#### 루프문 도중에 변수 바인딩하기
+- 별도의 val이나 var 없이 선언하면 됨
+- ex)
+``` scala
+for (
+    element <- collection
+    if ...;
+    subElement <- element.getSubCollection(
+    affectedSubElement = affect(subElement)
+    if ...
+) { 
+    sumFunc(affectedSubElement)
+}
+```
