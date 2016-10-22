@@ -116,3 +116,28 @@ class Rational(n: Int, d: Int) {
 - 예약어를 포함해서 모든 문자열을 쓸 수 있음
 
 ## 7장
+- 스칼라에서 할당의 결과는 할당의 값이 아니라 `Unit`
+- 되도록이면 `while`문은 지양할 것
+
+### for
+#### 컬렉션 순회
+- 제네레이터 문법: `for (element <- collection)`
+  - Range 타입도 사용 가능 ex) `i <- 1 to 5`, `i <- 1 until 6`
+  - 물론 스칼라에선 인덱스를 바탕으로 순회하는 일은 잘 없음
+
+#### 필터링
+- collection에 if문을 넣어서 필터링 가능 ex) `for (element <- collection if ...)`
+
+#### 중첩 순회
+- 여러 개의 제네레이터를 세미콜론이나 중괄호로 추가하면 중첩 순회도 가능
+- ex) 
+``` scala
+for (
+    element <- collection
+    if ...;
+    subElement <- element.getSubCollection()
+    if ...
+) { 
+    sumFunc(subElement)
+}
+```
