@@ -242,11 +242,13 @@ def myFunc(x: Int): Int = {
 - loan pattern: 함수를 제공하는 쪽에서 resource의 open, close 등 라이프사이클은 관리하고, 사용할 수 있게끔 빌려주는 패턴 
 - 스칼라에서는 패러미터가 한 개인 함수를 호출할 때 중괄호로 감싸서 호출할 수 있음. 
   - 이를 이용하여 사용자가 마치 기본 문법인 것처럼 사용하는 것이 가능
+
 ``` scala
 def customFunc(op: Int => Int) : Unit = {
  //...
 }
 
+// call
 customFunc { x: Int => {
     //...
 }}
