@@ -179,3 +179,16 @@ for (
   - 스칼라의 모든 재귀함수는 꼬리재귀
 - 만약에 굳이 break를 써야겠다면 `scala.util.control.Breaks` 클래스를 사용할 수도 있긴 함
 
+## 9장
+### 접근 제한
+- `private` 키워드를 메소드 정의 앞에 붙이는 방법
+- local function으로 만드는 방법도 있음
+  - 이 경우 클로져 이용 가능
+``` scala
+def outerFunc() : Unit = {
+      val outer = "outer"
+      def innerFunc() : Unit = {
+        println(outer)
+      }
+}
+```
