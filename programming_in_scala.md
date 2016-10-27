@@ -254,3 +254,47 @@ customFunc { x: Int => {
 }}
 ```
 
+### 이름에 의한 호출 사용
+- `()` 없이 바로 `=>` 사용
+- ex) `=> Boolean`, `=> Int`
+- 바로 Boolean을 패러미터로 쓸 때와 차이점은 계산 시점의 차이이다
+
+``` scala
+def byName(isTrue: => Boolean) {
+  if (isTrue) { // 여기에서 계산이 일어남
+    println("true")
+  } else {
+    println("false")
+  }
+}
+
+def byBoolean(isTrue: Boolean) {
+  if (isTrue) {
+    println("true")
+  } else {
+    println("false")
+  }
+}
+
+byName(1 > 0)
+byBoolean(1 > 0) // 여기에서 계산이 일어남
+```
+
+## 10장
+### Field vs Method
+``` scala
+class MyClass {
+  val asField: Int = 1 + 1
+  def asMethod: Int = 1 + 1
+}
+```
+- 차이점은 클래스 초기화때 미리 값을 계산해 저장해둘 것인가 매 호출마다 계산할 것인가 뿐
+  - 미리 값을 계산해두려면 저장공간을 소모하게 됨
+- 단일 접근 원칙: 필드든 메소드든 어떤 방식으로 정의하더라도 클라이언트의 코드를 수정하게끔 해서는 안 됨
+  - 괄호 없는 메소드를 사용할 것이라면 부수 효과도 없어야 함은 물론 변경 가능한 상태에 의존해서도 안 됨
+  - 클라이언트는 자신이 사용하는 필드가 말 그대로 필드인지 괄호 없는 메소드인지 굳이 구분할 필요가 없어야함
+- 스칼라에서는 필드와 메소드가 같은 네임스페이스
+
+### Super class 생성자 호출
+- `class MyClass extends SuperClass(params)`
+- extends에서 바로 호출하면 됨
