@@ -307,7 +307,23 @@ class MyClass {
 - 반환 타입이 Nothing인 것은 이 메소드가 정상적으로 값을 반환하지 않을 것이란 뜻. 즉, 비정상적인 종료를 표시
 
 ## 12장
-- trait의 주요 사용목적
-  - rich interface
-  - stackable modification
+### 사용목적
+- rich interface
+- stackable modification
+
+### 특징
+- 일반적인 클래스에서 할 수 있는 대부분이 가능함
+- 클래스 변수를 가질 수 없음 ex) `trait MyTrait(x: Int) // 컴파일 에러`
+- 믹스인 할 때 클래스에 따라 `super` 가 동적으로 바인딩됨
+
+### 믹스인
+- 이미 다른 클래스나 트레이트를 상속한 상황에서 추가로 `with` 구문과 함께 트레이트를 믹스인할 수 있음
+
+### Thin vs Rich Interface
+- Thin 인터페이스는 구현하긴 쉬운데 선택지가 적어 용도에 딱 맞는걸 고르기 힘듬
+- Rich 인터페이스는 선택지가 많은데 불필요한 코드가 많아져 구현하기 귀찮음
+- 자바는 보통 Thin 인터페이스로 되어있음
+- 트레이트를 보통 이 Rich 인터페이스로 만들면서 코드 관리는 쉽도록 사용
+  - 메소드를 트레이트 안에서 한번만 구현해도 됨
+  - 아니면 트레이트 안에 abstract method로 추가하여 구현은 떠넘겨도 됨
 
