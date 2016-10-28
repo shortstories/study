@@ -298,3 +298,16 @@ class MyClass {
 ### Super class 생성자 호출
 - `class MyClass extends SuperClass(params)`
 - extends에서 바로 호출하면 됨
+
+## 11장
+### 바닥에 있는 타입
+#### Nothing
+- Null이랑 비슷하지만 값이 존재하지 않는 타입을 의미
+- Null과 달리 Int, Boolean등 값 타입과 호환됨
+- 반환 타입이 Nothing인 것은 이 메소드가 정상적으로 값을 반환하지 않을 것이란 뜻. 즉, 비정상적인 종료를 표시
+
+## 12장
+- trait의 주요 사용목적
+  - rich interface
+  - stackable modification
+
