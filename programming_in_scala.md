@@ -327,3 +327,8 @@ class MyClass {
   - 메소드를 트레이트 안에서 한번만 구현해도 됨
   - 아니면 트레이트 안에 abstract method로 추가하여 구현은 떠넘겨도 됨
 
+### 변경 쌓아올리기
+- 트레이트의 super은 동적으로 바인딩됨
+- 그에 따라 trait에서도 super을 쓰는 것이 가능
+- trait에서 super을 쓰면 메소드 앞에 `abstract override`를 붙여줘야 함
+- `abstract override` 메소드가 있는 트레이트는 반드시 해당 메소드의 구현이 존재하는 클래스에 믹스인되어야 함
