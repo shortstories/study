@@ -19,3 +19,9 @@
 - `username.[hostname]` 혹은 `orgname.[hostname]` 의 형태로 repository 생성
 - 해당 repository의 master 브랜치에 업로드된 소스를 바탕으로 웹사이트를 빌드, 배포함
 - 빌드가 완료되면 `http(s)://[hostname]/pages/<username>` 또는  `http(s)://pages.[hostname]/<username>` 으로 접근 가능
+
+### Project Pages
+- 프로젝트 페이지는 같은 repository에서 생성하는 것이 가능
+- 원하는 프로젝트의 repository에서 `gh-pages` 브랜치를 만들어 소스를 업로드하면 됨
+- User가 가지고 있는 프로젝트이면 `http(s)://[hostname]/pages/<username>/<projectname>/` 또는 `http(s)://pages.[hostname]/<username>/<projectname>/`
+- Organization이 가지고 있는 프로젝트라면 `http(s)://[hostname]/pages/<orgname>/<projectname>/` 또는 `http(s)://pages.[hostname]/<orgname>/<projectname>/`
