@@ -26,7 +26,7 @@
 - User가 가지고 있는 프로젝트이면 `http(s)://[hostname]/pages/<username>/<projectname>/` 또는 `http(s)://pages.[hostname]/<username>/<projectname>/`
 - Organization이 가지고 있는 프로젝트라면 `http(s)://[hostname]/pages/<orgname>/<projectname>/` 또는 `http(s)://pages.[hostname]/<orgname>/<projectname>/`
 
-## automatic generator로 페이지 자동생성하기
+## Automatic generator로 페이지 자동생성하기
 1. Repository 메뉴의 Settings 클릭
 2. Options 탭의 GitHub Pages에서 Launch automatic page generator 클릭
 3. 적절히 내용을 수정하여 Continue to layouts 클릭
