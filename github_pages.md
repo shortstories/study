@@ -1,9 +1,9 @@
 # Github pages
-- Github에서 바로 특정 웹페이지를 호스팅할 수 있게 제공하는 서비스
+- Github에서 바로 웹페이지를 호스팅할 수 있게 제공하는 서비스
 
 ## 제약 조건
 - repository 용량을 1GB 이하로 유지하길 추천
-- publish 되는 Github pages 사이트의 용량은 1GB보다 클 수 없음
+- 배포되는 Github pages 사이트의 용량은 1GB보다 클 수 없음
 
 ## User, Organization, Project Pages
 - Github Pages는 그 주체가 User이냐 아니면 Organization이냐, 그리고 그 내용이 특정 Project에 대한 것이냐 아니면 주체에 대한 것이냐로 나누어짐
@@ -14,3 +14,8 @@
 | Organization 페이지 | `orgname.github.io` | `master` |
 | 특정 User의 Project 페이지 | `username.github.io/projectname` | `gh-pages` |
 | 특정 Organization의 Project 페이지 | `orgname.github.io/projectname` | `gh-pages` |
+
+### User, Organization Pages
+- `username.[hostname]` 혹은 `orgname.[hostname]` 의 형태로 repository 생성
+- 해당 repository의 master 브랜치에 업로드된 소스를 바탕으로 웹사이트를 빌드, 배포함
+- 빌드가 완료되면 `http(s)://[hostname]/pages/<username>` 또는  `http(s)://pages.[hostname]/<username>` 으로 접근 가능
