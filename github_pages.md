@@ -26,9 +26,16 @@
 - User가 가지고 있는 프로젝트이면 `http(s)://[hostname]/pages/<username>/<projectname>/` 또는 `http(s)://pages.[hostname]/<username>/<projectname>/`
 - Organization이 가지고 있는 프로젝트라면 `http(s)://[hostname]/pages/<orgname>/<projectname>/` 또는 `http(s)://pages.[hostname]/<orgname>/<projectname>/`
 
-## Creating Pages with the automatic generator
+## automatic generator로 페이지 자동생성하기
 1. Repository 메뉴의 Settings 클릭
 2. Options 탭의 GitHub Pages에서 Launch automatic page generator 클릭
 3. 적절히 내용을 수정하여 Continue to layouts 클릭
 4. 레이아웃 선택 이후 Publish page 클릭
+
+## 배포 중단하기
+### User/Organization Pages
+- `username.[hostname]` 또는 `orgname.[hostname]` repository 제거
+
+### Project Pages
+- `gh-pages` 브랜치 삭제
 
