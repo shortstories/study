@@ -35,4 +35,11 @@
 - 일반적으로 YAML 포맷을 사용하곤 함
 
 #### Asset pipeline
-- 
+- asset의 컴파일러, 변환기 등 여러 툴들을 파이프라인으로 관리
+  - 예를 들면 Babel이라던가, LESS라던가, Minifier 따위
+- 일부는 Grunt, Gulp 등 기존의 build tool에 기초
+- 별도의 복잡한 설정 없이 이용할 수 있게 제공됨
+
+#### Putting it all together
+- CLI든 GUI든 웹 인터페이스건 이용하여 build를 하면 바로 배포 가능한 Static website를 만들어줌
+
