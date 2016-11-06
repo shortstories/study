@@ -439,9 +439,6 @@ class Test {
 - `{member => _, _}` 특정 멤버는 제외하고 모두 불러오기
   - import 하고싶은 패키지 사이에 같은 이름의 멤버가 있을 때 모호함을 피할 수 있음
 
-``` scala 
-```
-
 #### Implicit import
 - `java.lang._`
 - `scala._`
@@ -458,6 +455,7 @@ class Test {
 #### 보호 스코프
 - `private[x]`, `protected[x]` 같은 형태로 좀 더 상세하게 정의 가능
   - x까지는 제외하고 비공개, 보호라는 뜻
+  - x는 패키지, 클래스, 또는 오브젝트
 
 ``` scala
 package com.navercorp
@@ -473,3 +471,4 @@ package test {
   }
 }
 ```
+
