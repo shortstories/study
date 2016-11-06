@@ -500,3 +500,5 @@ val copyEx = ex.copy(pa2 = 3)
 - 패턴 매치 지원
 
 ### 패턴 매치
+- 자바의 switch 문과 유사한 기능
+- `Selector match {case ...}` 형태로 사용
