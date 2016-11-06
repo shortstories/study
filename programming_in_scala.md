@@ -478,4 +478,23 @@ package test {
 - 자유롭게 import해서 사용 가능
 - package 디렉토리에 package.scala 라는 파일 이름으로 하는 것이 좋음
 
-## 14장
+## 15장
+### 케이스 클래스
+- class 선언 앞에 `case` 가 붙어있는 서브 클래스
+- 클래스 이름과 같은 팩토리 메소드 추가
+  - `new MyClass()` 대신에 `MyClass()`로 생성 가능
+- 모든 클래스 패러미터에 val 접두사를 붙여줌
+  - 자동으로 필드로 만들어줌
+- `toString`, `hashCode`, `equals`에 자연스러운 구현 추가
+  - 항상 전체를 구조적으로 비교함
+- `copy` 메소드 추가
+  - 이름있는 패러미터를 이용해서 바꿀 필드를 정의
+
+``` scala
+case class Ex(pa1: Int, pa2: Int)
+
+val ex = Ex(1, 2)
+val copyEx = ex.copy(pa2 = 3)
+```
+
+- 패턴 매치 지원
