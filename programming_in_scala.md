@@ -436,7 +436,7 @@ class Test {
 - 멤버를 감추거나 이름을 바꾸기 위해 사용
 - `import packagename.{member1, member2 => anotherName}` 같은 형식으로 사용
 - `{member => anotherName, _}` 특정 멤버는 이름을 바꾸고 모두 불러오기
-- `{member => _}` 특정 멤버만 제외하고 모두 불러오기
+- `{member => _, _}` 특정 멤버는 제외하고 모두 불러오기
   - import 하고싶은 패키지 사이에 같은 이름의 멤버가 있을 때 모호함을 피할 수 있음
 
 ``` scala 
