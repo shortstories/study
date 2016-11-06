@@ -332,3 +332,21 @@ class MyClass {
 - 그에 따라 trait에서도 super을 쓰는 것이 가능
 - trait에서 super을 쓰면 메소드 앞에 `abstract override`를 붙여줘야 함
 - `abstract override` 메소드가 있는 트레이트는 반드시 해당 메소드의 구현이 존재하는 클래스에 믹스인되어야 함
+
+## 13장
+### 패키지
+- 만약에 한 파일 안에 여러 패키지가 있어야된다면 중괄호로 감싸고 중첩시키는 것도 가능
+
+``` scala
+package com {
+  package navercorp {
+    package npush {
+      // Code
+    }
+    
+    package session-io {
+      // Code
+    }
+  }
+}
+```
