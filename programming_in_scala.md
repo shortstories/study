@@ -414,6 +414,7 @@ package world {
 - 모든 멤버에 접근하기 위해 `._` 사용
 - 코드의 어느 부분에서나 import 가능
 - 클래스에 국한되지 않고 일반 객체의 import도 가능
+- 패키지 그 자체를 import 하는 것도 가능
 
 ``` scala
 import com.navercorp._ // 전체 가져오기
@@ -431,3 +432,12 @@ class Test {
 }
 ```
 
+#### Import Selector
+- 멤버를 감추거나 이름을 바꾸기 위해 사용
+- `import packagename.{member1, member2 => anotherName}` 같은 형식으로 사용
+- `{member => anotherName, _}` 특정 멤버는 이름을 바꾸고 모두 불러오기
+- `{member => _}` 특정 멤버만 제외하고 모두 불러오기
+  - import 하고싶은 패키지 사이에 같은 이름의 멤버가 있을 때 모호함을 피할 수 있음
+
+``` scala 
+```
