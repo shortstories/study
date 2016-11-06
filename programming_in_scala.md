@@ -336,17 +336,52 @@ class MyClass {
 ## 13장
 ### 패키지
 - 만약에 한 파일 안에 여러 패키지가 있어야된다면 중괄호로 감싸고 중첩시키는 것도 가능
+  - 이렇게 중첩시키게 되면 바깥 스코프로 바로 접근 가능
+  - 중괄호로 감싼게 아니라 자바처럼 한 파일에 한 패키지로 하면 자기 패키지만 보임
 
 ``` scala
 package com {
   package navercorp {
+    class Naver {
+    }
+    
     package npush {
-      // Code
+      class Npush {
+        // 중첩된 바깥 스코프에도 접근 가능
+        // 덕분에 패키지 이름을 쓰거나 import 할 필요가 없음
+        val naver = new Naver() 
+      }
+      
     }
     
     package session-io {
-      // Code
     }
   }
 }
+
+package com.navercorp.test {
+  class Test {
+    // 중괄호로 중첩되어있지 않은 상황에선 자기 패키지만 보이므로
+    // 이렇게 사용할 땐 컴파일 오류가 나게 됨
+    val naver = new Naver()
+  }
+}
 ```
+
+#### Chained package clause
+- 중괄호 없이 나열하여 중첩 가능
+- 코드가 오른쪽으로 밀리는게 싫을 때 사용
+
+``` scala
+package com
+package navercorp
+package npush {
+  class Npush {
+    // com.navercorp 패키지에 Naver 클래스가 있다면
+    // 여기에서도 마찬가지로 import나 패키지 이름 없이 사용 가능
+    val naver = new Naver()   
+  }
+}
+```
+
+#### \_root\_
