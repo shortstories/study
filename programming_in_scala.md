@@ -473,3 +473,8 @@ package test {
 }
 ```
 
+### 패키지 객체
+- `package object Name` 형식으로 작성
+- 자유롭게 import해서 사용 가능
+- package 디렉토리에 package.scala 라는 파일 이름으로 하는 것이 좋음
+
