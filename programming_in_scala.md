@@ -410,3 +410,24 @@ package world {
 }
 ```
 
+### Import
+- 모든 멤버에 접근하기 위해 `._` 사용
+- 코드의 어느 부분에서나 import 가능
+- 클래스에 국한되지 않고 일반 객체의 import도 가능
+
+``` scala
+import com.navercorp._ // 전체 가져오기
+
+class Point(val x: Int, val y: Int) {
+}
+
+class Test {
+  import com.navercorp.npush._ // 언제 어디서나 import 가능
+  
+  def myMethod(point: Point) {
+    import point._ // 일반 객체의 import도 가능함. 이렇게 하면 x와 y에 바로 접근 가능해짐
+    println(x + ", " + y)
+  }
+}
+```
+
