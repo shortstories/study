@@ -441,3 +441,8 @@ class Test {
 
 ``` scala 
 ```
+
+#### Implicit import
+- `java.lang._`
+- `scala._`
+- `Predef._`
