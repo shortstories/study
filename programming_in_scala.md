@@ -385,3 +385,28 @@ package npush {
 ```
 
 #### \_root\_
+- 같은 이름을 가진 패키지가 섞여있을 때, 최상단 패키지에 접근하기 위해서 사용
+
+``` scala
+package test {
+  class MyTest1 {
+  }
+}
+
+package hello
+package world {
+  package test {
+    class MyTest2 {
+    }
+  }
+  
+  package ex {
+    class Ex {
+      // 같은 이름을 가진 두 패키지를 구분해서 접근 가능
+      val test1 = new _root_.test.MyTest1
+      val test2 = new test.MyTest2
+    }
+  }
+}
+```
+
