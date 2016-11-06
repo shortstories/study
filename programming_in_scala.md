@@ -456,6 +456,7 @@ class Test {
 - `private[x]`, `protected[x]` 같은 형태로 좀 더 상세하게 정의 가능
   - x까지는 제외하고 비공개, 보호라는 뜻
   - x는 패키지, 클래스, 또는 오브젝트
+- `private[this]` 같은 형식으로 쓰면 인스턴스 내부에서만 접근 가능. private보다 좀 더 제한적
 
 ``` scala
 package com.navercorp
