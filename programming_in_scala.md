@@ -446,3 +446,30 @@ class Test {
 - `java.lang._`
 - `scala._`
 - `Predef._`
+
+### 접근 수식자
+#### Private
+- inner class는 자기 부모 class의 private에 접근할 수 있음
+
+#### Protected
+- 자바와 달리 subclass 에서만 접근 가능
+  - 자바에서는 같은 패키지 안에 있으면 접근 가능했음
+
+#### 보호 스코프
+- `private[x]`, `protected[x]` 같은 형태로 좀 더 상세하게 정의 가능
+  - x까지는 제외하고 비공개, 보호라는 뜻
+
+``` scala
+package com.navercorp
+package test {
+  package test1 {
+    private[test] class Test1 {}
+  }
+  
+  package test2 {
+    class Test2 {
+      val test1 = new Test1 // [test] 덕분에 접근 가능
+    }
+  }
+}
+```
