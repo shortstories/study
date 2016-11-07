@@ -538,3 +538,28 @@ val copyEx = ex.copy(pa2 = 3)
 - 따라서 `case e: Map[Int, Int] => //...`처럼 특정 타입 제네릭만 매칭하려 해보면 unchecked warning과 함께 모든 타입에 매칭됨
   - 배열만은 원소 타입과 값을 함께 저장하므로 매칭 가능
 
+#### 변수 바인딩
+- 깊은 매치에서 매칭된 결과 일부를 변수로 바인딩하는 것
+- `case myFunc("const", e @ myFunc("const1", _)) => //...`
+  - 먼저 `myFunc("const1", _)`을 매칭하여 e에 담고
+  - 다음으로 `myFunc("const", e)` 매칭
+- 계산식에서 e를 호출하면 `myFunc("const1", _)`이 됨
+
+#### 패턴 가드
+- 변수 패턴에 조건 적용
+- `case myFunc2(x, y) if x == y => //...`
+- 가드가 true가 될 때에만 매칭
+
+#### 패턴 겹침
+- 더 자세한 매칭이 위에 오도록 배치
+
+#### 봉인한 클래스
+- 모든 패턴에 대응했는지 확인하기 쉽게 만들어줌
+- 다른 컴파일 단위에서 함부로 클래스를 새로 정의하는걸 막아줌
+- `sealed abstract class MyClass` 처럼 제일 앞에 `sealed` 추가
+
+#### Option
+- 선택적인 값을 표현. 보통 `Map` 등에서 사용
+- 값이 있으면 `Some(x)`
+- 없으면 `None`
+- 
