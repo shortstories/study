@@ -559,7 +559,24 @@ val copyEx = ex.copy(pa2 = 3)
 - `sealed abstract class MyClass` 처럼 제일 앞에 `sealed` 추가
 
 #### Option
-- 선택적인 값을 표현. 보통 `Map` 등에서 사용
-- 값이 있으면 `Some(x)`
-- 없으면 `None`
+- 선택적인 값을 표현. 보통 `Map` 등에서 반환
+- 값이 있으면 `Some(x)` 없으면 `None`
+- 보통 패턴 매치를 써서 처리
+
+#### 변수 정의에서 패턴 사용
+
+``` scala 
+val myTuple = (10, "test")
+val (number, string) = myTuple
+```
+
+#### case 시퀀스
+``` scala
+{ 
+  case => //... 
+  case => //...
+}
+```
+
+- 함수 리터럴이 쓰일 수 있는 모든 곳에 사용 가능
 - 
