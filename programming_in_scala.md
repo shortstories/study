@@ -573,10 +573,26 @@ val (number, string) = myTuple
 #### case 시퀀스
 ``` scala
 { 
-  case => //... 
-  case => //...
+  case x => //... 
+  case y => //...
 }
 ```
 
 - 함수 리터럴이 쓰일 수 있는 모든 곳에 사용 가능
-- 
+- case 시퀀스는 PartialFunction
+  - 매칭되지 않는 패러미터를 넘기면 `MatchError` 발생
+- 타입이 PartialFuntion이면 컴파일러에 의해서 PartialFuntion으로 변환됨
+``` scala
+  new PartialFunction[/* parameter type */, /* return type */] {
+    def apply(xs: /* parameter type */) = xs match {
+      case x => //...
+      case y => //...
+    }
+    def isDefinedAt(xs: /* parameter type */) = xs match {
+      case x => true
+      case y => true
+      case _ => false
+    }
+  }
+```
+- 타입이 없거나 Function1이면 isDefinedAt을 빼고 일반적인 함수 리터럴로 변환됨
