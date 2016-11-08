@@ -596,3 +596,4 @@ val (number, string) = myTuple
   }
 ```
 - 타입이 없거나 Function1이면 isDefinedAt을 빼고 일반적인 함수 리터럴로 변환됨
+
