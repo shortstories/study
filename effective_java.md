@@ -1,4 +1,4 @@
-# Effective Java Effective Java
+# Effective Java
 
 ## 4장
 ### 필드 직접 노출 < Accessor, Mutator 제공
