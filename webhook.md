@@ -21,3 +21,6 @@
 2. URL에 auth Token 추가
 3. Basic Auth 제공 https://en.wikipedia.org/wiki/Basic_access_authentication
 4. provider가 Request를 보내기 전에 서명하여 signature를 만들고 public key를 제공하여 받는 쪽에서 검증
+
+## Events
+- 보통 `[Resource Name].[Sub Resource Name].[Event]` 같은 형식으로 명명
