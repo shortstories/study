@@ -3,6 +3,7 @@
 - 리얼타임 통신을 위한 방법 중 하나
 - 이벤트 기반 동작
 - Web Callback, HTTP push API 등 다양한 이름으로 불림
+- RESTful Webhooks라고 하여 RESTful interface를 제공하는 경우가 많음
 - 보통 POST request를 통해서 콜백 데이터 전달
 
 ## 개념
@@ -198,4 +199,6 @@ Content-Type: application/json
   "resourceId": "ret08u3rv24htgh289g"
 }
 ```
+
+### Jira
 
