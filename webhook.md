@@ -38,8 +38,11 @@
 - 5XX
   - 기본적으로 retry 하되 정해진 횟수나 시간 만큼만 하도록 설정
 
-### Exponential Backoff
+### Handling Failure
+#### Exponential Backoff
+#### Claim Check
 
+### Ensuring Ordered Delivery
 
 ## Events
 - 보통 name, payload 두 가지로 구성됨
