@@ -202,3 +202,30 @@ Content-Type: application/json
 
 ### Jira
 
+- webhook을 얻을 수 있는 쿼리 메소드 제공
+
+#### 등록
+
+- `<JIRA_URL>/rest/webhooks/1.0/webhook`
+
+``` json
+{
+  "name": "my first webhook via rest",
+  "url": "http://www.example.com/webhooks",
+  "events": [
+    "jira:issue_created",
+    "jira:issue_updated"
+  ],
+  "jqlFilter": "Project = JRA AND resolution = Fixed",
+  "excludeIssueDetails" : false
+}
+```
+
+#### 해지
+
+- `<JIRA_URL>/rest/webhooks/1.0/webhook/{id of the webhook}`
+
+#### 쿼리
+
+- `<JIRA_URL>/rest/webhooks/1.0/webhook`
+- `<JIRA_URL>/rest/webhooks/1.0/webhook/<webhook ID>`
