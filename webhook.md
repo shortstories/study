@@ -24,6 +24,16 @@
   4. provider가 Request를 보내기 전에 서명하여 signature를 만들고 public key를 제공하여 받는 쪽에서 적절한 암호화 알고리즘을 통해 검증
 
 ## Failure & Retries
+- 2XX 
+  - 성공한 것이므로 종료
+- 3XX
+  - webhook subscription 정보를 동적으로 수정할 것인지 결정 필요
+  - fail으로 처리할 것인지 retry로 처리할 것인지 결정 필요
+- 4XX
+  - 일반적으로는 retry 할 필요성이 존재
+  - 401, 404의 경우 일시적인 문제일 수 있으므로 즉시 처리하지 말아야 함
+  - 410이라면 즉시 처리
+- 5XX
 
 
 ## Events
