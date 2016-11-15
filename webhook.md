@@ -105,4 +105,7 @@ text=googlebot: What is the air-speed velocity of an unladen swallow?
 trigger_word=googlebot:
 ```
 
+### Google Calendar
+
+- webhook 대신에 push notifications 라는 표현 사용
 - 
