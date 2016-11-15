@@ -77,4 +77,32 @@
 
 ## 구현 사례
 
-###
+### Slack
+
+- Incoming Webhooks와 Outgoing Webhooks 두 가지를 지원하고 있음
+- Rate Limits 존재
+
+#### Incoming Webhooks
+
+- JSON 형식
+- 슬랙 내부에 메세지를 보내기 위해서 사용
+
+#### Outgoing Webhooks
+
+- 특정 채널에서 특정 'trigger word'가 발생하였을 때 정해진 URL로 POST request를 보내주는 webhook
+- POST body
+
+``` form
+token=XXXXXXXXXXXXXXXXXX
+team_id=T0001
+team_domain=example
+channel_id=C2147483705
+channel_name=test
+timestamp=1355517523.000005
+user_id=U2147483697
+user_name=Steve
+text=googlebot: What is the air-speed velocity of an unladen swallow?
+trigger_word=googlebot:
+```
+
+- 
