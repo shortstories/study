@@ -108,4 +108,94 @@ trigger_word=googlebot:
 ### Google Calendar
 
 - webhook 대신에 push notifications 라는 표현 사용
-- 
+- HTTPS
+- 5XX에 대해서 Retry를 시도하며 Exponential backoff 사용
+  - 그 외에는 모두 버림
+
+#### Watch
+
+- `https://www.googleapis.com/apiName/apiVersion/resourcePath/watch`
+- webhook 등록
+
+##### Request
+
+``` json
+POST https://www.googleapis.com/calendar/v3/calendars/my_calendar@gmail.com/events/watch
+Authorization: Bearer auth_token_for_current_user
+Content-Type: application/json
+
+{
+  "id": "01234567-89ab-cdef-0123456789ab", // Your channel ID.
+  "type": "web_hook",
+  "address": "https://mydomain.com/notifications", // Your receiving URL.
+  // ...
+  "token": "target=myApp-myCalendarChannelDest", // (Optional) Your channel token.
+  "expiration": 1426325213000 // (Optional) Your requested channel expiration time.
+  }
+}
+```
+
+##### response
+``` json
+{
+  "kind": "api#channel",
+  "id": "01234567-89ab-cdef-0123456789ab"", // ID you specified for this channel.
+  "resourceId": "o3hgv1538sdjfh", // ID of the watched resource.
+  "resourceUri": "https://www.googleapis.com/calendar/v3/calendars/my_calendar@gmail.com/events", // Version-specific ID of the watched resource.
+  "token": "target=myApp-myCalendarChannelDest", // Present only if one was provided.
+  "expiration": 1426325213000, // Actual expiration time as Unix timestamp (in ms), if applicable.
+}
+```
+
+#### Sync
+
+- webhook이 시작되었음을 알림
+
+##### Request
+
+``` form
+POST https://mydomain.com/notifications // Your receiving URL.
+X-Goog-Channel-ID: channel-ID-value
+X-Goog-Channel-Token: channel-token-value
+X-Goog-Channel-Expiration: expiration-date-and-time // In human-readable format; present only if channel expires.
+X-Goog-Resource-ID: identifier-for-the-watched-resource
+X-Goog-Resource-URI: version-specific-URI-of-the-watched-resource
+X-Goog-Resource-State: sync
+X-Goog-Message-Number: 1
+```
+
+#### Notifications
+
+- 실질적인 webhook
+- HTTPS POST
+
+##### Request
+``` form
+POST https://mydomain.com/notifications // Your receiving URL.
+Content-Type: application/json; utf-8
+Content-Length: 0
+X-Goog-Channel-ID: 4ba78bf0-6a47-11e2-bcfd-0800200c9a66
+X-Goog-Channel-Token: 398348u3tu83ut8uu38
+X-Goog-Channel-Expiration: Tue, 19 Nov 2013 01:13:52 GMT
+X-Goog-Resource-ID:  ret08u3rv24htgh289g
+X-Goog-Resource-URI: https://www.googleapis.com/calendar/v3/calendars/my_calendar@gmail.com/events
+X-Goog-Resource-State:  exists
+X-Goog-Message-Number: 10
+```
+
+#### Stop
+
+- `https://www.googleapis.com/calendar/v3/channels/stop`
+- 만료되기 전에 직접 종료하는 방법
+
+``` json
+POST https://www.googleapis.com/calendar/v3/channels/stop
+Authorization: Bearer {auth_token_for_current_user}
+Content-Type: application/json
+
+{
+  "id": "4ba78bf0-6a47-11e2-bcfd-0800200c9a66",
+  "resourceId": "ret08u3rv24htgh289g"
+}
+```
+
