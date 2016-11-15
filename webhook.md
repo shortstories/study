@@ -1,14 +1,17 @@
 # Webhook
+
 - 리얼타임 통신을 위한 방법 중 하나
 - 이벤트 기반 동작
 - Web Callback, HTTP push API 등 다양한 이름으로 불림
 - 보통 POST request를 통해서 콜백 데이터 전달
 
 ## Consuming
+
 - Webhook을 받기 위해서 Webhook provider에게 URL을 제공
 - 일반적으로 json, xml 형식의 POST Request가 전달됨
 
 ## Debugging
+
 - 기본적으로 비동기 동작이므로 별도의 도구 사용
 - ex)
   1. RequestBin으로 리퀘스트 수집
@@ -17,6 +20,7 @@
   4. Runscope로 전체적인 플로우 감시
 
 ## Security
+
 - webhook의 URL은 기본적으로 공개되어있기 때문에 전송 데이터를 검증할 방법이 필요함
   1. TLS Connections
   2. URL에 auth Token 추가
@@ -26,6 +30,7 @@
 ## Failure & Retries
 
 ### HTTP Status Code 대응
+
 - 2XX 
   - 성공한 것이므로 종료
 - 3XX
@@ -38,17 +43,25 @@
 - 5XX
   - 기본적으로 retry 하되 정해진 횟수나 시간 만큼만 하도록 설정
 
-### Handling Failure
+### Failure 대응
+
 #### Exponential Backoff
+
+- 같은 webhook에 대해 retry를 할 때마다 간격을 점점 늘려나가며 하는 방법
+- 일정 시간 간격 내지는 일정 횟수 제한을 두고 그 제한을 넘어가면 서버가 비정상인 것으로 간주하여 subscription 자체를 중단하게 설정
+
 #### Claim Check
 
 ### Ensuring Ordered Delivery
 
 ## Events
+
 - 보통 name, payload 두 가지로 구성됨
 
 ### Name
+
 - `[Resource Name].[Sub Resource Name].[Event]` 같은 형식으로 명명
 
 ### Payload
+
 - Webhook의 리소스에 해당하는 REST API가 이미 있다면 webhook의 페이로드도 완전히 똑같이 만들어주는 편이 좋음
