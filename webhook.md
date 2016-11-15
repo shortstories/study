@@ -44,10 +44,8 @@
 ## Events
 - 보통 name, payload 두 가지로 구성됨
 
-#### Name
+### Name
 - `[Resource Name].[Sub Resource Name].[Event]` 같은 형식으로 명명
 
-#### Payload
+### Payload
 - Webhook의 리소스에 해당하는 REST API가 이미 있다면 webhook의 페이로드도 완전히 똑같이 만들어주는 편이 좋음
-
-## 
