@@ -5,12 +5,14 @@
 - Web Callback, HTTP push API 등 다양한 이름으로 불림
 - 보통 POST request를 통해서 콜백 데이터 전달
 
-## Consuming
+## 개념
+
+### Consuming
 
 - Webhook을 받기 위해서 Webhook provider에게 URL을 제공
 - 일반적으로 json, xml 형식의 POST Request가 전달됨
 
-## Debugging
+### Debugging
 
 - 기본적으로 비동기 동작이므로 별도의 도구 사용
 - ex)
@@ -19,7 +21,7 @@
   3. ngrok로 로컬에서 테스트
   4. Runscope로 전체적인 플로우 감시
 
-## Security
+### Security
 
 - webhook의 URL은 기본적으로 공개되어있기 때문에 전송 데이터를 검증할 방법이 필요함
   1. TLS Connections
@@ -27,9 +29,9 @@
   3. Basic Auth 제공 https://en.wikipedia.org/wiki/Basic_access_authentication
   4. provider가 Request를 보내기 전에 서명하여 signature를 만들고 public key를 제공하여 받는 쪽에서 적절한 암호화 알고리즘을 통해 검증
 
-## Failure & Retries
+### Failure & Retries
 
-### HTTP Status Code 대응
+#### HTTP Status Code 대응
 
 - 2XX 
   - 성공한 것이므로 종료
@@ -43,32 +45,36 @@
 - 5XX
   - 기본적으로 retry 하되 정해진 횟수나 시간 만큼만 하도록 설정
 
-### Failure 대응
+#### Failure 대응
 
-#### Exponential Backoff
+##### Exponential Backoff
 
 - 같은 webhook에 대해 retry를 할 때마다 간격을 점점 늘려나가며 하는 방법
 - 일정 시간 간격 내지는 일정 횟수 제한을 두고 그 제한을 넘어가면 webhook consumer가 비정상인 것으로 간주하여 subscription 자체를 중단하게 설정
 
-#### Claim Check
+##### Claim Check
 
 - webhook에 실패할 경우 별도의 저장소에다가 저장해두고 나중에 확인할 수 있도록 하는 방법
   1. 저장된 webhook을 확인할 수 있게 별도의 URL을 미리 제공하여 webhook consumer가 필요할 때 찾아볼 수 있도록 하는 방법
   2. 정해진 횟수의 retry 이후 저장소에 저장. 이후 만료되기 전까지 정기적으로 저장된 webhook을 확인할 수 있는 URL을 전송하는 방법
 
-### Ensuring Ordered Delivery
+#### Ensuring Ordered Delivery
 
 - webhook의 순서를 보장하기 위해선 일종의 sequence ID를 주는 방법이 있음
 - 물론 이 경우엔 webhook consumer가 webhook을 받아서 재정렬하는 과정이 필요
 
-## Events
+### Events
 
 - 보통 name, payload 두 가지로 구성됨
 
-### Name
+#### Name
 
 - `[Resource Name].[Sub Resource Name].[Event]` 같은 형식으로 명명
 
-### Payload
+#### Payload
 
 - Webhook의 리소스에 해당하는 REST API가 이미 있다면 webhook의 페이로드도 완전히 똑같이 만들어주는 편이 좋음
+
+## 구현 사례
+
+###
