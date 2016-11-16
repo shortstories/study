@@ -386,6 +386,7 @@ Content-Type: application/json
 ### Github
 
 - https://developer.github.com/v3/repos/hooks/#ping-a-hook
+- 인증 토큰이 선택 가능한 옵션으로 되어있어 그냥 사용하는 것도 가능
 
 #### webhook
 
