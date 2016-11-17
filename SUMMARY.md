@@ -58,5 +58,5 @@
 * [Github pages](github_pages.md)
 * [Static Website](static_website_generator.md)
 * [Webhook](webhook.md)
-* Service Discovery Tools
+* [Service Discovery Tools](service_discovery_tools.md)
 
