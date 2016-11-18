@@ -88,15 +88,20 @@ public Object test(Object param, Object param2)
 - 특별한 조건을 만족할 때만 캐싱하도록 제약을 거는 방법
 
 ##### `condition`
-- `condition` 패러미터에 SpEL 방식으로 작성
+
+- - `condition` 패러미터에 SpEL 방식으로 작성
 - 연산 결과가 true일 때 캐싱
 - false일 땐 캐싱되지 않았을 때와 동일하게 동작
 - 현재 캐시 상태, 패러미터와 상관없이 항상 실행됨
 - ex) `condition="#name.length < 32"`
 
-
 ##### `unless`
-- 
+
+- - `unless` 패러미터에 SpEL 방식으로 작성
+- 연산 결과가 false일 때 캐싱
+- `condition` 이랑 달리 메소드가 호출된 이후에 연산
+- 메소드 결과를 `#result`로 참고
+- `java.util.Optional`을 쓸 때도 `#result`는 `Optional` 래퍼 객체가 아니라 담고 있는 객체
 
 ### `@CacheEvict`
 
