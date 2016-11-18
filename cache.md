@@ -8,9 +8,8 @@
   - 주어진 argument를 기준으로 판단
     - 따라서 같은 input이 주어지면 언제나 같은 output이 나와야함
 - 캐시를 지우거나 수정할 수 있는 기능 제공
-- 추상체기 때문에 실제 캐시 저장소 구현체를 선택하여 사용해야 함
+- 추상체기 때문에 실제 캐시 저장소 구현체중 하나를 선택하여 사용해야 함
   - `org.springframework.cache.Cache`, `org.springframework.cache.CacheManager` 인터페이스를 사용해서 접근
-- 
 
 
 ### Cache vs Buffer
