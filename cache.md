@@ -64,7 +64,7 @@ public Object test(Object param, Object param2)
 ```
 
 - 정말 특별한 키 생성 알고리즘을 쓰거나 샤딩이 필요하면 `keyGenerator`에 별도의 bean 정의
-  - `key`, `keyGenerator` 을 동시에 적용할 수 없음
+  - `key`, `keyGenerator` 두개는 동시에 적용할 수 없음
 
 ### `@CacheEvict`
 
