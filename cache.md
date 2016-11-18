@@ -83,6 +83,21 @@ public Object test(Object param, Object param2)
 - 캐시 구현체가 thread safe 하지 않을 때, 자체적으로 캐시 접근에 동기화를 거는 방법
   - `@Cacheable(..., sync="/* true or false */")`
 
+#### 조건부 캐싱
+
+- 특별한 조건을 만족할 때만 캐싱하도록 제약을 거는 방법
+
+##### `condition`
+- `condition` 패러미터에 SpEL 방식으로 작성
+- 연산 결과가 true일 때 캐싱
+- false일 땐 캐싱되지 않았을 때와 동일하게 동작
+- 현재 캐시 상태, 패러미터와 상관없이 항상 실행됨
+- ex) `condition="#name.length < 32"`
+
+
+##### `unless`
+- 
+
 ### `@CacheEvict`
 
 - 
