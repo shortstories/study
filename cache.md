@@ -66,6 +66,14 @@ public Object test(Object param, Object param2)
 - 정말 특별한 키 생성 알고리즘을 쓰거나 샤딩이 필요하면 `keyGenerator`에 별도의 bean 정의
   - `key`, `keyGenerator` 두개는 동시에 적용할 수 없음
 
+#### 캐시 탐색
+
+##### 기본 캐시 탐색
+
+- `CacheResolver` 에서 `CacheManager` 의 설정을 보고 캐시 탐색
+  - 마찬가지로 기본 `CacheResolver`을 바꾸고 싶으면 `org.springframework.cache.interceptor.CacheResolver` 구현
+
+
 ### `@CacheEvict`
 
 - 
