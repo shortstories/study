@@ -35,6 +35,18 @@
   - 캐시 이름은 여러 개를 동시에 입력할 수 있음
   - 최소한 하나 이상 hit가 있으면 캐시 값 반환
 
+#### 키 생성
+##### 기본 키 생성
+- `KeyGenerator` 사용
+  - 패러미터가 없을 땐 `SimpleKey.EMPTY`
+  - 패러미터가 한 개 있을 땐 패러미터 인스턴스 사용
+  - 패러미터가 여러 개 있을 땐 모든 패러미터를 담은 `SimpleKey` 사용
+- 패러미터 객체에 적절한 `hashCode()`, `equals()` 구현이 있다면 수정할 필요 없음
+- 기본 키 생성 방식을 바꾸고 싶으면 `org.springframework.cache.interceptor.KeyGenerator` 인터페이스를 구현
+
+##### 커스텀 키 생성
+
+
 ### `@CacheEvict`
 
 - 
