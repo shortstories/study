@@ -43,6 +43,10 @@
   - 패러미터가 여러 개 있을 땐 모든 패러미터를 담은 `SimpleKey` 사용
 - 패러미터 객체에 적절한 `hashCode()`, `equals()` 구현이 있다면 수정할 필요 없음
 - 기본 키 생성 방식을 바꾸고 싶으면 `org.springframework.cache.interceptor.KeyGenerator` 인터페이스를 구현
+- 스프링 4.0 이전 버전에서는 `org.springframework.cache.interceptor.DefaultKeyGenerator` 사용
+  - 여러 패러미터를 가진 키를 생성할 때 `hashCode()`만 사용하여 예기치 않은 키 충돌을 일으킴
+  - 4.0 이후로는 `SimpleKeyGenerator` 사용
+
 
 ##### 커스텀 키 생성
 
