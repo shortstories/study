@@ -73,6 +73,10 @@ public Object test(Object param, Object param2)
 - `CacheResolver` 에서 `CacheManager` 의 설정을 보고 캐시 탐색
   - 마찬가지로 기본 `CacheResolver`을 바꾸고 싶으면 `org.springframework.cache.interceptor.CacheResolver` 구현
 
+##### 커스텀 캐시 탐색
+
+- `cacheManager` 에 별도의 CacheManager bean을 정의하거나 아예 `cacheResolver` 에 CacheResolver bean을 정의해서 갈아끼워도 됨
+  - 둘 중 하나만 선택
 
 ### `@CacheEvict`
 
