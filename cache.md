@@ -56,6 +56,12 @@
 - SpEL을 사용해서 특정 패러미터, 혹은 그 패러미터의 프로퍼티를 지정
 - 코드 베이스가 확장됨에 따라 메소드의 패러미터도 복잡해지기 때문에 추천되는 방법
   - 기본 키 생성 전략이 모든 메소드에 적용되는 일은 드뭄
+- ex)
+
+``` java
+@Cacheable(cacheNames="testCache", key="#param")
+public Object test(Object param, Object param2)
+```
 
 ### `@CacheEvict`
 
