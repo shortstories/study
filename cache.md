@@ -63,6 +63,8 @@
 public Object test(Object param, Object param2)
 ```
 
+- 정말 특별한 키 생성 알고리즘을 쓰거나 샤딩이 필요하면 `keyGenerator`에 별도의 인스턴스 정의
+
 ### `@CacheEvict`
 
 - 
