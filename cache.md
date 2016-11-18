@@ -10,8 +10,9 @@
 - 캐시를 지우거나 수정할 수 있는 기능 제공
 - 추상체기 때문에 실제 캐시 저장소 구현체중 하나를 선택하여 사용해야 함
   - `org.springframework.cache.Cache`, `org.springframework.cache.CacheManager` 인터페이스를 사용해서 접근
-
-
+- 멀티 쓰레드, 멀티 프로세스 관련 처리는 캐시 구현체에서 처리해야 됨
+  - 특히 멀티 프로세스의 경우 여러 노드에서 같은 데이터를 가질 수 있도록 처리해야 됨
+- 
 ### Cache vs Buffer
 - Cache와 Buffer은 서로 바꿔 쓸 수 있는 단어
 - Buffer는 전통적으로 연산 속도가 서로 다른 객체 사이에 임시로 데이터를 저장하는 저장소 지칭
