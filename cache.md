@@ -81,7 +81,7 @@ public Object test(Object param, Object param2)
 #### 캐싱 동기화
 
 - 캐시 구현체가 thread safe 하지 않을 때, 자체적으로 캐시 접근에 동기화를 거는 방법
-  - `@Cacheable(..., sync=/* true or false */)`
+  - `@Cacheable(..., sync="/* true or false */")`
 
 ### `@CacheEvict`
 
