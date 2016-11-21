@@ -29,7 +29,7 @@
 
 ### `@Cacheable` 
 
-- 캐시를 사용할 메소드 표시
+- 메소드의 결과 값이 캐싱되고, 존재하는 키 요청은 캐시에서 찾아 반환하도록 만드는 어노테이션
   - 이 어노테이션이 붙어있는 메소드는 결과가 캐시에 저장됨
 - 캐시 이름은 여러 개를 동시에 입력할 수 있음
   - 최소한 하나 이상 hit가 있으면 캐시 값 반환
@@ -105,7 +105,7 @@ public Object test(Object param, Object param2)
 
 ### `@CacheEvict`
 
-- 메소드가 호출될 때 캐시에 저장되어있는 데이터가 삭제되도록 만듬
+- 메소드가 호출될 때 캐시에 저장되어있는 데이터가 삭제되도록 만드는 어노테이션
 - 여러 개의 캐시 이름을 동시에 등록 가능
 - `@Cacheable` 에 있는 여러 설정 사용 가능
 - `allEntries=/* true or false */` 옵션을 통해 한번에 모든 캐시 값을 지울 것인가 키에 해당하는 캐시만 지울 것인가 선택 가능 
@@ -116,7 +116,7 @@ public Object test(Object param, Object param2)
 
 ### `@CachePut`
 
-- 메소드 호출 완료 후 그 결과 값을 바탕으로 캐시 데이터 수정
+- 메소드 호출 완료 후 그 결과 값을 바탕으로 캐시 데이터를 수정하게 만드는 어노테이션
 - `@Cacheable` 에 있는 여러 설정 사용 가능
 - 언제나 메소드가 실행된 이후 캐시에 저장
 - `@Cacheable`과 같이 사용하지 말 것
@@ -124,7 +124,7 @@ public Object test(Object param, Object param2)
 
 ### `@Cacheing`
 
-- 조건이나 key가 다른 여러 어노테이션들을 한 메소드에 동시 적용하기 위해 사용
+- 조건이나 key가 다른 여러 어노테이션들을 한 메소드에 동시 적용하기 위해 사용하는 어노테이션
   - `@Cacheable`, `@CachePut`, `@CacheEvict` 중첩 사용 가능
 
 ``` java
@@ -133,3 +133,6 @@ public Object testFunc(String param, String param1)
 ```
 
 ### `@CacheConfig`
+
+- 모든 메소드에서 공통되는 옵션을 설정하게 도와주는 클래스 레벨 어노테이션
+- 
