@@ -124,6 +124,6 @@ public Object test(Object param, Object param2)
 
 ### `@Cacheing`
 
-- 
+- 조건이나 key가 다른 여러 어노테이션들을 한 메소드에 동시 적용하기 위해 사용
 
 ### `@CacheConfig`
