@@ -127,4 +127,9 @@ public Object test(Object param, Object param2)
 - 조건이나 key가 다른 여러 어노테이션들을 한 메소드에 동시 적용하기 위해 사용
   - `@Cacheable`, `@CachePut`, `@CacheEvict` 중첩 사용 가능
 
+``` java
+@Caching(evict = { @CacheEvict("primary"), @CacheEvict(cacheNames="secondary", key="#p0") })
+public Book importBooks(String deposit, Date date)
+```
+
 ### `@CacheConfig`
