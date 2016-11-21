@@ -154,6 +154,7 @@ public class AppConfig {
 
 - 스프링 자체적으로 지원하는 캐시들은 해당하는 `CacheManager` 구현체를 bean 등록
 - 그 외에는 `CacheManager`, `Cache` 직접 구현 필요
+  - `AbstractCacheManager` 와 같은 추상 클래스들을 사용하여 보일러플레이트 줄이기 가능 
 
 #### JDK ConcurrentMap Cache
 
