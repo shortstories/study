@@ -135,4 +135,5 @@ public Object testFunc(String param, String param1)
 ### `@CacheConfig`
 
 - 모든 메소드에서 공통되는 옵션을 설정하게 도와주는 클래스 레벨 어노테이션
-- 
+  - 캐시 이름, `KeyGenerator`, `CacheManager`, `CacheResolver` 등 설정 가능
+
