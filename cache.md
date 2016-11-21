@@ -112,7 +112,7 @@ public Object test(Object param, Object param2)
 - `beforeInvocation=/* true or false */` 옵션을 통해 메소드가 실행되기 전에 날릴 것인가 실행 완료 이후에 날릴 것인가 선택 가능
   - 메소드 실행 도중 Exception 등 에러가 발생해서 실패했을 때 유용
 - void 리턴 메소드 사용 가능
-  - 이 경우 trigger처럼 사용
+  - 이 경우 trigger로 사용
 
 ### `@CachePut`
 
