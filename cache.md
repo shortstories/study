@@ -128,8 +128,8 @@ public Object test(Object param, Object param2)
   - `@Cacheable`, `@CachePut`, `@CacheEvict` 중첩 사용 가능
 
 ``` java
-@Caching(evict = { @CacheEvict("primary"), @CacheEvict(cacheNames="secondary", key="#p0") })
-public Book importBooks(String deposit, Date date)
+@Caching(evict = { @CacheEvict("cache1"), @CacheEvict(cacheNames="cache2", key="#param1") })
+public Object testFunc(String param, String param1)
 ```
 
 ### `@CacheConfig`
