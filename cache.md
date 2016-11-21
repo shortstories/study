@@ -119,6 +119,7 @@ public Object test(Object param, Object param2)
 - 메소드 호출 완료 후 그 결과 값을 바탕으로 캐시 데이터 수정
 - `@Cacheable` 에 있는 여러 설정 사용 가능
 - 언제나 메소드가 실행된 이후 캐시에 저장
+- `@Cacheable`과 같이 사용하지 말 것
 
 ### `@Cacheing`
 ### `@CacheConfig`
