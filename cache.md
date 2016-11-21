@@ -108,7 +108,7 @@ public Object test(Object param, Object param2)
 - 메소드가 호출될 때 캐시에 저장되어있는 데이터가 삭제되도록 만듬
 - 여러 개의 캐시 이름을 동시에 등록 가능
 - `@Cacheable` 에 있는 여러 패러미터 및 기능들 사용 가능
-- 
+- `allEntries` 옵션을 통해 한번에 모든 캐시 값을 지울 것인가 키에 해당하는 캐시만 지울 것인가 선택 가능 
 
 ### `@CachePut`
 
