@@ -107,7 +107,7 @@ public Object test(Object param, Object param2)
 
 - 메소드가 호출될 때 캐시에 저장되어있는 데이터가 삭제되도록 만듬
 - 여러 개의 캐시 이름을 동시에 등록 가능
-- `@Cacheable` 에 있는 여러 패러미터 및 기능들 사용 가능
+- `@Cacheable` 에 있는 여러 설정 사용 가능
 - `allEntries=/* true or false */` 옵션을 통해 한번에 모든 캐시 값을 지울 것인가 키에 해당하는 캐시만 지울 것인가 선택 가능 
 - `beforeInvocation=/* true or false */` 옵션을 통해 메소드가 실행되기 전에 날릴 것인가 실행 완료 이후에 날릴 것인가 선택 가능
   - 메소드 실행 도중 Exception 등 에러가 발생해서 실패했을 때 유용
@@ -116,7 +116,9 @@ public Object test(Object param, Object param2)
 
 ### `@CachePut`
 
-- 
+- 메소드 호출 완료 후 그 결과 값을 바탕으로 캐시 데이터 수정
+- `@Cacheable` 에 있는 여러 설정 사용 가능
+- 언제나 메소드가 실행된 이후 캐시에 저장
 
 ### `@Cacheing`
 ### `@CacheConfig`
