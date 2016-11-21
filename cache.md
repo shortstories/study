@@ -156,6 +156,13 @@ public class AppConfig {
 - 그 외에는 `CacheManager`, `Cache` 직접 구현 필요
   - `AbstractCacheManager` 와 같은 추상 클래스들을 사용하여 보일러플레이트 줄이기 가능 
 
-#### JDK ConcurrentMap Cache
+#### JDK ConcurrentMap
 
-- ``
+- `cacheManager`: `org.springframework.cache.support.SimpleCacheManager`
+
+#### Ehcache
+
+- `cacheManager`: `org.springframework.cache.ehcache.EhCacheCacheManager`
+- `ehcache`: `org.springframework.cache.ehcache.EhCacheManagerFactoryBean`
+
+#### 
