@@ -110,7 +110,7 @@ public Object test(Object param, Object param2)
 - `@Cacheable` 에 있는 여러 패러미터 및 기능들 사용 가능
 - `allEntries=/* true or false */` 옵션을 통해 한번에 모든 캐시 값을 지울 것인가 키에 해당하는 캐시만 지울 것인가 선택 가능 
 - `beforeInvocation=/* true or false */` 옵션을 통해 메소드가 실행되기 전에 날릴 것인가 실행 완료 이후에 날릴 것인가 선택 가능
-  - 메소드를 실행했을 때, Exception이 발생해서 실패한다거나 했을 때 유용
+  - 메소드 실행 도중 Exception 등 에러가 발생해서 실패했을 때 유용
 
 ### `@CachePut`
 
