@@ -172,3 +172,11 @@ public class AppConfig {
 #### Guava
 
 - `cacheManager`: `org.springframework.cache.guava.GuavaCacheManager`
+
+#### GemFire
+
+- http://docs.spring.io/spring-gemfire/docs/current/reference/html/
+
+#### JSR-107
+
+- `cacheManager`: `org.springframework.cache.jcache.JCacheCacheManager`
