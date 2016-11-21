@@ -165,4 +165,10 @@ public class AppConfig {
 - `cacheManager`: `org.springframework.cache.ehcache.EhCacheCacheManager`
 - `ehcache`: `org.springframework.cache.ehcache.EhCacheManagerFactoryBean`
 
-#### 
+#### Caffeine
+
+- `cacheManager`: `org.springframework.cache.caffeine.CaffeineCacheManager`
+
+#### Guava
+
+- `cacheManager`: `org.springframework.cache.guava.GuavaCacheManager`
