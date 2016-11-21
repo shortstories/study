@@ -150,3 +150,11 @@ public class AppConfig {
 }
 ```
 
+### 캐시 스토리지 설정
+
+- 스프링 자체적으로 지원하는 캐시들은 해당하는 `CacheManager` 구현체를 bean 등록
+- 그 외에는 `CacheManager`, `Cache` 직접 구현 필요
+
+#### JDK ConcurrentMap Cache
+
+- ``
