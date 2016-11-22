@@ -180,3 +180,36 @@ public class AppConfig {
 #### JSR-107
 
 - `cacheManager`: `org.springframework.cache.jcache.JCacheCacheManager`
+
+### 테스트
+
+- 테스트를 위해 캐시 어노테이션을 일일히 지우는 대신 더미 캐시 사용 가능
+
+``` java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.support.CompositeCacheManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class TestConfig {
+  @Autowired
+  CacheManager jdkCache; // 예시
+
+  @Autowired
+  CacheManager guavaCache; // 예시
+
+  @Bean
+  public CacheManager cacheManager() {
+    CompositeCacheManager manager = new CompositeCacheManager(jdkCache, guavaCache);
+
+    // CompositeCacheManager에 포함된 CacheManager 외
+    // 모든 캐시 요청을 NoOpCache로 보냄 (여기에선 jdkCache, guavaCache 외의 모든 캐시)
+    // NoOpCache는 캐시가 없는 것과 동일하게 동작
+    manager.setFallbackToNoOpCache(true);
+
+    return manager;
+  }
+}
+```
