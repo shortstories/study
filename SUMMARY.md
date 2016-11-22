@@ -62,4 +62,5 @@
 * [Service Discovery Tools](service_discovery_tools.md)
    * Zookeeper
    * Etcd
+   * Eureka
 
