@@ -60,7 +60,7 @@
 * [Static Website](static_website_generator.md)
 * [Webhook](webhook.md)
 * [Service Discovery Tools](service_discovery_tools.md)
-   * [Etcd](etcd.md)
-   * Eureka
+   * Etcd
+   * [Eureka](eureka.md)
    * Consul
 
