@@ -63,5 +63,5 @@
    * [Etcd](etcd.md)
    * [Eureka](eureka.md)
    * [Consul](consul.md)
-   * 비교
+   * [비교](be44_ad50.md)
 
