@@ -61,6 +61,6 @@
 * [Webhook](webhook.md)
 * [Service Discovery Tools](service_discovery_tools.md)
    * [Etcd](etcd.md)
-   * Eureka
+   * [Eureka](eureka.md)
    * [Consul](consul.md)
 
