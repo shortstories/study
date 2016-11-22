@@ -63,4 +63,5 @@
    * Zookeeper
    * Etcd
    * Eureka
+   * Consul
 
