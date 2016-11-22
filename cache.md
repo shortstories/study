@@ -192,7 +192,7 @@ import org.springframework.cache.support.CompositeCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@TestConfiguration
 public class TestConfig {
   @Autowired
   private CacheManager jdkCache; // 예시
@@ -201,6 +201,7 @@ public class TestConfig {
   private CacheManager guavaCache; // 예시
 
   @Bean
+  @Primary
   public CacheManager cacheManager() {
     CompositeCacheManager manager = new CompositeCacheManager(jdkCache, guavaCache);
 
