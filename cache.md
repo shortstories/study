@@ -195,10 +195,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestConfig {
   @Autowired
-  CacheManager jdkCache; // 예시
+  private CacheManager jdkCache; // 예시
 
   @Autowired
-  CacheManager guavaCache; // 예시
+  private CacheManager guavaCache; // 예시
 
   @Bean
   public CacheManager cacheManager() {
