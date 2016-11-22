@@ -9,6 +9,10 @@
 - 데이터의 Consistency가 보장되어야 함
 - 데이터 변경에 대한 watch가 가능해야 함
 
+## 구조
+
+- 일반적으로 `Provider` - `Service Discovery Tool` - `Proxy` - `Consumer` 구조
+
 ## 목록
 - zookeeper
 - etcd
