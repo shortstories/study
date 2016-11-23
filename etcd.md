@@ -21,8 +21,15 @@
 ### 서버 실행
 
 ``` shell
-/etcd/installed/path/etcd
+etcd
 ```
 
 - 기본적으로 2379 포트에서 클라이언트 통신을 받고 2380 포트에서 서버간 통신을 진행
+
+### 클라이언트 접속
+
+``` shell
+etcdctl set test "hello world"
+etcdctl get test
+```
 
