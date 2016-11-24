@@ -33,3 +33,5 @@ etcdctl set test "hello world"
 etcdctl get test
 ```
 
+## 클러스터링
+
