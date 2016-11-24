@@ -35,3 +35,11 @@ etcdctl get test
 
 ## 클러스터링
 
+### Static
+
+- `--inital-cluster` 옵션에 모든 클러스터 노드의 이름과 peer-url을 넣어서 클러스터를 시작하는 방법
+- `--initial-cluster-token` 옵션을 통해 같은 설정을 가진 고유한 클러스터들을 구분 가능하게 생성할 수 있음
+
+### etcd Discovery
+
+### DNS Discovery
