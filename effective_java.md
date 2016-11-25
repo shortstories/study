@@ -124,3 +124,12 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
   - 보통 3개의 서브 클래스 정도로 판단 가능
   - 최소한 1개는 다른 사람이 작성해보도록 할 것
 4. 생성자에서는 절대 오버라이드 가능한 메소드를 호출하지 말 것
+  - 수퍼 클래스의 생성자가 서브 클래스 생성자에 앞서 실행되기 때문
+5. 되도록이면 `Serializable`, `Cloneable`는 수퍼 클래스에서 implement 하지 말 것
+  - 만약에 해야된다면 `clone()`, `readObject()` 메소드는 오버라이딩 가능한 메소드를 호출하면 안 됨
+6. 설계나 문서화되지 않은 클래스의 상속은 금지
+  - final 클래스로 만들기
+  - 모든 생성자를 private, default로 하고 팩토리 메소드 추가
+
+### 추상 클래스 < 인터페이스
+
