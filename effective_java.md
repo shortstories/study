@@ -132,4 +132,3 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
   - 모든 생성자를 private, default로 하고 팩토리 메소드 추가
 
 ### 추상 클래스 < 인터페이스
-
