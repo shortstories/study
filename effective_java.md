@@ -113,3 +113,4 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
 ##### 위임
 - 컴포지션과 포워딩을 결합하고, 래퍼 객체 참조가 자신이 포함한 객체에 전달되는 것
 
+### 상속을 위한 설계, 문서화
