@@ -54,6 +54,57 @@
 - 새로운 클래스의 각 메소드를 기존 클래스의 메소드와 매핑하여 외부에 노출시키는 것
 - 매핑된 메소드는 포워딩 메소드
 - 포워딩 메소드로만 이루어진 클래스는 포워딩 클래스
+- 래퍼를 만들 땐 바로 상속하는 것 보다 포워딩 클래스를 만들어 상속하는 것이 좋다
+
+``` java
+public class ForwardingList<T> implements List<T> {
+  private final List<T> instance;
+
+  public ForwardingList(List<T> instance) {
+    this.instance = instance;
+  }
+
+  @Override
+  public int size() {
+    return instance.size();
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return instance.isEmpty();
+  }
+
+  @Override
+  public boolean contains(Object o) {
+    return instance.contains(o);
+  }
+  
+  //... 이후 생략
+}
+```
+
+``` java
+public class PrintWrapperList<T> extends ForwardingList<T> {
+  public PrintWrapperList(List<T> instance) {
+    super(instance);
+  }
+
+  @Override
+  public boolean add(T t) {
+    System.out.println("element added: " + t.toString());
+    return super.add(t);
+  }
+
+  @Override
+  public boolean remove(Object o) {
+    System.out.println("element deleted: " + t.toString());
+    return super.remove(o);
+  }
+  
+  //... 이후 생략
+}
+
+```
 
 ##### 데코레이터 패턴
 - 기존 클래스의 인스턴스를 갖고 거기에 새로운 기능을 덧붙인 래퍼 클래스를 만들어 쓰는 것
