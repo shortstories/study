@@ -132,3 +132,7 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
   - 모든 생성자를 private, default로 하고 팩토리 메소드 추가
 
 ### 추상 클래스 < 인터페이스
+- 기존 클래스에다 추가로 추상 클래스를 상속하는 것 보다 인터페이스를 구현하기 위해 바꾸는 것이 훨씬 쉬움
+- 인터페이스는 Mixin 정의에 이상적
+- 인터페이스는 비계층적인 타입 프레임워크 구축 가능
+- 
