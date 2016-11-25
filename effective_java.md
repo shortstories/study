@@ -123,4 +123,4 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
   - 사용 빈도가 적은 멤버는 `private`로, 꼭 필요했던 멤버는 `protected`로
   - 보통 3개의 서브 클래스 정도로 판단 가능
   - 최소한 1개는 다른 사람이 작성해보도록 할 것
-
+4. 생성자에서는 절대 오버라이드 가능한 메소드를 호출하지 말 것
