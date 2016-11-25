@@ -136,4 +136,4 @@ public class PrintWrapperList<T> extends ForwardingList<T> {
 - 인터페이스는 Mixin 정의에 이상적
 - 인터페이스는 비계층적인 타입 프레임워크 구축 가능
 - 메소드 구현 부분을 포함해서 제공하고 싶다면 인터페이스를 먼저 만들고 그 인터페이스의 중요한 부분을 일부 구현한 골격 구현 추상 클래스를 만들 것
-  - 네이밍은 `Abstract{$InterfaceName}`
+  - 네이밍은 `Abstract{Interface name}`
