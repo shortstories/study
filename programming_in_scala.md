@@ -306,7 +306,7 @@ class MyClass {
 - Null과 달리 Int, Boolean등 값 타입과 호환됨
 - 반환 타입이 Nothing인 것은 이 메소드가 정상적으로 값을 반환하지 않을 것이란 뜻. 즉, 비정상적인 종료를 표시
 
-## 12장
+## 12장 (Trait)
 ### 사용목적
 - rich interface
 - stackable modification
