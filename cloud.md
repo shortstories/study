@@ -19,3 +19,14 @@
 - https://12factor.net/
 
 ## Spring Cloud Context
+
+- spring boot에서 제공하는 각종 기능들의 빌드보다 먼저 빌드되고, 필요하리라 여겨지는 몇몇 기능들 추가
+
+### The Bootstrap Application Context
+
+- `bootstrap` context를 생성하여 동작
+  - 일반적인 spring context의 부모로 생성됨
+  - 외부 소스로부터 설정을 읽어오기, 암호화된 설정 복호화 등
+  - spring context와 `Environment` 공유
+  - 높은 우선도를 가지고 있기 때문에 기본적으로는 local configuration에 의해서 override 될 수 없음
+  - `application[.yml|.properties]` 대신에 `bootstrap[.yml|.properties]` 사용
