@@ -69,6 +69,6 @@ MutablePropertySources (last state)
 - 외부 Cloud 저장소 (Consul 등) 에서 가져온 Properties 값들을 로컬에서 덮어씌울 수 있게 할 것인지 설정하는 부분
 - `spring.cloud.config.allowOverride`
   - false이면 Remote Properties를 덮어 씌울 수 없게 됨
-  - true이면 세부 옵션 추가됨 (기본값)
+  - true이면 세부 옵션 추가 (기본값)
     - `spring.cloud.config.overrideNone`: true이면 모든 로컬 `PropertySource`가 Remote Properties를 덮어쓰게 됨 (기본값 false)
-    - `spring.cloud.config.overrideSystemProperties`: true이면 시스템 환경설정으로만 덮어씌울 수 있게 됨 (기본값 false)
+    - `spring.cloud.config.overrideSystemProperties`: true이면 시스템 환경설정으로는 덮어씌울 수 있게 됨 (기본값 false)
