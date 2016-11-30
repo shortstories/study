@@ -48,7 +48,7 @@
 +------------------------+
 |  bootstrap.yml         |
 +------------------------+
-MutablePropertySources
+MutablePropertySources (last state)
 ```
 
 #### 세팅 순서
