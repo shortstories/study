@@ -46,6 +46,7 @@
 5. application.yml에서 로드해온 applicationConfig를 `MutablePropertySources`에 추가
 6. `PropertySourceLocator.locate()`를 통해 얻은 `PropertySource`를 높은 우선순위로 `MutablePropertySources`에 추가
 
+```
 +------------------------+
 |  PropertySourceLocator |
 |   .locate()            |
@@ -64,4 +65,6 @@
 |  bootstrap.yml         |
 |                        |
 +------------------------+
+```
+
 
