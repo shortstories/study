@@ -37,6 +37,19 @@
   1. "bootstrap": Bootstrap context에 `PropertySourceLocator` Bean이 있으면 application context 설정 완료 이후에 `CompositePropertySource`를 높은 우선순위로 추가함
   2. "applicationConfig": `classpath:bootstrap.yml` 에 등록된 값으로 Bootstrap context가 설정 완료된 이후에 `classpath:application.yml` 및 기타 스프링 부트 기본 PropertySource보다 낮은 우선순위로 추가됨
 
+```
++------------------------+
+|  PropertySourceLocator |
+|   .locate()            |
++------------------------+
+|   application.yml      |
+|          +             |
+|   spring boot sources  |
++------------------------+
+|  bootstrap.yml         |
++------------------------+
+```
+
 #### 세팅 순서
 
 1. bootstrap.yml 로드
@@ -46,25 +59,6 @@
 5. application.yml에서 로드해온 applicationConfig를 `MutablePropertySources`에 추가
 6. `PropertySourceLocator.locate()`를 통해 얻은 `PropertySource`를 높은 우선순위로 `MutablePropertySources`에 추가
 
-```
-+------------------------+
-|  PropertySourceLocator |
-|   .locate()            |
-|                        |
-+------------------------+
-|                        |
-|   application.yml      |
-|                        |
-|                        |
-|          +             |
-|                        |
-|   spring boot sources  |
-|                        |
-+------------------------+
-|                        |
-|  bootstrap.yml         |
-|                        |
-+------------------------+
 ```
 
 
