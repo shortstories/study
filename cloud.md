@@ -60,6 +60,15 @@ MutablePropertySources (last state)
 5. application.yml에서 로드해온 applicationConfig를 `MutablePropertySources`에 추가
 6. `PropertySourceLocator.locate()`를 통해 얻은 `PropertySource`를 높은 우선순위로 `MutablePropertySources`에 추가
 
-```
+#### Bootstrap Properties 파일 위치 변경
 
+- 시스템 환경변수에다가 `spring.cloud.bootstrap.name`, `spring.cloud.bootstrap.location` 적절하게 설정
 
+#### Remote Properties 덮어 씌우기
+
+- 외부 Cloud 저장소 (Consul 등) 에서 가져온 Properties 값들을 로컬에서 덮어씌울 수 있게 할 것인지 설정하는 부분
+- `spring.cloud.config.allowOverride`
+  - false이면 Remote Properties를 덮어 씌울 수 없게 됨
+  - true이면 세부 옵션 추가됨 (기본값)
+    - `spring.cloud.config.overrideNone`: true이면 모든 로컬 `PropertySource`가 Remote Properties를 덮어쓰게 됨 (기본값 false)
+    - `spring.`
