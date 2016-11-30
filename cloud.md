@@ -71,4 +71,4 @@ MutablePropertySources (last state)
   - false이면 Remote Properties를 덮어 씌울 수 없게 됨
   - true이면 세부 옵션 추가 (기본값)
     - `spring.cloud.config.overrideNone`: true이면 모든 로컬 `PropertySource`가 Remote Properties를 덮어쓰게 됨 (기본값 false)
-    - `spring.cloud.config.overrideSystemProperties`: true이면 시스템 환경설정으로는 덮어씌울 수 있게 됨 (기본값 false)
+    - `spring.cloud.config.overrideSystemProperties`: false 이면 시스템 환경설정으로는 덮어씌울 수 있게 됨 (기본값 true)
