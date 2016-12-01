@@ -82,3 +82,20 @@ MutablePropertySources (last state)
   - `@Order` annotation으로 실행 순서 지정 가능 (기본 값은 "last")
 - 이 BootstrapConfiguration 클래스들은 꼭 필요한 경우가 아니라면 `@ComponentScan`이나 `@SpringBootApplication`에 걸리지 않도록 별도의 패키지로 관리하거나 아예 `@Configuration` annotation을 안 붙이는 것을 추천
 - bootstrap 과정이 모두 끝나고 나면 main application을 시작하기 전에 `ApplicationContextInitializer` bean들을 추가함
+
+#### Bootstrap Property Sources 추가하기
+
+- `spring.factories` 파일에 알맞은 `PropertySourceLocator` 클래스를 등록해도 되고, 아니면 Configuration 클래스에서 Locator 클래스 인스턴스를 생성하여 bean으로 등록하게 하여도 됨
+
+``` java
+@Configuration
+public class CustomPropertySourceLocator implements PropertySourceLocator {
+  @Override
+  public PropertySource<?> locate(Environment environment) {
+    return new MapPropertySource(
+          "customMapProperty",
+          Collections.singletonMap("custom.property.key", "custom property value")
+        );
+  }
+}
+```
