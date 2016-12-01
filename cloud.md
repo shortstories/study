@@ -79,4 +79,6 @@ MutablePropertySources (last state)
   - `org.springframework.boot.autoconfigure.EnableAutoConfiguration` 키에 원하는 `@Configuration` 클래스 리스트들을 각각 ","로 구분하여 값 작성
 - 이 configuration에서 생성한 bean들을 main application context에서 autowired 할 수 있음
   - `ApplicationContextInitializer` bean도 생성 가능
-  - `@Order` annotation으로 설정 순서 지정 가능 (기본 값은 "last")
+  - `@Order` annotation으로 실행 순서 지정 가능 (기본 값은 "last")
+- 이 BootstrapConfiguration 클래스들은 꼭 필요한 경우가 아니라면 `@ComponentScan`이나 `@SpringBootApplication`에 걸리지 않도록 별도의 패키지로 관리하거나 아예 `@Configuration` annotation을 안 붙이는 것이 추천됨
+
