@@ -86,6 +86,7 @@ MutablePropertySources (last state)
 #### Bootstrap Property Sources 추가하기
 
 - `spring.factories` 파일에 알맞은 `PropertySourceLocator` 클래스를 등록해도 되고, 아니면 Configuration 클래스에서 Locator 클래스 인스턴스를 생성하여 bean으로 등록하게 하여도 됨
+- ex)
 
 ``` java
 @Configuration
@@ -99,3 +100,12 @@ public class CustomPropertySourceLocator implements PropertySourceLocator {
   }
 }
 ```
+
+#### Environment Change 이벤트 처리 
+
+- Environment가 변경되면 어플리케이션 전역에 `EnvironmentChangedEvent` publish 됨
+  - 변경된 값들의 key가 담겨있음
+  - 자동적으로 `@ConfigurationProperties` 다시 바인딩하게 만듬
+  - log 레벨을 프로퍼티 `logging.level.*` 에 맞춰서 재설정
+- 일반적으로는 `ApplicationListeners` bean 을 만들어서 처리하도록 함
+- 
