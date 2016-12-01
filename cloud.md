@@ -77,3 +77,6 @@ MutablePropertySources (last state)
 
 - 리소스 폴더에 `/META-INF/spring.factories` 파일 생성하여 설정
   - `org.springframework.boot.autoconfigure.EnableAutoConfiguration` 키에 원하는 `@Configuration` 클래스 리스트들을 각각 ","로 구분하여 값 작성
+- 이 configuration에서 생성한 bean들을 main application context에서 autowired 할 수 있음
+  - `ApplicationContextInitializer` bean도 생성 가능
+  - `@Order` annotation으로 설정 순서 지정 가능 (기본 값은 "last")
