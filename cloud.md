@@ -76,3 +76,4 @@ MutablePropertySources (last state)
 #### Bootstrap context Configuration
 
 - 리소스 폴더에 `/META-INF/spring.factories` 파일 생성하여 설정
+  - `org.springframework.boot.autoconfigure.EnableAutoConfiguration` 키에 원하는 `@Configuration` 클래스 리스트들을 각각 ","로 구분하여 값 작성
