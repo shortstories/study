@@ -74,3 +74,5 @@ MutablePropertySources (last state)
     - `spring.cloud.config.overrideSystemProperties`: false이면 시스템 환경설정으로는 덮어 씌울 수 있게 됨 (기본값 true)
 
 #### Bootstrap context Configuration
+
+- 리소스 폴더에 `/META-INF/spring.factories` 파일 생성하여 설정
