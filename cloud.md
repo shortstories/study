@@ -108,4 +108,4 @@ public class CustomPropertySourceLocator implements PropertySourceLocator {
   - 자동적으로 `@ConfigurationProperties` 다시 바인딩하게 만듬
   - log 레벨을 프로퍼티 `logging.level.*` 에 맞춰서 재설정
 - 일반적으로는 `ApplicationListeners` bean 을 만들어서 처리하도록 함
-- 
+  - Config Client가 `Environment` 변경사항을 폴링하는 것보다 나음
