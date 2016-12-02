@@ -1,11 +1,8 @@
 {
-    "plugins": ["ga", "page-treeview"],
+    "plugins": ["ga"],
     "pluginsConfig": {
         "ga": {
             "token": "UA-88346411-1"
-        },
-        "page-treeview": {
-            "copyright": ""
         }
     }
 }
