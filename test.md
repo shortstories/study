@@ -47,46 +47,29 @@ public class FreshContextTests {
     // 모든 케이스에서 새로운 context가 필요함
 }
 ```
-
-
-After each test method in the current test class, when declared on a class with class mode set to AFTER\_EACH\_TEST\_METHOD.
-
-@DirtiesContext\(classMode = AFTER\_EACH\_TEST\_METHOD\)
-
+4. 클래스의 모든 테스트 케이스가 끝날 때 마다 context 재생성
+``` java
+@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 public class ContextDirtyingTests {
-
-    // some tests that result in the Spring container being dirtied
-
+    // 모든 케이스가 context의 상태에 영향을 끼침
 }
-
-
-
-Before the current test, when declared on a method with the method mode set to BEFORE\_METHOD.
-
-@DirtiesContext\(methodMode = BEFORE\_METHOD\)
-
+```
+5. 특정 케이스를 시작하기 전에 context 재생성
+``` java
+@DirtiesContext(methodMode = BEFORE_METHOD)
 @Test
-
-public void testProcessWhichRequiresFreshAppCtx\(\) {
-
-    // some logic that requires a new Spring container
-
+public void testProcessWhichRequiresFreshAppCtx() {
+    // 새로운 context가 필요한 어떤 로직
 }
-
-
-
-After the current test, when declared on a method with the method mode set to AFTER\_METHOD \(i.e., the default method mode\).
-
+```
+6. 특정 케이스를 시작한 이후 context 재생성
+``` java
 @DirtiesContext
-
 @Test
-
-public void testProcessWhichDirtiesAppCtx\(\) {
-
-    // some logic that results in the Spring container being dirtied
-
+public void testProcessWhichDirtiesAppCtx() {
+    // context의 상태를 변경하는 어떤 로직
 }
-
+```
 
 
 
