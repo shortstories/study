@@ -19,7 +19,7 @@
 
 그에 따른 해결책이 바로 `@DirtiesContext`이다. 이 어노테이션을 통해 테스트를 수행하기 전, 수행한 이후, 그리고 테스트의 각 테스트 케이스마다 수행하기 전, 수행한 이후에 context를 다시 생성하도록 지시할 수 있다.
 
-[http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\\#\\_\\_dirtiescontext](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\#\_\_dirtiescontext)
+[http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\#\_\_dirtiescontext](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\#\_\_dirtiescontext)
 
 ### 사용법
 
