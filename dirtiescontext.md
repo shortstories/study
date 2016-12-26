@@ -1,4 +1,4 @@
-## `DirtiesContext`
+# `DirtiesContext`
 
 스프링 어플리케이션에서 단위테스트를 작성하다보면 이상한 일이 발생할 때가 있다. 단독으로 돌리게 되면 멀쩡하게 수행되는 케이스가 인텔리제이에서 "Run all Tests"로 모든 단위테스트를 한번에 돌릴 때는 실패하는 것이다.
 
@@ -8,7 +8,7 @@
 
 [http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\#\_\_dirtiescontext](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/\#\_\_dirtiescontext)
 
-### 사용법
+## 사용법
 
 메소드나 클래스레벨에 어노테이션을 붙이는 것으로 동작하며, methodMode, classMode에 따라 각각 다르게 동작하게 설정할 수 있다.
 
