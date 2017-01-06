@@ -39,7 +39,7 @@ Lambda의 argument에 capture 될 변수들까지 추가하여 argument로 갖�
 
 > We only allow capture of \(effectively\) final variables. So we can freely copy variables at point of capture
 >
-> -  『From Lambdas to Bytecode』  Brian Goetz,  Java Language Architect
+> 『From Lambdas to Bytecode』.  Brian Goetz,  Java Language Architect
 
 ## 참고
 
