@@ -21,17 +21,17 @@
   * 만약에 stateful lambda라면 새로운 인스턴스를 생성
   * stateless lambda면 최초 호출에만 인스턴스를 생성하고 캐싱
 
-
-
 ### Desugaring
 
 #### Stateless
 
-
+Lambda의 argument와 동일하게 argument를 갖는 static method 생성
 
 #### Stateful
 
+Lambda의 argument에 capture 될 변수들까지 추가하여 argument로 갖는 static method 생성. Functional Interface 인스턴스를 생성할 때 capture 된 변수들을 각각 argument로 넘겨주게 함
+
 #### Stateful - instance member
 
-
+위와 기본적으론 동일하나 Functional Interface 인스턴스를 생성할 때 capture 변수 그 자체가 아니라 클래스 인스턴스를 통째로 argument로 넘기게 함
 
