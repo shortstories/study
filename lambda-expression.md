@@ -6,8 +6,6 @@
 
 뭐, 결론부터 내리자면 걱정할 필요는 없었다. forEach는 하나의 callback 객체를 가지고 반복문으로 동작하기 때문이다. 처음부터 불필요한 걱정이긴 했지만 덕분에 Lambda에 대해서 좀 더 찾아볼 수 있는 기회였다.
 
-
-
 ### 내부 순서
 
 1. invokedynamic instruction 호출됨
@@ -15,15 +13,25 @@
 
 3. CallSite가 가지고 있는 MethodHandle의 invoke\(\)를 호출하여 Functional Interface 생성
 
-
-
 ### 변환 방법
 
 * Lambda expression의 body를 클래스의 새로운 static method로 변환
   * capture 된 변수들은 모두 이 메소드의 argument
 * Functional Interface 중 하나를 구현하여 내부 클래스를 만들고 앞에서 변환한 static method를 연결
+  * 만약에 stateful lambda라면 새로운 인스턴스를 생성
+  * stateless lambda면 최초 호출에만 인스턴스를 생성하고 캐싱
 
 
+
+### Desugaring
+
+#### Stateless
+
+
+
+#### Stateful
+
+#### Stateful - instance member
 
 
 
