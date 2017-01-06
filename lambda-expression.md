@@ -38,12 +38,12 @@ Lambda의 argument에 capture 될 변수들까지 추가하여 argument로 갖�
 ### 왜 final 변수만?
 
 > We only allow capture of \(effectively\) final variables. So we can freely copy variables at point of capture
+>
+> -  『From Lambdas to Bytecode』  Brian Goetz,  Java Language Architect
 
 ## 참고
 
-https://slipp.net/wiki/pages/viewpage.action?pageId=19530334
+[https://slipp.net/wiki/pages/viewpage.action?pageId=19530334](https://slipp.net/wiki/pages/viewpage.action?pageId=19530334)
 
-http://wiki.jvmlangsummit.com/images/1/1e/2011\_Goetz\_Lambda.pdf
-
-
+[http://wiki.jvmlangsummit.com/images/1/1e/2011\\_Goetz\\_Lambda.pdf](http://wiki.jvmlangsummit.com/images/1/1e/2011\_Goetz\_Lambda.pdf)
 
