@@ -37,18 +37,18 @@ class MyComponent extends React.Component {
 
 #### 유의사항
 
-1. state를 직접 수정하지 않기  
+1. state를 직접 수정하지 않아야 함
 
    1. 이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
-   
-   2. ```js  
+
+   2. ```js
       this.state.name = "other'; //false  
       this.setState\({name: 'other'}\); // true
 
       constructor\(props\) {  
         super\(props\);  
         this.state = {name: 'other'}; // 생성자에서는 허용됨  
-      }  
+      }
       ```
 
 2. state의 변경은 비동기적으로 적용됨
@@ -70,7 +70,65 @@ class MyComponent extends React.Component {
 
 3. state의 변경은 엄밀히 따져서 set이 아니라 merge에 가까움
 
-   1. 
+   1. state 내부에 여러 key가 존재할 때, `setState()`에서 하나씩 수정해도 문제 없음
+
+   2. ```js
+      import React from 'react';
+
+      class Point extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            x: 0,
+            y: 0
+          }
+        }
+
+        componentDidMount() {
+          calculateX().then(newX => {
+            this.setState({x: newX}); // 기존의 y값은 놔두고 x값만 바꿈
+          });
+
+          calculateY().then(newY => {
+            this.setState({y: newY}); // 기존의 x값은 놔두고 y값만 바꿈
+          });
+        }
+      }
+      ```
+
+## 탑 다운 데이터 플로우
+
+component의 state는 local, 내지는 encapsulated된 데이터라고 볼 수 있다. 즉, 다른 component에서 접근할 수 없다는 뜻이다. 이 사실은 parent - child 관계에 놓인 component들 끼리도 마찬가지다. 그러나 parent -&gt; child 간의 데이터 전달은 가능하며, 이 경우 parent에서 어떤 데이터를 넘겨주게되면 child에서는 그걸 props로 간주하여 사용한다. 이 때, child는 parent가 전달하는 데이터가 state이든, props든, 상수이든 전혀 신경쓰지 않는다.
+
+
+
+```js
+import React from 'react';
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {data: props.obj.data};
+  }
+
+  render() {
+    // 모두 문제 없음
+    return (
+      <Child data={this.props.obj.data} />
+      <Child data={this.state.data} />
+      <Child data='my Data' />
+    )
+  }
+}
+
+class Child extends React.Component {
+  render() {
+    return (
+      <h1>{this.props.data}</h1>
+    );
+  }
+}
+```
 
 
 
