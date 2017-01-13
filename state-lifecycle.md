@@ -2,11 +2,9 @@
 
 앞서 React Element는 immutable 개체라고 했다. 그러나 component는 stateless 개체가 아니다. component는 어떤 자신의 state를 가질 수 있다. 물론 앞서 설명에는 모든 react component를 pure function처럼 취급하라고 했는데 바로 다음 페이지에서 이렇게 말을 뒤집으니 좀 난감하긴 하다. 뭐, 정말로 stateless한 pure function으로 할 때 여러모로 불편한 점이 생기니 만든 대안이긴 할 것이다.
 
-
-
 ## 사용법
 
-우선, 만약에 component를 function으로 작성했다면 es6 class 형태로 바꾸는게 여러모로 유리하다. 
+우선, 만약에 component를 function으로 작성했다면 es6 class 형태로 바꾸는게 여러모로 유리하다.
 
 ```js
 import React from 'react';
@@ -39,18 +37,19 @@ class MyComponent extends React.Component {
 
 #### 유의사항
 
-1. state를 직접 수정하지 않기
-   1. ```js
-      this.state.name = "other'; //false
-      this.setState({name: 'other'}); // true
+1. state를 직접 수정하지 않기  
+   1. ```js  
+      this.state.name = "other'; //false  
+      this.setState\({name: 'other'}\); // true
 
-      constructor(props) {
-        super(props);
-        this.state = {name: 'other'}; // 생성자에서는 허용됨
-      }
+      constructor\(props\) {  
+        super\(props\);  
+        this.state = {name: 'other'}; // 생성자에서는 허용됨  
+      }  
       ```
 
-      이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
+   이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
+
 2. state의 변경은 비동기적으로 적용됨
 
    1. react에서 성능을 향상시키기위해 여러 `setState()`를 몰아서 한번에 적용하기 때문에 발생. 따라서 이전 state에 의존해서 작동하는 코드는 고장날 수 있음. 이럴 땐 `setState()`의 argument에 callback function을 넘겨서 처리 가능
