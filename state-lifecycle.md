@@ -38,7 +38,10 @@ class MyComponent extends React.Component {
 #### 유의사항
 
 1. state를 직접 수정하지 않기  
-   1. ```js  
+
+   1. 이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
+   
+   2. ```js  
       this.state.name = "other'; //false  
       this.setState\({name: 'other'}\); // true
 
@@ -47,8 +50,6 @@ class MyComponent extends React.Component {
         this.state = {name: 'other'}; // 생성자에서는 허용됨  
       }  
       ```
-
-   이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
 
 2. state의 변경은 비동기적으로 적용됨
 
