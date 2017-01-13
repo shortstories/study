@@ -1,8 +1,10 @@
 # State, Lifecycle
 
+## State
+
 앞서 React Element는 immutable 개체라고 했다. 그러나 component는 stateless 개체가 아니다. component는 어떤 자신의 state를 가질 수 있다. 물론 앞서 설명에는 모든 react component를 pure function처럼 취급하라고 했는데 바로 다음 페이지에서 이렇게 말을 뒤집으니 좀 난감하긴 하다. 뭐, 정말로 stateless한 pure function으로 할 때 여러모로 불편한 점이 생기니 만든 대안이긴 할 것이다.
 
-## 사용법
+### 사용법
 
 우선, 만약에 component를 function으로 작성했다면 es6 class 형태로 바꾸는게 여러모로 유리하다.
 
@@ -96,11 +98,9 @@ class MyComponent extends React.Component {
       }
       ```
 
-## 탑 다운 데이터 플로우
+### 탑 다운 데이터 플로우
 
 component의 state는 local, 내지는 encapsulated된 데이터라고 볼 수 있다. 즉, 다른 component에서 접근할 수 없다는 뜻이다. 이 사실은 parent - child 관계에 놓인 component들 끼리도 마찬가지다. 그러나 parent -&gt; child 간의 데이터 전달은 가능하며, 이 경우 parent에서 어떤 데이터를 넘겨주게되면 child에서는 그걸 props로 간주하여 사용한다. 이 때, child는 parent가 전달하는 데이터가 state이든, props든, 상수이든 전혀 신경쓰지 않는다.
-
-
 
 ```js
 import React from 'react';
@@ -129,6 +129,37 @@ class Child extends React.Component {
   }
 }
 ```
+
+## Lifecycle
+
+component들은 모두 각자의 라이프 사이클을 가지고 있으며, 이 각각의 라이프 사이클에 대해 원하는 동작을 써 넣을 수 있다. 보통, 메소드 이름에 will이 붙으면 특정 동작을 하기 전에 수행하고, did가 붙으면 동작을 완료한 다음 수행한다.
+
+### 종류
+
+#### Mounting
+
+component가 생성되고 DOM에 끼워넣어질 때
+
+1. constructor\(\)
+2. componentWillMount\(\)
+3. render\(\)
+4. componentDidMount\(\)
+
+#### Updating
+
+props나 state의 변경에 의해서 component가 다시 렌더링 될 때
+
+1. componentWillReceiveProps\(\)
+2. shouldComponentUpdate\(\)
+3. componentWillUpdate\(\)
+4. render\(\)
+5. componentDidUpdate\(\)
+
+#### Unmounting
+
+component가 DOM에서 제거될 때
+
+1. componentWillUnmount\(\)
 
 
 
