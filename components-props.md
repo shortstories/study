@@ -51,5 +51,11 @@ component는 JSX에서 마치 HTML tag중 하나인 것 처럼 사용할 수 있
 
 
 
+## 주의점
+
+### Read-Only props
+
+component를 function 형태로 만들든 class 형태로 만들든 내부 로직에서 props를 수정해서는 안 된다. 왜냐? 모든 React Component들은 'pure function'과 동일하게 동작하는 것을 원칙으로 삼고 있기 때문이다. pure function이란 외부에 어떠한 영향도 끼치지 않고 오직 주어진 input에 대한 계산만 수행하여 돌려주는 function을 말한다. input을 수정하지도 않고, 같은 input이라면 몇 번을 돌려도 항상 같은 결과가 주어져야 한다.
+
 
 
