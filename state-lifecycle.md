@@ -41,7 +41,7 @@ class MyComponent extends React.Component {
 
 1. state를 직접 수정하지 않아야 함
 
-   1. 이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서
+   1. 이유는 위에서 말한 것 처럼, DOM까지 state의 변경을 전파하기 위해서. 대신에 `setState()`를 사용
 
    2. ```js
       this.state.name = "other'; //false  
