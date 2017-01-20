@@ -37,20 +37,18 @@ type은 client, management 두 가지가 있다. client는 ACL rules를 수정�
 
 > default token &lt; X-Consul-Token header &lt; token query string parameter
 
-### acl\_default\_policy
+별도 policy가 지정되지 않았을 때 어떻게 동작할 건지 선택할 수도 있다. Agent 옵션 중 `acl_default_policy`값을 설정하면 된다.
 
-별도 policy가 지정되지 않았을 때 어떻게 동작할 건지 선택하는 부분이다. Agent 옵션 중 `acl_default_policy`값을 설정하면 된다.
+* allow : 기본적으로 모든 요청을 받아들이고 차단할 부분만 차단하여 일종의 블랙 리스트처럼 동작. 기본값
+* deny : 기본적으로 모든 요청을 거부하고 필요한 부분만 허용하여 일종의 화이트 리스트처럼 동작
 
-* allow : 기본적으로 모두 받아들이고 차단할 부분만 차단하여 일종의 블랙 리스트처럼 동작. 기본값
-* deny : 기본적으로 모두 거부하고 필요한 부분만 허용하여 일종의 화이트 리스트처럼 동작
+`acl_data_center` 에 지정된 값이나 리더 노드로부터 토큰에 대한 policy를 읽어올 수 없는 상황에서 어떻게 동작할 것인지 선택할 수 있다. Agent 옵션 중 `acl_down_policy`값을 설정하면 된다.
 
-### acl\_down\_policy
+* allow : 모든 요청을 받아들임
+* deny : 모든 요청을 거부함
+* extend-cache : 만약에 캐싱된 policy가 있다면 TTL을 무시하고 그 policy대로 동작. 캐싱하지 않는 상황이라면 deny와 동일하게 동작. 기본값
 
-`acl_data_center` 에 지정된 값이나 리더 노드로부터 토큰에 대한 policy를 읽어올 수 없는 상황에서 어떻게 동작할 것인지 선택하는 부분이다. Agent 옵션 중 
-
-* allow
-* deny
-* extend-cache
+### ACL Datacenter
 
 
 
