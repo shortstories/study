@@ -7,13 +7,11 @@
 모든 토큰은 ID, name, type, rule set을 가진다.
 
 ```
-token = {
-  ID: "",
-  name: "",
-  type: ["client", "management"],
-  rule_set: {
-    // ...
-  }
+// Body
+{
+  "Name": "/* name */",
+  "Type": "/* client or management */",
+  "Rules": "/* rule set */"
 }
 ```
 
@@ -90,7 +88,6 @@ type은 client, management 두 가지가 있다. client는 ACL rules를 수정�
 #### User event Policy
 
 - event "event name" { policy }
-- 현재로선 항상 write 레벨이므로 언제나 read 가능
 
 #### Prepared query Policy
 
