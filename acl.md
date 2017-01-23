@@ -65,5 +65,33 @@ type은 client, management 두 가지가 있다. client는 ACL rules를 수정�
 3. 옮길 datacenter의 서버들을 재시작하면서 `acl_datacenter`을 자기 자신으로 바꾼다. 이렇게 하면 자동으로 replication은 꺼지고 자기 자신을 인증 datacenter으로 동작하게 만든다. 이 때, 복제된 토큰들을 사용한다.
 4. 새롭게 옮겨진 datacenter을 제외한 다른 모든 datacenter들을 재시작하면서 `acl_datacenter`을 새로운 datacenter으로 변경한다.
 
+### Bootstrapping ACLs
 
+`acl_master_token`을 넣어서 서버를 시작하는 것으로 ACL을 만들 수 있음. 이 경우 토큰은 "management" 타입으로 생성됨. `acl_master_token`은 서버가 리더일 때만 설정되므로 만약에 다른 토큰으로 새로 설정하고 싶다면 현재 리더를 제외한 다른 모든 서버에 새로운 토큰을 `acl_master_token`으로 지정하고 현재 리더를 재시작해서 다른 서버로 리더를 넘기면 됨.
 
+### Rule 설정
+
+- 기본적으로 HCL 사용 https://github.com/hashicorp/hcl/
+- policy : read, write, deny
+  - write는 read를 포함하며 write만 허용하는 방법은 없음
+- 기본 값을 지정하고 싶으면 비어있는 String을 주면 됨. (ex) key "" { })
+- rule이 지정되지 않으면 `acl_default_policy`를 따름
+- 만약 일부 겹치는 부분이 생길 땐 가장 길고 상세한 prefix를 가지는 policy를 따름
+
+#### Key Policy
+
+- key "prefix" { policy }
+
+#### Service Policy
+
+- service "service name" { policy }
+- read는 service prefix의 discovery에 대한 접근을 제한할 수 있음
+
+#### User event Policy
+
+- event "event name" { policy }
+- 현재로선 항상 write 레벨이므로 언제나 read 가능
+
+#### Prepared query Policy
+
+- query "query name" { policy }
