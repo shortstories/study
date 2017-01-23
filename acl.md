@@ -58,7 +58,12 @@ type은 client, management 두 가지가 있다. client는 ACL rules를 수정�
 
 그 외에 다른 선택지로 인증 datacenter 서버가 아닌 곳에서도 전체 토큰을 복제해서 유지하도록 하는 방법이 있다. 캐싱과는 전혀 관계없다. 해당 서버의 옵션에 `acl_replication_token`을 주게 되면 대략 30초에 한번씩 백그라운드 프로세스로 복제를 진행하게 되며, 이 작업의 업데이트는 초당 100개정도로 쓰로틀링이 걸려있기 때문에 토큰의 양이 많다면 몇분씩 걸릴 수도 있다. 이 때, 복제용 token은 적절한 권한을 가지고 있어야하며 master ACL 토큰과 같을 수도 있다. 인증 datacenter에 장애가 발생하면 `acl_down_policy`값에 의해 동일하게 동작한다. 복제된 ACL로 인증된 경우에도 `acl_ttl`세팅에 따라 캐싱이 이루어진다. 이 경우 인증 datacenter가 다시 복구되더라도 TTL이 만료되기 전 까지는 갱신되지 않는다.
 
+복제는 인증 datacenter을 옮길 때 사용할 수도 있다.
 
+1. 서비스가 중단되지 않도록 모든 datacenter에서 ACL replication을 활성화시킨다. 옮길 datacenter에서 API를 사용하여 replication이 적절하게 이루어졌는지 확인한다.
+2. 이전 인증 datacenter을 종료한다.
+3. 옮길 datacenter의 서버들을 재시작하면서 `acl_datacenter`을 자기 자신으로 바꾼다. 이렇게 하면 자동으로 replication은 꺼지고 자기 자신을 인증 datacenter으로 동작하게 만든다. 이 때, 복제된 토큰들을 사용한다.
+4. 새롭게 옮겨진 datacenter을 제외한 다른 모든 datacenter들을 재시작하면서 `acl_datacenter`을 새로운 datacenter으로 변경한다.
 
 
 
