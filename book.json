@@ -1,8 +1,12 @@
 {
-    "plugins": ["ga"],
+    "plugins": ["ga", "verifications"],
     "pluginsConfig": {
         "ga": {
             "token": "UA-88346411-1"
+        },
+        "verifications": {
+            "naverWebmasterContent": "1bb8151d56ff08ea87daa2e1364a269a21ca45e4",
+            "googleSearchConsoleContent": "QMkk0XYelGpgE-_X7RWYurecgGNnifnOQfy24tVgm5A"
         }
     }
 }
