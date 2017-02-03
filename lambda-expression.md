@@ -8,7 +8,7 @@
 
 ### 내부 순서
 
-1. `invokedynamic` instruction 호출됨
+1. 람다식은 `invokedynamic` instruction 호출됨
 2. `LambdaMethodFactory.metafactory()`로 capture argument 및 필요 정보들을 전달하여 `CallSite` 인스턴스 생성
 
 3. `CallSite`가 가지고 있는 `MethodHandle`의 `invoke()`를 호출하여 Functional Interface 생성
