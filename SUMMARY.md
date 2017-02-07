@@ -87,4 +87,5 @@
   * [Systemd](linux/systemd.md)
 * [Messaging protocols](messaging-protocols.md)
   * [XMPP](messaging-protocols/xmpp.md)
+  * [AMQP](messaging-protocols/amqp.md)
 
