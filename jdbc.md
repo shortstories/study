@@ -51,5 +51,5 @@
 - Connection : 데이터베이스에 접촉하기 위한 메소드들을 가지고 있는 인터페이스. 이 인터페이스를 통해서 만들어진 객체는 커뮤니케이션 context 그 자체를 표현하고 있음. 데이터베이스와 이루어지는 모든 커뮤니케이션은 connection 오브젝트를 통해서 이루어지게 됨.
 - Statement : 데이터베이스에 SQL문을 보내기 위해 사용하는 인터페이스. 어떤 인터페이스들은 stored procedure들을 실행하기 위해 별도의 패러미터들을 받기도 함.
 - ResultSet : Statement 객체를 사용해서 SQL문을 실행한 다음, 그 결과를 가지고 있는 객체. Iterator처럼 동작하곤 한다.
-- SQLException : 데이터베이스에서 발생하는 모든 에러를 처리하는 예외.
+- SQLException : 데이터베이스에서 발생하는 모든 에러를 처리하는 Exception.
 
