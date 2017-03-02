@@ -2,6 +2,24 @@
 
 JDBC를 쓸 때 개발자가 해야되는 여러 low-level 작업들을 스프링에서 대신 처리해주는 모듈이다. 주로 connection 관리, SQL문 실행 및 결과 정리, 예외처리, 트랜잭션 처리 등을 도와준다.
 
+## 패키지 구조
+
+### core
+
+`JdbcTemplate` 클래스와 수많은 callback 인터페이스들, 그리고 관련된 각종 클래스들을 포함하고 있다. 이 아래에 또 `simple`, `namedparam` 패키지 등이 존재하며 각각 `JdbcTemplate`를 좀 더 사용하기 쉽게 만든 클래스들이 들어있다.
+
+### datasource
+
+`DataSource` 에 쉽게 접근할 수 있게 도와주는 유틸리티 클래스들을 포함하고 있다. 또한 간단한 `DataSource` 구현체들도 여기에 들어가있어 테스트에 쓸 수 있다. 아래에 `embedded` 패키지가 있어 embedded database를 쓸 수 있게 도와준다.
+
+### object
+
+재사용 가능하고 thread-safe한 자바 객체로 RDBMS의 query, update, stored procedure 등을 사용할 수 있게 도와주는 클래스들을 포함하고 있다.
+
+### support
+
+일부 유틸리티 클래스들과 `SQLException`을 처리하는 기능을 포함하고 있다. 스프링에서는 JDBC 사용 중 발생하는 에러들을 `org.springframework.dao` 패키지 아래에 있는 exception으로 바꿔준다.
+
 ## 사용법
 
 ### 접근 방식 선택
