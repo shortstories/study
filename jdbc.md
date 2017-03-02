@@ -44,3 +44,11 @@
 
 ```
 
+## 구성
+
+- DriverManager : 데이터베이스 드라이버들의 리스트를 관리함. 어플리케이션에서 데이터베이스 Connection을 요청하면 적절한 subprotocol을 가지는 드라이버를 선택하여 맞춰주는 역할 수행. 여러 드라이버가 한 subprotocol에 해당된다면 가장 먼저 나오는 드라이버로 선택하여 Connection 구축.
+- Driver : 데이터베이스 서버와 어플리케이션 간 커뮤니케이션을 담당하는 인터페이스. 직접 Driver 객체를 만지게 될 일은 거의 없음. 보통은 DriverManager을 통해서 Driver들을 관리하게 됨. 
+- Connection : 데이터베이스에 접촉하기 위한 메소드들을 가지고 있는 인터페이스. 이 인터페이스를 통해서 만들어진 객체는 커뮤니케이션 context 그 자체를 표현하고 있음. 데이터베이스와 이루어지는 모든 커뮤니케이션은 connection 오브젝트를 통해서 이루어지게 됨.
+- Statement : 
+- ResultSet
+- SQLException
