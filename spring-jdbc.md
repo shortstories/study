@@ -31,9 +31,9 @@ JDBC를 쓸 때 개발자가 해야되는 여러 low-level 작업들을 스프�
 
 ### JdbcTemplate
 
-`JdbcTemplate`를 사용하기 위해서는 우선 적절한 `DataSource`를 만드는 것이 우선이다. 일반적인 데이터베이스들은 자신들의 `DataSource`를 이미 지원하고 있으므로 적절히 설정하여 bean으로 등록해두는 것이 좋다.
+`JdbcTemplate`를 사용하기 위해서는 우선 적절한 `DataSource`를 만드는 것이 우선이다. 일반적인 데이터베이스들은 자신들의 `DataSource`를 이미 지원하고 있으므로 적절히 설정하여 bean으로 등록해두는 것이 좋다. 보통은 `BasicDataSource`로 충분하다.
 
-#### 사용 예제
+#### 사용
 
 ``` java
 @Repository
@@ -70,3 +70,7 @@ public class MyRepository {
   }
 }
 ```
+
+select는 `query()`
+insert, update, delete는 `update()`
+그 외에 임의의 SQL문이나 DDL문들은 `execute()` 메소드를 사용하면 된다.
