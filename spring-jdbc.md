@@ -29,3 +29,44 @@ JDBC를 쓸 때 개발자가 해야되는 여러 low-level 작업들을 스프�
 1. SimpleJdbcInsert, SimpleJdbcCall : 데이터베이스의 metadata들을 사용해서 필요한 설정들이 최소로 되도록 최적화한 것들이다. 테이블이나 프로시져의 이름과 column에 알맞는 데이터를 map으로 넣는 것 만으로 사용할 수 있어 간편하다. 다만 적절한 metadata가 있고 또 해당 데이터베이스를 지원하는 경우에만 그렇게 사용할 수 있다는게 흠이다. 그렇지 않다면 자기가 직접 설정을 입력해 넣어야만 한다.
 1. RDBMS Objects : `MappingSqlQuery`, `SqlUpdate`, `StoredProcedure` 등이 있다. 재사용 가능하고 thread-safe한 객체들을 생성하여 사용한다. query string을 넣고, 패러미터들을 정의하고, 컴파일하면 사용준비가 완료되며, 이렇게 한번 만들고 나면 패러미터를 바꿔가며 몇번이고 재사용할 수 있게 된다.
 
+### JdbcTemplate
+
+`JdbcTemplate`를 사용하기 위해서는 우선 적절한 `DataSource`를 만드는 것이 우선이다. 일반적인 데이터베이스들은 자신들의 `DataSource`를 이미 지원하고 있으므로 적절히 설정하여 bean으로 등록해두는 것이 좋다.
+
+#### 사용 예제
+
+``` java
+@Repository
+public class MyRepository {
+  private final JdbcTemplate jdbcTemplate;
+  private final MyObjectMapper myObjectMapper;
+
+  @Autowired
+  public MyRepository(DataSource myDataSource) {
+    this.jdbcTemplate = new JdbcTemplate(myDataSource);
+    this.myObjectMapper = new MyObjectMapper();
+  }
+  
+  public MyObject read(int id) {
+    return jdbcTemplate.queryForObject(
+      "select * from my_table where id = ?",
+      new Object[]{id},
+      myObjectMapper
+    );
+  }
+  
+  public List<MyObject> readAll() {
+    return jdbcTemplate.query(
+      "select * from my_table",
+      myObjectMapper
+    )
+  }
+  
+  private static class MyObjectMapper implements RowMapper<MyObject> {
+    @Override
+    public MyObject mapRow(ResultSet rs, int rowNum) throws SQLException {
+      return new MyObject(rs.getString("param1"), rs.getString("param2"));
+    }
+  }
+}
+```
