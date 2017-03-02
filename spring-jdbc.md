@@ -59,7 +59,7 @@ public class MyRepository {
     return jdbcTemplate.query(
       "select * from my_table",
       myObjectMapper
-    )
+    );
   }
   
   private static class MyObjectMapper implements RowMapper<MyObject> {
