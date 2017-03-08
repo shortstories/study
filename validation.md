@@ -31,6 +31,8 @@ public class AppConfig {
 ``` java
 @Data
 public class Message {
+    // 이 NotNull처럼 `javax.validation.Constraint` 어노테이션이 붙어있는 어노테이션들
+    // `javax.validation.constraints` 패키지를 보면 됨.
     @NotNull
     private String sender;
     
