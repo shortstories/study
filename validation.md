@@ -57,7 +57,7 @@ public class MessageController {
         Set<ConstraintViolation<Message>> violationSet = validator.validate(message);
         
         if (violationSet.isEmpty() == false) {
-            // 만약에 sender가 null이라면 이 Exception의 메세지는 
+            // 만약에 Message.sender가 null이라면 이 Exception의 메세지는 
             // [class: Message, property: sender, message: may not be null]
             throw new IllegalArgumentException(
                 violationSet.stream()
