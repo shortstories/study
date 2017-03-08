@@ -68,6 +68,8 @@ public class MessageController {
                     .collect(Collectors.joining(", "))
             );
         }
+        
+        // 이하 생략
     }
 }
 ```
