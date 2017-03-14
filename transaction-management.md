@@ -123,5 +123,6 @@ public class JdbcConfig {
 
 JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유틸리티 클래스를 사용하여 직접 low-level의 작업들을 처리하는 방법이다. 최소한 exception정도는 스프링에서 매핑해준다.
 
-물론, 되도록 이미 제공되고 있는 모듈들을 활용하는 것이 좋다. 바퀴를 재발명할 필요는 없지 않은가.
+물론, 되도록 스프링에서 제공하는 기능들을 활용하는게 좋다. 바퀴를 재발명할 필요는 없지 않은가.
 
+## 
