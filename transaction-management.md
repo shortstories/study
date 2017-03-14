@@ -7,7 +7,7 @@
 
 ## 기존 Java EE transaction management와 비교
 
-요약하면, 기존 자바 EE 개발자들은 Global, Local transaction 모델 중 하나를 골라서 써야했는데 그 둘다 어떠한 제한점을 가지고 있었고, 스프링의 transaction management는 이러한 제한점에 대한 지원을 제공한다는 것이다.
+요약하면, 기존 자바 EE 개발자들은 Global, Local transaction 모델 중 하나를 골라서 써야했는데 그 둘다 각각 나름의 한계를 가지고 있었고, 스프링의 transaction management는 이러한 한계에 대한 보완책을 제공한다는 것이다.
 
 ### Java EE Global transactions
 
@@ -26,4 +26,6 @@ Global transaction은 데이터 베이스, 메세지 큐 등 여러 transactiona
 programmatic transaction management 방법을 쓸 땐 스프링의 transaction abstraction을 써서 어떤 transaction 환경에서든 동작할 수 있게 한 단계 더 추상화를 한다.
 
 declarative transaction management 방법을 쓸 땐 아주 조금의 코드, 내지는 전혀 코드를 작성하지 않아도 되기 때문에 transaction API에 전혀 구애받지 않는다. 심지어는 스프링의 transaction API까지도 말이다.
+
+## Spring framework transaction abstraction
 
