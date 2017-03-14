@@ -115,3 +115,13 @@ public class JdbcConfig {
 
 ## Transaction과 resource의 동기화
 
+### High-level
+
+`JdbcTemplate`처럼 스프링에서 제공하는 API나 다른 transaction 친화적인 ORM API, 내지는 native resource factory에 대한 프록시를 통해서 동기화하는 방법이다. 이러한 솔루션들은 내부적으로 알아서 생성, 재사용 등 transaction을 관리하고, exception을 매핑한다. 덕분에 사용자들은 코드를 짤 때 자신의 문제를 해결하는 데만 집중할 수 있게 된다.
+
+### Low-level
+
+JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유틸리티 클래스를 사용하여 직접 low-level의 작업들을 처리하는 방법이다. 최소한 exception정도는 스프링에서 매핑해준다.
+
+물론, 되도록 이미 제공되고 있는 모듈들을 활용하는 것이 좋다. 바퀴를 재발명할 필요는 없지 않은가.
+
