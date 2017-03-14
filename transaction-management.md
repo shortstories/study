@@ -74,3 +74,44 @@ public interface TransactionStatus extends SavepointManager {
 ```
 
 스프링의 declarative, programmatic transaction management에 관계없이 제일 중요한건 적절한 `PlatformTransactionManager` 구현체를 정의하는 것이다.
+
+### JDBC Example
+
+``` java
+// JdbcProperties.java
+@ConfigurationProperties
+@Data
+public class JdbcProperties {
+    private String driverClassName;
+    private String url;
+    private String userName;
+    private String password;
+}
+
+// JdbcConfig.java
+@Configuration
+public class JdbcConfig {
+    @Autowired
+    private JdbcProperties properties;
+    
+    @Bean(destroyMethod = "close")
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        
+        dataSource.setDriverClassName(properties.getDriverClassName());
+        dataSource.setUrl(properties.getUrl());
+        dataSource.setUserName(properties.getUserName());
+        dataSource.setPassword(properties.getPassword());
+        
+        return dataSource;
+    }
+    
+    @Bean
+    public PlatformTransactionManager txManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
+}
+```
+
+## Transaction과 resource의 동기화
+
