@@ -53,4 +53,4 @@ Spring transaction abstraction은 transaction strategy를 표현하기 위해서
 
 `TransactionDefinition` 인터페이스는 말 그대로 transaction을 정의하기위해 사용하는 인터페이스이다. isolation, propagation, timeout, read-only 등의 설정값들을 가질 수 있다.
 
-
+`TransactionStatus` 인터페이스는 
