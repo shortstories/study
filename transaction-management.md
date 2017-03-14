@@ -22,3 +22,8 @@ Global transaction은 데이터 베이스, 메세지 큐 등 여러 transactiona
 ### Spring Framework's consistent programming model
 
 스프링은 위에서 말한 두 transaction의 단점들을 보완하고 어떤 환경에서든 똑같은 코드로 동작시킬 수 있게 해준다. 스프링에서는 declarative와 programmatic transaction management 두가지 방법을 모두 제공한다. 일반적인 경우에는 declarative transaction management가 더 추천되는 방법이긴 하다.
+
+programmatic transaction management 방법을 쓸 땐 스프링의 transaction abstraction을 써서 어떤 transaction 환경에서든 동작할 수 있게 한 단계 더 추상화를 한다.
+
+declarative transaction management 방법을 쓸 땐 아주 조금의 코드, 내지는 전혀 코드를 작성하지 않아도 되기 때문에 transaction API에 전혀 구애받지 않는다. 심지어는 스프링의 transaction API까지도 말이다.
+
