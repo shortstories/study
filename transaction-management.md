@@ -53,4 +53,24 @@ Spring transaction abstraction은 transaction strategy를 표현하기 위해서
 
 `TransactionDefinition` 인터페이스는 말 그대로 transaction을 정의하기위해 사용하는 인터페이스이다. isolation, propagation, timeout, read-only 등의 설정값들을 가질 수 있다.
 
-`TransactionStatus` 인터페이스는 
+`TransactionStatus` 인터페이스는 transaction을 실행하고 컨트롤하는 방법, 현재 상태를 쿼리하기 위한 방법들을 제공한다. 
+
+``` java
+public interface TransactionStatus extends SavepointManager {
+
+    boolean isNewTransaction();
+
+    boolean hasSavepoint();
+
+    void setRollbackOnly();
+
+    boolean isRollbackOnly();
+
+    void flush();
+
+    boolean isCompleted();
+
+}
+```
+
+스프링의 declarative, programmatic transaction management에 관계없이 제일 중요한건 적절한 `PlatformTransactionManager` 구현체를 정의하는 것이다.
