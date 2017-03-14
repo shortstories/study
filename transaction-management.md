@@ -17,3 +17,8 @@ Global transaction은 데이터 베이스, 메세지 큐 등 여러 transactiona
 
 ### Java EE Local transactions
 
+통상 쓰는 transaction이 바로 local transaction이다. 특정 리소스마다 각각 정의되어있다. 예를 들면 JDBC Connection transaction 등이 있다. 배우기 쉽고 쓰기 쉬운 장점이 있는데 반대로 여러 리소스를 동시에 써야되는 케이스는 적용할 수 없다는 단점이 있다. 현재 내 경우에도 RabbitMQ와 MySQL과 로컬 스토리지 세개를 동시에 써야되므로 적합하지 않다고 볼 수 있다. 그 외에 내 코드가 특정 리소스에 종속되는 문제점도 발생한다.
+
+### Spring Framework's consistent programming model
+
+스프링은 위에서 말한 두 transaction의 단점들을 보완하고 어떤 환경에서든 똑같은 코드로 동작시킬 수 있게 해준다. 스프링에서는 declarative와 programmatic transaction management 두가지 방법을 모두 제공한다. 일반적인 경우에는 declarative transaction management가 더 추천되는 방법이긴 하다.
