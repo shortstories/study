@@ -21,11 +21,31 @@ Global transaction은 데이터 베이스, 메세지 큐 등 여러 transactiona
 
 ### Spring Framework's consistent programming model
 
-스프링은 위에서 말한 두 transaction의 단점들을 보완하고 어떤 환경에서든 똑같은 코드로 동작시킬 수 있게 해준다. 스프링에서는 declarative와 programmatic transaction management 두가지 방법을 모두 제공한다. 일반적인 경우에는 declarative transaction management가 더 추천되는 방법이긴 하다.
+스프링은 위에서 말한 두 transaction management의 단점들을 보완하고 어떤 환경에서든 똑같은 코드로 동작시킬 수 있게 해준다. 스프링에서는 declarative와 programmatic transaction management 두가지 방법을 모두 제공한다. 일반적인 경우에는 declarative transaction management가 더 추천되는 방법이긴 하다.
 
 programmatic transaction management 방법을 쓸 땐 스프링의 transaction abstraction을 써서 어떤 transaction 환경에서든 동작할 수 있게 한 단계 더 추상화를 한다.
 
 declarative transaction management 방법을 쓸 땐 아주 조금의 코드, 내지는 전혀 코드를 작성하지 않아도 되기 때문에 transaction API에 전혀 구애받지 않는다. 심지어는 스프링의 transaction API까지도 말이다.
 
 ## Spring framework transaction abstraction
+
+``` java
+public interface PlatformTransactionManager {
+
+    TransactionStatus getTransaction(
+            TransactionDefinition definition) throws TransactionException;
+
+    void commit(TransactionStatus status) throws TransactionException;
+
+    void rollback(TransactionStatus status) throws TransactionException;
+}
+```
+
+Spring transaction abstraction은 transaction strategy를 표현하기 위해서 사용한다. 위의 `PlatformTransactionManager` 인터페이스를 implement해서 사용할 수 있다.
+
+이 인터페이스는 주로 service provider interface (SPI, 서드파티에서 구현하여 제공할 수 있게 만든 인터페이스) 이며, 필요하다면 직접 코드를 짜서 사용하는 것도 가능하다. 
+
+이 인터페이스를 구현한 클래스는 일반적인 스프링 bean처럼 생성해서 사용하게 된다. 덕분에 만약에 JTA를 사용하더라도 스프링의 abstraction을 통해서 쓰는 것이 더 나은데, 그 이유는 직접 JTA를 쓰는 것보다 테스트같은 부분이 훨씬 쉽기 때문이다.
+
+만약 위 인터페이스 메소드 중에 문제가 발생하면 `TransactionException`이 던져진다. 이 exception은 unchecked exception이다. 왜냐면 대부분 문제가 발생하는 transaction은 항상 실패할 가능성이 높기 때문이다. 그런데 만약에 transaction 실패를 복구할 수 있는 가능성이 있다면 직접 exception을 catch해서 처리하는 것도 가능하다.
 
