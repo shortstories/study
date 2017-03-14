@@ -49,3 +49,8 @@ Spring transaction abstraction은 transaction strategy를 표현하기 위해서
 
 만약 위 인터페이스 메소드 중에 문제가 발생하면 `TransactionException`이 던져진다. 이 exception은 unchecked exception이다. 왜냐면 대부분 문제가 발생하는 transaction은 항상 실패할 가능성이 높기 때문이다. 그런데 만약에 transaction 실패를 복구할 수 있는 가능성이 있다면 직접 exception을 catch해서 처리하는 것도 가능하다.
 
+`getTransaction()` 메소드에 `TransactionDefinition` 객체를 패러미터로 담아 호출하면 `TransactionStatus` 객체를 얻을 수 있다. `TransactionStatus` 객체는 하나의 새로운 transaction 이거나, 현재 콜 스택에 일치하는 transaction이 있다면 그 transaction이라고 할 수 있다.
+
+`TransactionDefinition` 인터페이스는 말 그대로 transaction을 정의하기위해 사용하는 인터페이스이다. isolation, propagation, timeout, read-only 등의 설정값들을 가질 수 있다.
+
+
