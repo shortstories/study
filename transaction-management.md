@@ -143,8 +143,10 @@ JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유�
 
 ### 사용법
 
-
-
+JDBC 기준
 
 ``` java
+// JDBC, ```트랜잭션 매니저 설정
+@Configuration
+
 ```
