@@ -125,4 +125,9 @@ JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유�
 
 물론, 되도록 스프링에서 제공하는 기능들을 활용하는게 좋다. 바퀴를 재발명할 필요는 없지 않은가.
 
-## 
+## TransactionAwareDataSourceProxy
+
+`TransactionAwareDataSourceProxy`는 가장 낮은 단계로, `DataSource`에 대한 프록시이다. 타겟 `DataSource`를 감싸서 스프링의 방식대로 transaction을 관리할 수 있게 도와준다. 이러한 방식 덕분에 Java EE Server의 transaction에서 JNDI `DataSource`와 유사하게 사용할 수 있다.
+
+보통은 저 클래스를 쓸 일이 없다. 그러나 만약에 이미 있던 코드가 직접 `DataSource`에 의존하고 있다면 위의 프록시 클래스를 재활용하여 스프링이 transaction을 관리하게 할 수 있다. 물론, 기존 코드를 포기하고 스프링의 방식대로 아예 새롭게 작성하는 쪽이 좀 더 권장되는 방법이다.
+
