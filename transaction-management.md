@@ -135,9 +135,16 @@ JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유�
 
 설정을 사용해서 트랜잭션을 관리하는 방법이다. 설정은 Java config, xml 어느 것이든 상관 없다. AOP를 사용하여 돌아가기 때문에 원본 코드를 수정하지 않아도 된다는게 장점이다.
 
-`@Transactional` 어노테이션이 붙어있는 메소드의 경우 작동 도중에 Exception이 발생하면 rollback을 수행하게 된다.
+`@Transactional` 어노테이션이 붙어있는 메소드의 경우 작동 도중에 Exception이 발생하면 rollback을 수행하게 된다. 
 
 ### 내부 동작 방식
 
 ![](http://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/images/tx.png.pagespeed.ce.FxwdOUVtVX.png)
 
+### 사용법
+
+
+
+
+``` java
+```
