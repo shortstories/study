@@ -146,7 +146,41 @@ JDBC라면 `DataSourceUtils`, JPA라면 `EntityManagerFactoryUtils` 등의 유�
 JDBC 기준
 
 ``` java
-// JDBC, ```트랜잭션 매니저 설정
+// JDBC, 트랜잭션 매니저 설정
+// JdbcDataConfig.java
 @Configuration
+public class JdbcDataConfig {
+    @Bean
+    public DataSource myDataSource() {
+      //...
+    }
+    
+    @Bean
+    public PlatformTransactionManager txManager() {
+        return new DataSourceTransactionManager(myDataSource());
+    }
+}
 
+// 서비스 클래스
+// MyService.java
+@Service
+@Transactional("txManager")
+public class MyService {
+    private final MyRepository repository;
+    
+    @Autowired
+    public MyService(MyRepository repository) {
+        this.repository = repository;
+    }
+
+    public MyModel read() {
+        //...    
+    }
+    
+    public void create(MyModel model) {
+        //...
+    }
+    
+    //...
+}
 ```
