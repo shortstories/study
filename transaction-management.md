@@ -183,4 +183,11 @@ public class MyService {
     
     //...
 }
+
+// 레포지터리 클래스
+// MyRepository.java
+@Repository
+public class MyRepository {
+    private final 
+}
 ```
