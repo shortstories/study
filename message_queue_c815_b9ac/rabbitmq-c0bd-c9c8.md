@@ -22,6 +22,7 @@ RabbitMQ를 사용하는 코드를 작성할 때, 가장 중요한 부분이 아
 1. 메세지 보관 방식
   - 큐를 최초 생성할 때, 그리고 메세지를 보낼 때 만지는 설정이다. 큐를 만들 때 `durable` 옵션을 활성화시키고, 메세지를 보낼 때 `MessageProperties.PERSISTENT_TEXT_PLAIN` 속성을 부여해서 보내면 된다. 이렇게 되면 서버에서 메세지를 memory가 아니라 storage에 저장하기 때문에 RabbitMQ 서버가 급작스럽게 사망해도 메세지를 잃지 않을 수 있다. 다만 성능적으로 손해를 볼 수 밖에 없긴 하다.
 1. 메세지 분산 배치 갯수
+  - consumer의 channel에서 설정한다. 이 값은 숫자 값이며, 설정한 값에 따라서 한번에 consumer에게 주어진 갯수 만큼의 메세지만 준다. 다시 말해서 한 consumer 당 값이 1일 때, 이미 consumer에게 하나의 메세지가 들어가있다면 그 consumer가 ack를 하기 전 까지는 추가로 메세지를 주지 않고 다른 consumer를 찾는다는 뜻이다. 특정 consumer에게 메세지가 몰리는 것을 방지하기 위해서 사용할 수 있다.
 
 ### Pub/Sub
 
