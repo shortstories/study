@@ -42,4 +42,8 @@ Exchange type `direct`를 사용하는 방식이다. routingKey에 따라 특정
 
 ![](https://www.rabbitmq.com/img/tutorials/python-five.png)
 
-Exchange type `topic`을 사용하는 방식이다. 거의 대부분 Routing 구조와 다를게 없는데, 유일하게 다른 부분은 routingKey가 좀 특별하다는 것이다.
+Exchange type `topic`을 사용하는 방식이다. 거의 대부분 Routing 구조와 다를게 없는데, 유일하게 다른 부분은 routingKey가 좀 특별하다는 것이다. 메세지를 보낼 때, 큐를 선택하는 것에 하나 이상의 조건이 필요하다면 Topics로 구성하는게 옳다. 
+
+`topic`에서는 routingKey를 '.'으로 구분하여 여러 단계로 나눌 수 있다. 위의 그림같은 경우에는 `{speed}.{colour}.{species}`로 나눈 것이다. 이렇게 나누어진 routingKey는 큐에 바인딩할 때 특정 조건으로 바꿀 수 있는데, \*나 #처럼 와일드카드를 사용할 수 있다. \*는 특정 영역 모두를 가리키는 것이고, #는 앞, 내지는 뒤 나머지 전부를 가르키는 것이다.
+
+위 그림대로라면 Q1은 속도와 종류에 관계없이 색깔이 orange인 모든 메세지를 받아올 것이고, Q2는 종류가 rabbit인 모든 메세지와 속도가 lazy인 모든 메세지를 받아올 것이다.
