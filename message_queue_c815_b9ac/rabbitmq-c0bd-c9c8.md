@@ -52,4 +52,10 @@ Exchange type `topic`을 사용하는 방식이다. 거의 대부분 Routing 구
 
 ### RPC
 
-말 그대로 RPC처럼 동작하게 시스템을 구성하는 방법이다.
+![](https://www.rabbitmq.com/img/tutorials/python-six.png)
+
+말 그대로 RPC처럼 동작하게 시스템을 구성하는 방법이다. 이 경우 위 그림처럼 두 개의 큐를 사용하게 된다.
+
+모든 request마다 전용 reply 큐를 만들게 되면 굉장히 비효율적이기 때문에 하나의 클라이언트당 하나의 reply 큐를 만드는 편이 좀 더 효율적이다. client에서 이렇게 만든 reply 큐의 이름을 메세지의 property에 첨부해서 보내면 server에서 그걸 꺼내어서 그 큐로 response를 보내며 된다.
+
+다만 이렇게 되면 약간 애매한게, 어떤 response가 어떤 request에 대한 것인지 구분하기가 어렵다. 그래서 사용하는 것이 바로 `correlationId`이다. 최초 client가 메세지에다가 담아서 보내면 server도 그 `correlationId`를 다시 response에 그대로 담아서 돌려주면 된다. 그럼 client는 reply 큐의 메세지를 꺼내서 `correlationId`를 비교해서 버리거나 정상 처리하거나 마음대로 선택하면 그만이다.
