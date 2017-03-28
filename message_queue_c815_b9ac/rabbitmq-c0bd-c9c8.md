@@ -32,4 +32,12 @@ RabbitMQ를 사용하는 코드를 작성할 때, 가장 중요한 부분이 아
 
 ### Routing
 
+![](https://www.rabbitmq.com/img/tutorials/direct-exchange.png)
+![](https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png)
+
+
+Exchange type `direct`를 사용하는 방식이다. routingKey에 따라 특정 메세지는 특정 큐에만 들어갔으면 할 때 사용한다. 
+
+
+
 ### Topics
