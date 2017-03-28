@@ -48,4 +48,8 @@ Exchange type `topic`을 사용하는 방식이다. 거의 대부분 Routing 구
 
 위 그림대로라면 Q1은 속도와 종류에 관계없이 색깔이 orange인 모든 메세지를 받아올 것이고, Q2는 종류가 rabbit인 모든 메세지와 속도가 lazy인 모든 메세지를 받아올 것이다.
 
-만약 큐를 binding할 때 routingKey가 #라면 모든 데이터를 받아오는 fanout처럼 동작할 것이고, #나 \*이 없이 모든 항목이 들어있다면 direct처럼 동작할 것이다.
+만약 큐를 binding할 때 routingKey가 #이라면 모든 데이터를 받아오는 fanout처럼 동작할 것이고, #이나 \*이 없이 모든 항목이 들어있다면 direct처럼 동작할 것이다.
+
+### RPC
+
+말 그대로 RPC처럼 동작하게 시스템을 구성하는 방법이다.
