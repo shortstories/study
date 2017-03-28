@@ -26,6 +26,8 @@ RabbitMQ를 사용하는 코드를 작성할 때, 가장 중요한 부분이 아
 
 ### Pub/Sub
 
+여기서부터는 Exchange를 사용한다. 특히 Publisher-Subscriber의 경우 Exchange Type `fanout`을 사용한다. `fanout`은 publisher가 어떤 메세지를 Exchange로 보내면 묻지도 따지지도 않고 binding된 모든 큐로 메세지를 보내주는 방식이다.
+
 ### Routing
 
 ### Topics
