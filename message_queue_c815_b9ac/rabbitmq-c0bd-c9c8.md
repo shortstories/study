@@ -35,9 +35,11 @@ RabbitMQ를 사용하는 코드를 작성할 때, 가장 중요한 부분이 아
 ![](https://www.rabbitmq.com/img/tutorials/direct-exchange.png)
 ![](https://www.rabbitmq.com/img/tutorials/direct-exchange-multiple.png)
 
-
 Exchange type `direct`를 사용하는 방식이다. routingKey에 따라 특정 메세지는 특정 큐에만 들어갔으면 할 때 사용한다. 
-
-
+위의 그림처럼 하나의 큐당 하나의 routingKey를 binding할 수도 있고, 동일한 routingKey를 여러 큐에다가 binding할 수도 있다. 위에서 두번째 그림처럼 설정하게 되면 사실 `fanout`이랑 다를 것 없이 동작한다.
 
 ### Topics
+
+![](https://www.rabbitmq.com/img/tutorials/python-five.png)
+
+Exchange type `topic`을 사용하는 방식이다. 거의 대부분 Routing 구조와 다를게 없는데, 유일하게 다른 부분은 routingKey가 좀 특별하다는 것이다.
