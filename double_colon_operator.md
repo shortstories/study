@@ -1,4 +1,4 @@
-# Double colon operator
+# Java8 Double colon operator
 
 ## 형태
 `Reference::method`
