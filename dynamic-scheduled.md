@@ -1,4 +1,4 @@
-# Dynamic `@Scheduled`
+# Spring Test Dynamic `@Scheduled`
 
 캐시를 사용하는 클래스에서 테스트를 작성하던 중이었다. 해당 클래스에는 캐시 invalidation을 하는 메소드가 있었고, 이 메소드가 주기적으로 실행되어야 하기 때문에 거기에 `@Scheduled`를 붙여 스프링 스케쥴링을 사용하고 있었다. 그런데 이 `@Scheduled` 의 delay로 3분을 줬었는데, 이렇게 되니까 테스트 하나하나에 걸리는 시간이 너무 길어져서 답답하기 그지 없었다. 그래서 런타임에서 `@Scheduled`의 delay를 동적으로 수정하려고 구글링도 해보고, 여러가지 시도도 해봤다.
 

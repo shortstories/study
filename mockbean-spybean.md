@@ -1,4 +1,4 @@
-# MockBean, SpyBean
+# Spring Test MockBean, SpyBean
 
 내가 기존의 프로젝트들을 스프링 부트 1.4로 올리게 된 주요 원인.
 
