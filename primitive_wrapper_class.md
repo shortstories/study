@@ -1,4 +1,5 @@
-# Wrapper
+# Java Primitive Wrapper class
+
 보통 Null을 받을 필요성 있을 때 primitive대신에 사용하곤 하였다. 그런데 과연 이게 괜찮은 버릇인걸까?
 
 ## 빠른 결론
