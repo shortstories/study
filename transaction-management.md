@@ -1,4 +1,4 @@
-# Transaction Management
+# Spring Transaction Management
 
 - JTA, JDBC, Hibernate, JPA, JDO 등의 transaction API를 지원
 - declarative transaction management 제공
@@ -188,6 +188,13 @@ public class MyService {
 // MyRepository.java
 @Repository
 public class MyRepository {
-    private final 
+    private final JdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    public MyRepository(DataSource myDataSource) {
+        this.jdbcTemplate = new JdbcTemplate(myDataSource);
+    }
+    
+    //...
 }
 ```

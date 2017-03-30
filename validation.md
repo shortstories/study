@@ -1,4 +1,4 @@
-# Validation
+# Spring Validation
 
 손쉽게 annotation을 붙여서 Validation을 수행할 수 있게 도와준다. 또한 validation 로직을 여러 레이어에서 중복되지 않고 하나의 도메인 모델에서 한꺼번에 처리할 수 있도록 도와준다.
 
