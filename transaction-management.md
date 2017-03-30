@@ -149,6 +149,7 @@ JDBC 기준
 // JDBC, 트랜잭션 매니저 설정
 // JdbcDataConfig.java
 @Configuration
+@EnableTransactionManagement
 public class JdbcDataConfig {
     @Bean
     public DataSource myDataSource() {
