@@ -11,7 +11,7 @@
   * [RabbitMQ 삽질](message_queue_c815_b9ac/rabbitmq-c0bd-c9c8.md)
 * [Java 관련 정리](java_ad00_b828_c815_b9ac.md)
   * [Primitive Wrapper class](primitive_wrapper_class.md)
-  * [NIO](nio.md)
+  * [Java NIO](nio.md)
   * [Double colon operator](double_colon_operator.md)
   * [Effective Java](effective_java.md)
     * [4장](effective_java/4.md)

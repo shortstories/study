@@ -1,4 +1,4 @@
-# NIO
+# Java NIO
 ## 용도
 - Direct memory access
 - Block mediated bulk data transfers
