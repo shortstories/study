@@ -1,4 +1,5 @@
-# AOP (Aspect-Oriented Programming)
+# Spring AOP (Aspect-Oriented Programming)
+
 - OOP가 Class를 기반으로 모듈화 한다면 AOP는 Aspect를 기반으로 모듈화 함
 
 ## 용어

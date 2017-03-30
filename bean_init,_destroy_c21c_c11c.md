@@ -1,4 +1,4 @@
-# Bean init, destroy 순서
+# Spring Bean init, destroy 순서
 
 ## 순서 확인하는 법
 - `org.springframework.beans.factory.support.DefaultListableBeanFactory` log level 'DEBUG' 등록
