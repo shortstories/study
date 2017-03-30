@@ -1,4 +1,4 @@
-# Cache
+# Spring Cache
 
 * 스프링 3.1버전 이후부터 지원
 * 스프링 4.1 버전부터 [JCache Annotations](https://jcp.org/en/jsr/detail?id=107)에 맞춰서 기능이 개선됨
