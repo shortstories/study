@@ -199,3 +199,27 @@ public class MyRepository {
     //...
 }
 ```
+
+## Test
+
+유닛 테스트에서 발생하는 데이터베이스의 수정사항을 모조리 롤백하고 싶은 경우가 있다. 이런 경우에는 테스트 클래스에다가 `@Transactional` 어노테이션과 `@Rollback` 어노테이션을 붙여서 원하는대로 세팅할 수 있다.
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional("txManager")
+@Rollback
+public class MyServiceTest() {
+    @Test
+    public void shouldRollbackAll() {
+        // ...
+    }
+    
+    // 만약에 테스트 결과를 디비에 적용해야되는 경우라면
+    @Commit
+    @Test
+    public void shouldCommit() {
+        // ...
+    }
+}
+```
