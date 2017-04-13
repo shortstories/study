@@ -94,4 +94,6 @@
 * [Messaging protocols](messaging-protocols.md)
   * [XMPP](messaging-protocols/xmpp.md)
   * [AMQP](messaging-protocols/amqp.md)
+* [Windows](windows.md)
+  * [Windows10 내장 우분투에 ssh 클라이언트로 접속하기](windows/windows10-b0b4-c7a5-c6b0-bd84-d22c-c5d0-ssh-d074-b77c-c774-c5b8-d2b8-b85c-c811-c18d-d558-ae30.md)
 
