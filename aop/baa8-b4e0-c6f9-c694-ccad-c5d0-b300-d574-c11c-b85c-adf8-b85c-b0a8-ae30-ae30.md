@@ -44,9 +44,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableConfigurationProperties
 @EnableAspectJAutoProxy
 public class MyApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(MyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
 }
 ```
 
@@ -114,8 +114,8 @@ public class RequestLoggingAspect {
 
 1. Bean으로 등록하기위해 `@Configuration` 클래스에서 직접 등록할 수도 있겠지만 나는 그냥 `@Component`로 등록하는 것을 선호한다.
 2. 이 어노테이션을 붙여야 동작한다.
-3. Pointcut을 등록하는 부분. 사용할 수 있는 Pointcut 타입들은 https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html\#aop-pointcuts-designators 여기를 참고하시라. 현재 이 코드에서는 `com.navercorp.npush2.controller` 패키지 아래에 있는 모든 public 메소드들을 포함하도록 만들었다. \(Spring AOP도 프록시 기반으로 동작하다보니까 public이 아닌 다른 메소드들은 인식하지 않는다.\) 또 여기서 중요한 것은 `@Pointcut` 은 어디까지나 적용 범위를 잡는 개념이므로 method body에 뭘 넣든 의미가 없다는 것이다. 빈 채로 두도록 하자.
-4. Advice를 등록하는 부분. 사용할 수 있는 Advice 타입들은 역시 https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html\#aop-advice 문서를 참고하자. advice에다가 Pointcut을 등록하는 방법엔 이미 정의된 Pointcut 메소드를 가르키게 하는 방법과 inline으로 바로 pointcut을 작성해서 하는 방법 두가지가 있는데 뭐 입맛대로 골라쓰면 될 듯 하다. 나는 따로 정의해서 등록했다.
+3. Pointcut을 등록하는 부분. 사용할 수 있는 Pointcut 타입들은 [https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html\#aop-pointcuts-designators](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html#aop-pointcuts-designators) 여기를 참고하시라. 현재 이 코드에서는 `com.navercorp.npush2.controller` 패키지 아래에 있는 모든 public 메소드들을 포함하도록 만들었다. \(Spring AOP도 프록시 기반으로 동작하다보니까 public이 아닌 다른 메소드들은 인식하지 않는다.\) 또 여기서 중요한 것은 `@Pointcut` 은 어디까지나 적용 범위를 잡는 개념이므로 method body에 뭘 넣든 의미가 없다는 것이다. 빈 채로 두도록 하자.
+4. Advice를 등록하는 부분. 사용할 수 있는 Advice 타입들은 역시 [https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html\#aop-advice](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html#aop-advice) 문서를 참고하자. advice에다가 Pointcut을 등록하는 방법엔 이미 정의된 Pointcut 메소드를 가르키게 하는 방법과 inline으로 바로 pointcut을 작성해서 하는 방법 두가지가 있는데 뭐 입맛대로 골라쓰면 될 듯 하다. 나는 따로 정의해서 등록했다.
 5. 혹시 어떻게 `HttpServletRequest` 를 받아와야할지 모르겠다면 이 부분을 그대로 사용하면 된다.
 6. Around advice는 메소드의 실행 전, 후 접근 및 리턴 값까지 바꿀 수 있는 가장 강력한 advice인데, 이 코드는 실질적으로 Controller의 메소드가 실행되는 부분이다.
 
