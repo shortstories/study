@@ -12,7 +12,7 @@
 
 두 가지 방법이 있다. starter을 쓰는 방법과 일일히 하나하나 추가해주는 방법. 스프링 부트를 쓰고 있다면 당연히 starter을 쓰는게 편하다.
 
-#### groovy
+#### gradle
 
 ```groovy
 dependencies {
