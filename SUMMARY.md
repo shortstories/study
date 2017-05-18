@@ -98,6 +98,7 @@
   * [AMQP](messaging-protocols/amqp.md)
 * [Windows](windows.md)
   * [Windows10 내장 우분투에 ssh 클라이언트로 접속하기](windows/windows10-b0b4-c7a5-c6b0-bd84-d22c-c5d0-ssh-d074-b77c-c774-c5b8-d2b8-b85c-c811-c18d-d558-ae30.md)
+  * [Hyper-V 기반 docker에서 Shared Drives 설정 실패할 때](windows/hyper-v-ae30-bc18-dockerc5d0-c11c-shared-drives-c124-c815-c2e4-d328-d560-b54c.md)
 * [Spring camp 2017](spring-camp-2017.md)
   * [Project Reactive](spring-camp-2017/project-reactive.md)
   * [이벤트 소싱](spring-camp-2017/c774-bca4-d2b8-c18c-c2f1.md)
