@@ -19,6 +19,7 @@
     * [5장](effective_java/5.md)
   * [Java8 Lambda expression](lambda-expression.md)
   * [JDBC](jdbc.md)
+  * [Linux에서 WatchService 이상동작](linuxc5d0-c11c-watchservice-c774-c0c1-b3d9-c791.md)
 * [Spring 관련 정리](spring_ad00_b828_c815_b9ac.md)
   * [Spring Bean init, destroy 순서](bean_init,_destroy_c21c_c11c.md)
   * [Spring Async Controller](async_controller.md)
