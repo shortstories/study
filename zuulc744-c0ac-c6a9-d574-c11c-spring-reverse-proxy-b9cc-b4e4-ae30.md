@@ -46,7 +46,7 @@ public class ZuulConfig {
 
 ### properties 추가
 
-나는 yaml으로 쓰고 있다.
+나는 spring의 프로퍼티를  yaml으로 관리하고 있다.
 
 ```yaml
 zuul:
@@ -61,6 +61,54 @@ zuul:
 물론 필요하다면 Pre Filter 등을 추가해서 원하는 대로 인증을 한다던가 하는 방법도 존재한다.
 
 ## 동적으로 Routing 추가하는 방법
+
+Zuul은 라우팅 과정에서 어떤 주소로 포워딩할건지 결정하기 위해 `RouteLocator` 이라는 인터페이스를 사용한다. 이 인터페이스를 구현한 클래스들이 여러 개 존재하는데 모든 `RouteLocator` 구현 클래스들은 `CompositeRouteLocator` 이라는 구현 클래스 안에 담겨지게 된다. \(만약에 직접 상속해서 구현한 클래스를 @Primary bean으로 만들 경우, 에러가 발생한다.\) 그리고 포워딩 url 요청이 올 때마다 모든 `RouteLocator` 구현체들을 주어진 순서에 따라 돌면서 탐색하며, 가장 먼저 알맞은 path가 발견되면 그 path에 매핑된 url을 돌려주게 된다.
+
+직접 라우팅을 동적으로 관리하기 위해서는 클래스를 작성해야되는데, 여기에 필요한 것은 다음과 같다.
+
+1. 라우팅이 추가, 삭제될 수 있으므로 `RefreshableRouteLocator` 를 구현해야 한다.
+
+2. 대부분의 로직은 그대로 사용할 수 있으므로 기존의 `SimpleRouteLocator` 을 상속해서 사용한다.
+
+3. `SimpleRouteLocator` 은 `ZuulProperties` 의 `ZuulRoute` 목록을 받아다가 쓴다. 그러므로 우리는 저 `ZuulRoute` 맵을 관리하면 된다.
+
+```java
+public class MyDynamicRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
+  private static final Logger logger = LoggerFactory.getLogger(MyDynamicRouteLocator.class);
+
+  private final ZuulProperties properties;
+  private final Map<String, ZuulProperties.ZuulRoute> staticRoutes;
+
+  public MyDynamicRouteLocator(final String servletPath,
+                             final ZuulProperties properties) {
+    super(servletPath, properties);
+
+    this.properties = properties;
+
+    // properties 파일에 등록된 zuul 옵션들
+    this.staticRoutes = Maps.newLinkedHashMap();
+    this.staticRoutes.putAll(properties.getRoutes());
+  }
+
+  public void refreshWithRoutesMap(final Map<String, ZuulProperties.ZuulRoute> newRoutesMap) {
+    newRoutesMap.putAll(staticRoutes);
+
+    final ZuulProperties.ZuulRoute defaultRoute =
+        properties.getRoutes().get(DiscoveryClientRouteLocator.DEFAULT_ROUTE);
+    if (defaultRoute != null) {
+      newRoutesMap.put(DiscoveryClientRouteLocator.DEFAULT_ROUTE, defaultRoute);
+    }
+
+    properties.setRoutes(newRoutesMap);
+    refresh();
+  }
+
+  @Override
+  public void refresh() {
+    doRefresh();
+  }
+}
+```
 
 
 
