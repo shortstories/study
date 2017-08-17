@@ -72,6 +72,8 @@ Zuul은 라우팅 과정에서 어떤 주소로 포워딩할건지 결정하기 
 
 3. `SimpleRouteLocator` 은 `ZuulProperties` 의 `ZuulRoute` 목록을 받아다가 쓴다. 그러므로 우리는 저 `ZuulRoute` 맵을 관리하면 된다.
 
+그에 따라 나는 다음과 같은 클래스를 작성했다.
+
 ```java
 public class MyDynamicRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
   private static final Logger logger = LoggerFactory.getLogger(MyDynamicRouteLocator.class);
@@ -110,5 +112,22 @@ public class MyDynamicRouteLocator extends SimpleRouteLocator implements Refresh
 }
 ```
 
+그리고 이 클래스를 아까 만든 ZuulConfig에서 bean으로 등록하되, 다른 `RouteLocator`보다 우선될 수 있도록 order를 -1로 지정하였다.
 
+```java
+@Configuration
+@EnableZuulProxy
+public class ZuulConfig {
+  @Bean
+  @ConditionalOnBean(ZuulProperties.class)
+  public RouteLocator myDynamicRouteLocator(final ServerProperties server,
+                                            final ZuulProperties zuulProperties) {
+    MyDynamicRouteLocator myDynamicRouteLocator = new MyDynamicRouteLocator(server.getServletPath(), zuulProperties);
+    myDynamicRouteLocator.setOrder(-1);
+    return myDynamicRouteLocator;
+  }
+}
+```
+
+그 결과, 원하는 대로 적절하게 추가되고 삭제됨을 확인할 수 있었다.
 
