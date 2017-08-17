@@ -80,7 +80,7 @@ public class MyDynamicRouteLocator extends SimpleRouteLocator implements Refresh
   private final Map<String, ZuulProperties.ZuulRoute> staticRoutes;
 
   public MyDynamicRouteLocator(final String servletPath,
-                             final ZuulProperties properties) {
+                               final ZuulProperties properties) {
     super(servletPath, properties);
 
     this.properties = properties;
