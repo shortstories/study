@@ -18,20 +18,48 @@
 
 * 문서가 중구난방. 커스텀해서 쓰려고 하니 결국 코드 뜯어보게 되더라.
 * 동적으로 라우팅 추가하기가 엄청 귀찮다. 원칙은 리본이나 유레카 붙이라나? 닭잡는데 소잡는 칼 들이미는 격이다. 내가 현재 쓰고 있는 consul로도 돌릴 순 있지만 service discovery 쓸 때만 적용 가능하더라. 결국 특정 kv에 맞춰서 하려면 직접 코드를 짜는 수 밖에 없었다.
+* 물론 이건 내가 무리한 요구를 한 것일 수도 있는데, Zuul로 프록시하는 path에다가 cors를 허용하게 만들기가 좀 귀찮았다. 그래서 spring의 `CorsFilter`를 추가해서 해결했다.
 
 ## 사용법
 
+maven, spring-boot 1.4 이상 기준.
+
 ### dependency 추가
 
-
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-zuul</artifactId>
+    <version>1.3.1.RELEASE</version>
+</dependency>
+```
 
 ### annotation 추가
 
+```java
+@Configuration
+@EnableZuulProxy
+public class ZuulConfig {
+}
+```
+
 ### properties 추가
 
+나는 yaml으로 쓰고 있다.
+
+```yaml
+zuul:
+  routes:
+    myApiRoute:
+      path: /proxy/**
+      url: localhost:8080
+```
+
+이렇게 세 가지 세팅을 처리해주면, /proxy/ path 아래로 가는 모든 요청은 `localhost:8080` 아래로 가게 된다. 물론 옵션에 따라 달라지기는 하지만 path도, body도, header도 그대로 포워딩되는게 좋았다.
+
+물론 필요하다면 Pre Filter 등을 추가해서 원하는 대로 인증을 한다던가 하는 방법도 존재한다.
+
 ## 동적으로 Routing 추가하는 방법
-
-
 
 
 
