@@ -40,6 +40,7 @@
     * [Spring with JTA 삽질](transaction-management/spring-transaction-management-jta-c0bd-c9c8.md)
   * [Spring에서 효율적으로 Static resource 관리하기](springc5d0-c11c-static-resource-versioning-d558-ae30.md)
   * [Zuul을 사용해서 Spring Reverse proxy 만들기](zuulc744-c0ac-c6a9-d574-c11c-spring-reverse-proxy-b9cc-b4e4-ae30.md)
+  * [Spring Security](spring-security.md)
 * [코드 리팩토링](cf54_b4dc_b9ac_d329_d1a0_b9c1.md)
   * [한번에 하나씩](d55c_bc88_c5d0_d558_b098_c529.md)
 * [지속적 통합 \(CI\)](c9c0_c18d_c801_d1b5_d569__ci.md)
