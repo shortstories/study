@@ -14,12 +14,23 @@ Java EE를 기반으로하는 엔터프라이즈 시스템에서 사용할 수 �
 
 #### SecurityContextHolder, SecurityContext, Authentication
 
-* `SecurityContextHolder` 은 현재 어플리케이션의 security context를 저장.
-  * 일반적으로 `ThreadLocal` 을 사용하여 저장하고 있기 때문에 같은 thread 안이라면 어디에서든 같은 context를 사용 가능.
-  * Spring security에서 적절하게 thread clear을 수행하므로 안전함.
-  * Swing처럼 모든 thread가 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_GLOBAL` 설정.
-  * secure thread에서 생성된 모든 자식 thread들이 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 설정.
-* `SecurityContext` 는 현재 어플리케이션을 사용하고 있는 principal의 자세한 정보를 담고 있음.
-* 
+* `SecurityContextHolder` 은 현재 어플리케이션의 `SecurityContext` 를 저장.
 
+* 일반적으로 `ThreadLocal` 을 사용하여 저장하고 있기 때문에 같은 thread 안이라면 어디에서든 같은 context를 사용 가능.
+* Spring security에서 적절하게 thread clear을 수행하므로 안전함.
+* Swing처럼 모든 thread가 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_GLOBAL` 설정.
+* secure thread에서 생성된 모든 자식 thread들이 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 설정.
+
+* `SecurityContext` 는 현재 범위의 `Authentication` 을 담고 있음.
+* `Authentication`은 principal과 credentials를 가지고 있음. 보통 principal은 `UserDetails` 구현체일 때가 많음.
+
+현재 로그인한 유저의 데이터를 갖고 싶다면
+
+```java
+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+```
+
+#### UserDetailsService
+
+`Authentication` 클래스의 principal에 들어갈 인스턴스를 공급하는 서비스. 일반적으로는 `UserDetails` 인터페이스의 인스턴스를 사용한다. `UserDetails` 인터페이스를 데이터베이스와 Spring security간의 일종의 어댑터처럼 생각할 수 있다.
 
