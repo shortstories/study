@@ -19,6 +19,7 @@ Java EE를 기반으로하는 엔터프라이즈 시스템에서 사용할 수 �
 * 일반적으로 `ThreadLocal` 을 사용하여 저장하고 있기 때문에 같은 thread 안이라면 어디에서든 같은 context를 사용 가능.
 
 * Spring security에서 적절하게 thread clear을 수행하므로 안전함.
+
 * Swing처럼 모든 thread가 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_GLOBAL` 설정.
 * secure thread에서 생성된 모든 자식 thread들이 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 설정.
 
@@ -40,11 +41,19 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 #### AuthenticationProvider
 
-`AuthenticationManager` 와 동일한 역할을 수행하지만, 특정 `Authentication` 구현 클래스에 특화된다고 생각하면 편하다. 가령 예를 들면 `AbstractUserDetailsAuthenticationProvider`는 `UsernamePasswordAuthenticationToken`만 받아서 처리하고, `PreAuthenticatedAuthenticationProvider`는 `PreAuthenticatedAuthenticationToken`만 받아서 처리하는 식이다. 그래서 provider은 manager이랑 달리 `boolean supports(Class<?> authentication)` 라는 메소드를 추가로 가지고 있다. 이 supports를 Override해서 원하는 Authentication 상속 클래스의 인스턴스인지 확인하게끔 만드는 것이다.
+`AuthenticationManager` 와 동일한 역할을 수행하지만, 특정 `Authentication` 구현 클래스에 특화된다고 생각하면 편하다. 가령 예를 들면 `AbstractUserDetailsAuthenticationProvider`는 `UsernamePasswordAuthenticationToken`만 받아서 처리하고, `PreAuthenticatedAuthenticationProvider`는 `PreAuthenticatedAuthenticationToken`만 받아서 처리하는 식이다. 그래서 provider는 manager이랑 달리 `boolean supports(Class<?> authentication)` 라는 메소드를 추가로 가지고 있다. 이 supports를 Override해서 원하는 Authentication 상속 클래스의 인스턴스인지 확인하게끔 만드는 것이다.
 
 #### UserDetailsService
 
-`Authentication`  인스턴스를 생성할 때, principal 정보를 제공하는 서비스. 일반적으로는 `UserDetails` 인터페이스의 구현체를 집어넣는다. `UserDetails` 인터페이스를 데이터 저장소와 스프링 시큐리티 사이에 있는 일종의 어댑터처럼 생각하면 된다. 
+`Authentication`  인스턴스를 생성할 때, principal 정보를 제공하는 서비스. 일반적으로는 `UserDetails` 인터페이스의 구현체를 집어넣는다. `UserDetails` 인터페이스를 데이터 저장소와 스프링 시큐리티 사이에 있는 일종의 어댑터처럼 생각하면 된다.
 
 이 인터페이스의 구현체는 DB든 메모리든 파일이든 뒤져서 주어진 token, 혹은 username 등에 알맞은 `UserDetails`를 찾게 된다. 즉, 유저 데이터 DAO의 역할을 수행한다고 생각하면 된다. 중요한 것은 `UserDetailsService` 에서는 데이터의 검증을 하지 않는다는 것이다. 데이터의 검증은 `AuthenticationManager` 혹은 `AuthenticationProvider`  의 몫이다.
+
+일반적으로, `AuthenticationManager` &lt;- `AuthenticationProvider` &lt;- `UserDetailsService` 순서로 참조하게 된다.
+
+#### GrantedAuthority
+
+
+
+
 
