@@ -36,7 +36,7 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 #### AuthenticationManager
 
-일부 정보를 가지고 있는 `Authentication` 을 받아서 검증하여 Exception을 던지거나 필요한 정보를 채워넣어 완성된 `Authentication` 을 돌려주는 역할을 수행한다. 이 때, 필요한 정보에는 `UserDetails`, `GrantedAuthority` 등이 있다. 
+일부 정보를 가지고 있는 `Authentication` 을 받아서 검증하여 Exception을 던지거나 필요한 정보를 채워넣어 완성된 `Authentication` 을 돌려주는 역할을 수행한다. 이 때, 필요한 정보에는 `UserDetails`, `GrantedAuthority` 등이 있다.
 
 보통 `AuthenticationManager.authenticate()` 을 수행한 결과물을 `SecurityContextHolder.getContext().setAuthentication()` 으로 집어넣게 된다
 
@@ -56,5 +56,6 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 #### GrantedAuthority
 
+특정 권한을 의미하는 인터페이스다. 보통은 이 객체 하나하나가 일종의 "role"로 취급된다. 가령 예를 들면 ROLE\_ADMIN, ROLE\_USER 등이다. 이 객체는 나중에 권한 체크를 하는데 사용된다. 보통은 `UserDetailsService` 에서 제공되는 편이다.
 
-
+`GrantedAuthority`를 "role"이라고 말했는데, 특정 개인이 아닌 넓은 범위에 적용하라는 것이다. 즉, 예를 들어 이용자가 천명쯤 있을 때 그 중 하나, 31번 이용자를 위해 특별한 `GrantedAuthority`를 만들지 말라는 것이다. `GrantedAuthority`가 수없이 많아지면 메모리 소모는 물론 최악의 경우 "Authentication" 과정 자체가 느려질 수가 있다. 따라서 이러한 용도로는 domain object security를 적용해야 한다.
