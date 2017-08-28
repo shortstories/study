@@ -6,8 +6,6 @@ Java EE를 기반으로하는 엔터프라이즈 시스템에서 사용할 수 �
 
 보통 보안이라고 하면 크게 잡아서 "authentication" 과 "authorization"의 두 영역이 존재한다. 이 둘은 Spring security가 주 타겟으로 삼는 두 영역이기도 하다. "Authentication"은 행동의 주체가 누구인지 파악하고 정립해나가는 과정이며, "Authorization"은 그 주체에게 어떤 행동들이 허락되었는지 확인하고 결정하는 과정이다. 이 행동의 주체를 spring security에서는 principal이라고 부른다. 당연하지만 "Authorization"은 "Authentication"이 완료되어서 현재 이 행동을 하려고 하는 자가 누구인지 파악된 다음에 가능하다.
 
-
-
 ## 아키텍쳐
 
 ### Authentication
@@ -62,8 +60,6 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 `GrantedAuthority`를 "role"이라고 말했는데, 특정 개인이 아닌 넓은 범위에 적용하라는 것이다. 즉, 예를 들어 이용자가 천명쯤 있을 때 그 중 하나, 31번 이용자를 위해 특별한 `GrantedAuthority`를 만들지 말라는 것이다. `GrantedAuthority`가 수없이 많아지면 메모리 소모는 물론 최악의 경우 "Authentication" 과정 자체가 느려질 수가 있다. 따라서 이러한 용도로는 domain object security를 적용해야 한다.
 
-
-
 ### Authorization
 
 ---
@@ -76,7 +72,7 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 #### Secure Object, AbstractSecurityInterceptor
 
-Secure Object는 권한 체크가 적용될 수 있는 모든 object를 말하는 것이다. 스프링 시큐리티에서 기본적으로 제공하는 항목은 AspectJ, Spring AOP, Servlet filter 세 가지다. 최근에는 web request가 왔을 때도 권한 체크를 Servlet filter로 바로 하지 않고, 서비스 레이어에서 메소드를 호출할 때 Spring AOP를 통해 하는 것이 주류 패턴이다.
+Secure Object는 권한 체크가 적용될 수 있는 모든 object를 말하는 것이다. 스프링 시큐리티에서 기본적으로 제공하는 항목은 `JoinPoint`\(AspectJ\), `MethodInvocation` \(Spring AOP\), `FilterInvocation` \(Servlet filter\) 세 가지다. 최근에는 web request가 왔을 때도 권한 체크를 Servlet filter로 바로 하지 않고, 서비스 레이어에서 메소드를 호출할 때 Spring AOP를 통해 하는 것이 주류 패턴이다.
 
 각각의 Secure Object는 `AbstractSecurityInterceptor` 을 구현하여 가지게 되는데 동작은 다음과 같다.
 
@@ -88,7 +84,7 @@ Secure Object는 권한 체크가 적용될 수 있는 모든 object를 말하�
 
 #### Configuration Attributes
 
-`AbstractSecurityInterceptor` 에서 사용하는 값들로, `ConfigAttribute` 이라는 인터페이스로 표현된다. `AccessDecisionManager` 이 어떻게 구현되었냐에 따라 단순히 "role" 이름일 수도 있고, 좀 더 복잡한 객체일 수도 있다. `AbstractSecurityInterceptor` 에다가 `SecurityMetadataSource` 를 설정하여 secure object에서 찾을 수 있게 한다. 
+`AbstractSecurityInterceptor` 에서 사용하는 값들로, `ConfigAttribute` 이라는 인터페이스로 표현된다. `AccessDecisionManager` 이 어떻게 구현되었냐에 따라 단순히 "role" 이름일 수도 있고, 좀 더 복잡한 객체일 수도 있다. `AbstractSecurityInterceptor` 에다가 `SecurityMetadataSource` 를 설정하여 secure object에서 찾을 수 있게 한다.
 
 가령 예를 들어 메소드 위에다가 `@PreAuthorized("hasAnyRole('ROLE_ADMIN')")` 이런 어노테이션을 달면 이 어노테이션이 바로 Configuration attribute 이다. 이 경우 secure object는 `MethodInvocation` 이 되고 `SecurityMetadataSource` 는 `PrePostAnnotationSecurityMetadataSource` 가 된다.
 
@@ -99,6 +95,4 @@ Secure Object는 권한 체크가 적용될 수 있는 모든 object를 말하�
 #### AfterInvocationManager
 
 secure object를 성공적으로 실행하고 리턴값이 돌아왔을 때 리턴값을 조작하거나 검증할 필요성이 있을 때 사용하는 기능이다. 더 유연한 구조를 위해서 별도의 `AfterInvocationManager` 인터페이스로 분리되어있다. 가령 유저 정보를 불러올 때, 권한에 따라 특정 정보들은 제외하고 보여주고싶다면 이 기능을 사용할 수 있다. secure object의 실행이 성공적으로 끝났을 때만 호출된다.
-
-
 
