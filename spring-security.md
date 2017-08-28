@@ -17,11 +17,13 @@ Java EE를 기반으로하는 엔터프라이즈 시스템에서 사용할 수 �
 * `SecurityContextHolder` 은 현재 어플리케이션의 `SecurityContext` 를 저장.
 
 * 일반적으로 `ThreadLocal` 을 사용하여 저장하고 있기 때문에 같은 thread 안이라면 어디에서든 같은 context를 사용 가능.
+
 * Spring security에서 적절하게 thread clear을 수행하므로 안전함.
 * Swing처럼 모든 thread가 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_GLOBAL` 설정.
 * secure thread에서 생성된 모든 자식 thread들이 같은 security context를 공유해야하면 `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 설정.
 
 * `SecurityContext` 는 현재 범위의 `Authentication` 을 담고 있음.
+
 * `Authentication`은 principal과 credentials를 가지고 있음. 보통 principal은 `UserDetails` 구현체일 때가 많음.
 
 현재 로그인한 유저의 데이터를 갖고 싶다면
@@ -30,7 +32,19 @@ Java EE를 기반으로하는 엔터프라이즈 시스템에서 사용할 수 �
 SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 ```
 
+#### AuthenticationManager
+
+일부 정보를 가지고 있는 `Authentication` 을 받아서 검증하여 Exception을 던지거나 필요한 정보를 채워넣어 완성된 `Authentication` 을 돌려주는 역할을 수행한다. 이 때, 필요한 정보에는 `UserDetails`, `GrantedAuthority` 등이 있다.
+
+스프링 시큐리티에서 Authentication을 수행하는 핵심 요소로 필요하다면 이 인터페이스만 직접 구현해서 사용해도 문제 없다. 그러나 이렇게 되면 직접 구현해야하는 부분도 많아지고 유연성이 떨어지기 때문에 스프링 시큐리티에서는 보통 이 인터페이스의 구현체로 `ProviderManager` 이라는 클래스를 사용한다. 이 클래스는 여러 `AuthenticationProvider` 을 가지고 있다가 `authenticate()`  요청이 들어오면 주어진 `Authentication`에 적합한 `AuthenticationProvider` 를 찾아서 그 쪽으로 넘겨버린다. 그럼 그 provider가 위에서 말한 작업을 실제로 수행하게 된다.
+
+#### AuthenticationProvider
+
+`AuthenticationManager` 와 동일한 역할을 수행하지만, 특정 `Authentication` 구현 클래스에 특화된다고 생각하면 편하다. 가령 예를 들면 `AbstractUserDetailsAuthenticationProvider`는 `UsernamePasswordAuthenticationToken`만 받아서 처리하고, `PreAuthenticatedAuthenticationProvider`는 `PreAuthenticatedAuthenticationToken`만 받아서 처리하는 식이다. 그래서 provider은 manager이랑 달리 `boolean supports(Class<?> authentication)` 라는 메소드를 추가로 가지고 있다. 이 supports를 Override해서 원하는 Authentication 상속 클래스의 인스턴스인지 확인하게끔 만드는 것이다.
+
 #### UserDetailsService
 
-`Authentication` 클래스의 principal에 들어갈 인스턴스를 공급하는 서비스. 일반적으로는 `UserDetails` 인터페이스의 인스턴스를 사용한다. `UserDetails` 인터페이스를 데이터베이스와 Spring security간의 일종의 어댑터처럼 생각할 수 있다.
+`Authentication`  인스턴스를 생성할 때, principal 정보를 제공하는 서비스. 일반적으로는 `UserDetails` 인터페이스의 구현체를 집어넣는다. `UserDetails` 인터페이스를 데이터 저장소와 스프링 시큐리티 사이에 있는 일종의 어댑터처럼 생각하면 된다. 
+
+이 인터페이스의 구현체는 DB든 메모리든 파일이든 뒤져서 주어진 token, 혹은 username 등에 알맞은 `UserDetails`를 찾게 된다. 즉, 유저 데이터 DAO의 역할을 수행한다고 생각하면 된다. 중요한 것은 `UserDetailsService` 에서는 데이터의 검증을 하지 않는다는 것이다. 데이터의 검증은 `AuthenticationManager` 혹은 `AuthenticationProvider`  의 몫이다.
 
