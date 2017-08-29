@@ -40,7 +40,7 @@ SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 보통 `AuthenticationManager.authenticate()` 을 수행한 결과물을 `SecurityContextHolder.getContext().setAuthentication()` 으로 집어넣게 된다
 
-스프링 시큐리티에서 "Authentication"을 수행하는 핵심 요소로 필요하다면 이 인터페이스만 직접 구현해서 사용해도 문제 없다. 그러나 이렇게 되면 직접 구현해야하는 부분도 많아지고 유연성이 떨어지기 때문에 스프링 시큐리티에서는 보통 이 인터페이스의 구현체로 `ProviderManager` 이라는 클래스를 사용한다. 이 클래스는 여러 `AuthenticationProvider` 을 가지고 있다가 `authenticate()`  요청이 들어오면 주어진 `Authentication`에 적합한 `AuthenticationProvider` 를 찾아서 그 쪽으로 넘겨버린다. 그럼 그 provider가 위에서 말한 작업을 실제로 수행하게 된다.
+스프링 시큐리티에서 "Authentication"을 수행하는 핵심 요소이며, 필요하다면 이 인터페이스만 직접 구현해서 사용해도 문제 없다. 그러나 이렇게 되면 직접 구현해야하는 부분도 많아지고 유연성이 떨어지기 때문에 스프링 시큐리티에서는 보통 이 인터페이스의 구현체로 `ProviderManager` 이라는 클래스를 사용한다. 이 클래스는 여러 `AuthenticationProvider` 을 가지고 있다가 `authenticate()`  요청이 들어오면 주어진 `Authentication`에 적합한 `AuthenticationProvider` 를 찾아서 그 쪽으로 넘겨버린다. 그럼 그 provider가 위에서 말한 작업을 실제로 수행하게 된다.
 
 #### AuthenticationProvider
 
