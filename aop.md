@@ -27,10 +27,10 @@
 
 스프링에서 AOP를 사용할 때 기본적으로 사용하는 방식. 모듈들은 순수한 자바로 작성되어있으며, 별도의 복잡한 설정이 필요없다는 것이 장점. 현재로는 method 실행 join point에만 advice를 걸 수가 있음. 그건 Spring AOP의 목표는 AspectJ 스펙의 완전한 구현이 아니기 때문. 그 대신에 별도 설정 없이 Spring Bean으로 설정을 관리할 수 있게 되었으니 그 나름대로 강점을 가짐.
 
-* **JDK dynamic proxy**: 기본적으로 사용되는 Proxy. interface로 정의된 클래스에만 사용 가능함. 스프링에서는 CGLIB보다 JDK dynamic proxy를 권장함. 그 이유야 뭐, CGLIB는 스프링이 아닌 외부 라이브러리이기 때문.
+* **JDK dynamic proxy**: 기본적으로 사용되는 Proxy. interface로 정의된 클래스에만 사용 가능함. 스프링에서는 CGLIB보다 JDK dynamic proxy를 권장함. 그 이유야 뭐, Interface로 정의한 다음 class를 작성하는게 더 낫기도 하고 CGLIB는 스프링이 아닌 외부 라이브러리이기 때문.
 * **CGLIB proxy**: interface가 없이 바로 작성된 concrete class도 proxy로 만들 수 있음. 설정에 따라서 CGLIB만 사용하도록 강제할 수도 있음. 물론 자주 있는 일은 아님. 예를 들어 interface에서는 정의하지 않고 concrete class에만 존재하는 메소드에다가 advice를 걸어야만 한다던가, 어떤 메소드의 패러미터로 interface 대신 concrete class로 proxy 인스턴스를 던져야하는 상황에나 필요함. CGLIB가 약간 성능이 더 좋을 때가 많음.
 
 ### Full AspectJ
 
-AspectJ compiler 또는 weaver를 사용해서 AOP 기능을 사용하는 방식. 약간 귀찮아지는건 사실이다. 우선 스프링하고 연동하기 위해선 spring-aspects.jar를 추가해줘야되기도 하고, 자바 실행할 때 `-javaagent:...../aspectjweaver.jar` 같은 옵션을 넣어야될 수도 있다. 실행할 때 옵션을 주기 싫다면 AspectJ Load-time weaving이라는 기능을 써야만 한다. 하지만 귀찮아지는 대신에 각 field, method 모두 다 advice를 거는 것이 가능해지므로 find-grained object를 다루는데 유리하다. 
+AspectJ compiler 또는 weaver를 사용해서 AOP 기능을 사용하는 방식. 약간 귀찮아지는건 사실이다. 우선 스프링하고 연동하기 위해선 spring-aspects.jar를 추가해줘야되기도 하고, 자바 실행할 때 `-javaagent:...../aspectjweaver.jar` 같은 옵션을 넣어야될 수도 있다. 실행할 때 옵션을 주기 싫다면 AspectJ Load-time weaving이라는 기능을 써야만 한다. 하지만 귀찮아지는 대신에 각 field, method 모두 다 advice를 거는 것이 가능해지므로 find-grained object를 다루는데 유리하다.
 
