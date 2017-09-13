@@ -32,5 +32,5 @@
 
 ### Full AspectJ
 
-AspectJ compiler 또는 weaver를 사용해서 AOP 기능을 사용하는 방식. 약간 귀찮아지는건 사실이다. 우선 스프링하고 연동하기 위해선 spring-aspects.jar를 추가해줘야되기도 하고, 자바 실행할 때 `-javaagent:...../aspectjweaver.jar` 같은 옵션을 넣어야될 수도 있다. 실행할 때 옵션을 주기 싫다면 AspectJ Load-time weaving이라는 기능을 써야만 한다. 하지만 귀찮아지는 대신에 각 field, method 모두 다 advice를 거는 것이 가능해지므로 find-grained object를 다루는데 유리하다.
+AspectJ compiler 또는 weaver를 사용해서 AOP 기능을 사용하는 방식. 자바를 실행할 때 JVM에다가  `-javaagent:...../aspectjweaver.jar` 같은 옵션을 줘야 함. 실행할 때 옵션을 주기 싫다면 런타임에 처리하기 위해서 AspectJ Load-time weaving이라는 기능을 써야만 함. 하지만 어떻게든 귀찮아지는 대신에 각 field, method 모두 다 advice를 거는 것이 가능해지므로 find-grained object를 다루는데 유리. 스프링에서는 `spring-aspects.jar` 이라는 라이브러리에서 자신들이 정의한 Aspect들을 제공하고 있음.
 
