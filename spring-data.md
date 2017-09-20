@@ -16,7 +16,7 @@
 
 1. 내 모델 클래스의 Repository 인터페이스를 정의.
 2. 필요한 query methods를 인터페이스에 추가
-3. Proxy 객체를 만들 수 있도록 세팅 추가 \(`@EnableJpaRepositories` , `@EnableMongoRepositories` 등\)
+3. Repository Proxy 객체를 만들 수 있도록 설정 추가 \(`@EnableJpaRepositories` , `@EnableMongoRepositories` 등\)
 4. `@Autowired` 로 repository 인스턴스를 끌어와서 사용
 
 ### 인터페이스 정의하는 방법
