@@ -42,6 +42,7 @@
   * [Zuul을 사용해서 Spring Reverse proxy 만들기](zuulc744-c0ac-c6a9-d574-c11c-spring-reverse-proxy-b9cc-b4e4-ae30.md)
   * [Spring Security](spring-security.md)
   * [스프링 어노테이션이 안 먹힐 때 대처법](c2a4-d504-b9c1-c5b4-b178-d14c-c774-c158-c774-c548-ba39-d790-b54c-b300-cc98-bc95.md)
+  * [Spring Data](spring-data.md)
 * [코드 리팩토링](cf54_b4dc_b9ac_d329_d1a0_b9c1.md)
   * [한번에 하나씩](d55c_bc88_c5d0_d558_b098_c529.md)
 * [지속적 통합 \(CI\)](c9c0_c18d_c801_d1b5_d569__ci.md)
