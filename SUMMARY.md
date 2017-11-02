@@ -112,4 +112,5 @@
   * [CQRS](spring-camp-2017/cqrs.md)
 * [Spring webflux](spring-webflux.md)
 * [리액티브 프로그래밍](bc18-c751-d615-d504-b85c-adf8-b798-bc0d3f.md)
+* [Linux Settings](linux-settings.md)
 
