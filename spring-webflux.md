@@ -133,5 +133,17 @@ Reactive Streams: JAVA9에서 나온 스펙. 비동기 컴포넌트와 백 프�
 4. DB API가 블로킹이거나 블로킹인 네트워크 API를 쓰고있다면 Spring MVC가 더 좋음. 일부 블로킹 콜을 쓰레드로 분리해서 쓸 수도 있지만 굳이 그렇게까지 해야될 필요성이 있을지 잘 모르겠음.
 5. 그래도 굳이 써보고싶다면 기존의 Spring MVC 프로그램에다가 `WebClient`부터 부분적으로 적용시켜 써보는게 좋음. WebFlux의 HTTP Client임.
 
+#### Server
 
+WebFlux는 Netty가 기본 서버. 필요에 따라 비동기 API를 지원하는 다른 서버를 사용하는 것도 물론 가능.
+
+#### Reactive Spring web Server
+
+#### HttpHandler
+
+`HttpHandler` 는 request를 받아 response를 돌려주는 하나의 함수. 특정 서버에 국한되지 않고 범용성 있게 Reactive Stream API로 HTTP request를 처리할 수 있도록 추상화됨. 각 서버에 따라 알맞은 Adapter가 존재함.
+
+#### WebHandler API
+
+`HttpHandler` 에다가 일반적으로 Web에서 쓰는 세세한 기능들을 부여할 수 있도록 만든 API. 기존 Spring MVC의 Filter나 Session, ExceptionHandler 등의 기능을 추가할 수 있게 만들어져있음. 모든 컴포넌트들은 `ServerWebExchange` 를 받아서 제각기 처리. 보통은 `WebHttpHandlerBuilder` 를 통해 원하는 컴포넌트들을 조합하여 `HttpWebHandlerAdapter` 를 만들어 사용. 
 
