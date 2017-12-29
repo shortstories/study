@@ -137,7 +137,7 @@ Reactive Streams: JAVA9에서 나온 스펙. 비동기 컴포넌트와 백 프�
 
 WebFlux는 Netty가 기본 서버. 필요에 따라 비동기 API를 지원하는 다른 서버를 사용하는 것도 물론 가능.
 
-#### Reactive Spring web Server
+### Reactive Spring web Server
 
 #### HttpHandler
 
@@ -145,5 +145,11 @@ WebFlux는 Netty가 기본 서버. 필요에 따라 비동기 API를 지원하�
 
 #### WebHandler API
 
-`HttpHandler` 에다가 일반적으로 Web에서 쓰는 세세한 기능들을 부여할 수 있도록 만든 API. 기존 Spring MVC의 Filter나 Session, ExceptionHandler 등의 기능을 추가할 수 있게 만들어져있음. 모든 컴포넌트들은 `ServerWebExchange` 를 받아서 제각기 처리. 보통은 `WebHttpHandlerBuilder` 를 통해 원하는 컴포넌트들을 조합하여 `HttpWebHandlerAdapter` 를 만들어 사용. 
+`HttpHandler` 에다가 일반적으로 Web에서 쓰는 세세한 기능들을 부여할 수 있도록 만든 API. 기존 Spring MVC의 Filter나 Session, ExceptionHandler 등의 기능을 추가할 수 있게 만들어져있음. 모든 컴포넌트들은 `ServerWebExchange` 를 받아서 제각기 처리. 보통은 `WebHttpHandlerBuilder` 를 통해 원하는 컴포넌트들을 조합하여 `HttpWebHandlerAdapter` 를 만들어 사용.
+
+#### Codecs
+
+코덱 개념 자체는 Netty의 그것과 거의 유사. `DataBuffer`, `Encoder`, `Decoder` 요렇게 세가지가 있는데 `DataBuffer`은 Netty의 `ByteBuf` 랑 비슷하고 `Encoder`, `Decoder`은 말 그대로 그 버퍼를 원하는 특정 Object로 변환하고 다시 바이트 버퍼로 변환하는 역할.
+
+spring-web에서는 HTTP Message와 body를 읽고 쓰기 위해 `HttpMessageReader` `HttpMessageWriter` 두 인터페이스를 제공.  
 
