@@ -141,7 +141,7 @@ WebFlux는 Netty가 기본 서버. 필요에 따라 비동기 API를 지원하�
 
 #### HttpHandler
 
-`HttpHandler` 는 request를 받아 response를 돌려주는 하나의 함수. 특정 서버에 국한되지 않고 범용성 있게 Reactive Stream API로 HTTP request를 처리할 수 있도록 추상화됨. 각 서버에 따라 알맞은 Adapter가 존재함.
+`HttpHandler` 는 request를 받아 response를 돌려주는 하나의 함수. 특정 서버에 국한되지 않고 범용성 있게 Reactive Stream API로 HTTP request를 처리할 수 있도록 추상화됨. 각 서버에 따라 알맞은 HttpHandlerAdapter가 존재함.
 
 #### WebHandler API
 
@@ -151,5 +151,17 @@ WebFlux는 Netty가 기본 서버. 필요에 따라 비동기 API를 지원하�
 
 코덱 개념 자체는 Netty의 그것과 거의 유사. `DataBuffer`, `Encoder`, `Decoder` 요렇게 세가지가 있는데 `DataBuffer`은 Netty의 `ByteBuf` 랑 비슷하고 `Encoder`, `Decoder`은 말 그대로 그 버퍼를 원하는 특정 Object로 변환하고 다시 바이트 버퍼로 변환하는 역할.
 
-spring-web에서는 HTTP Message와 body를 읽고 쓰기 위해 `HttpMessageReader` `HttpMessageWriter` 두 인터페이스를 제공.  
+spring-web에서는 HTTP Message와 body를 읽고 쓰기 위해 `HttpMessageReader` `HttpMessageWriter` 두 인터페이스를 제공하는데 위의 `Encoder` 와 `Decoder` 을 한번 감싸서 그대로 사용할 수도 있음.
+
+### DispatcherHandler
+
+`WebHandler`에 Spring MVC에서 `DispatcherServlet` 이 수행하던 기능들을 덧붙인 것. Spring configuration에서 필요한 컴포넌트들을 땡겨와서 세팅된다. 보통은 bean name을 "webHandler" 으로 지어서 `WebHandler` 역할을 수행하도록 한다.
+
+일반적으로 WebFlux 어플리케이션은 다음과 같은 bean들을 포함한다
+
+* 이름이 "webHandler"인 `DispatcherHandler` bean
+* `WebFilter`, `WebExceptionHandler` bean
+* `HandlerMapping`, `HandlerAdapter`, `HandlerResultHandler`bean
+
+
 
