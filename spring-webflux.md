@@ -123,7 +123,15 @@ spring-webflux는 spring-webmvc의 대체재. 물론 같이 사용할 수도 있
 
 Reactive Streams: JAVA9에서 나온 스펙. 비동기 컴포넌트와 백 프레셔간의 상호작용을 정의
 
+### 선택 기준
 
+#### Spring MVC vs Spring WebFlux
+
+1. 이미 잘 돌아가는 Spring MVC 프로그램이 있다? 그럼 굳이 바꿀 필요까진 없음.
+2. 좀 더 가벼운 프로그램, 함수형 웹 프레임워크에 관심이 있다면 써봐도 괜찮음.
+3. Spring MVC의 전형적인 controller 방식이랑 Spring WebFlux functional endpoints는 둘 다 동시에 써도 되므로 같이 써보면서 비교해보고 골라도 괜찮음.
+4. DB API가 블로킹이거나 블로킹인 네트워크 API를 쓰고있다면 Spring MVC가 더 좋음. 일부 블로킹 콜을 쓰레드로 분리해서 쓸 수도 있지만 굳이 그렇게까지 해야될 필요성이 있을지 잘 모르겠음.
+5. 그래도 굳이 써보고싶다면 기존의 Spring MVC 프로그램에다가 `WebClient`부터 부분적으로 적용시켜 써보는게 좋음. WebFlux의 HTTP Client임.
 
 
 
