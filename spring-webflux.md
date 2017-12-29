@@ -163,5 +163,28 @@ spring-web에서는 HTTP Message와 body를 읽고 쓰기 위해 `HttpMessageRea
 * `WebFilter`, `WebExceptionHandler` bean
 * `HandlerMapping`, `HandlerAdapter`, `HandlerResultHandler`bean
 
+#### Special bean types
+
+Spring MVC에서 우리가 controller, service, repository라고 부르던 레이어. `DispatcherHandler` 는 여기에 속하는 bean에게 역할을 위임하여 request를 처리하고 response를 생성한다.
+
+* `HandlerMapping`: request랑 Handler를 매핑해주는 bean. 익숙한 `@RequestMapping` 어노테이션이나 `RouterFunction`, URL 정보 등을 미리 가지고 있다가 request가 들어올 때마다 검사하여 적합한 Handler를 돌려주는 역할
+* `HandlerAdapter`: Handler를 실제로 실행하기 위해 필요한 bean. 예를 들어 Handler중 하나인 `HandlerFunction` 은 parameter로 `ServerRequest` 하나를 받는데 `DispatcherHandler`은 `ServerWebExchange` 만 가지고 있음. 그렇다면 실제로 `HandlerFunction` 을 실행하기 위해서는 `ServerWebExchange` 를 `ServerRequest`로 바꾼 다음 parameter로 넣어서 실행하는 과정이 필요한데 이러한 역할을 수행하는 부분.
+* `HandlerResultHandler`: Handler 결과값을 바탕으로 response를 처리하기 위해 필요한 bean. 예를 들면 반환값 타입에 따라 `ResponseEntity<?>` , `@ResponseBody` , String으로 된 view name 모두 제각기 구현체가 등록되어있어야 함.
+
+#### 설정 방법
+
+세 가지 선택지가 있음
+
+1. 위 세 가지 bean을 직접 스프링 컨테이너에 등록하는 방법
+2. `@EnableWebFlux` 어노테이션을 원하는 특정 `@Configuration` 클래스에 붙이고 `WebFluxConfigurer` 인터페이스를 상속, 필요한 부분을 구현해서 쓰는 방법
+   1. `@EnableWebFlux` 어노테이션을 발견하면 기본 값으로 초기화
+3. `DelegatingWebFluxConfiguration` 인터페이스를 상속해서 처음부터 끝까지 직접 다 세팅하는 방법
+
+#### 동작 방식
+
+1. `HandlerMapping` 를 모조리 돌면서 제일 먼저 처리할 수 있는 Handler를 찾음
+2. Handler를 찾았으면 거기에 적합한 `HandlerAdapter` 를 찾음. 찾았으면 `HandlerAdapter` 에서 실제 Handler를 실행하고, 그 결과를 `HandlerResult` 로 바꿔서 넘겨줌.
+3. 이번에는 `HandlerResult` 를 처리할 수 있는 `HandlerResultHandler` 를 찾아서 결과값을 처리하여 view나 값을 담아 response를 보냄.
+
 
 
