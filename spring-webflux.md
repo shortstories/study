@@ -186,5 +186,23 @@ Spring MVC에서 우리가 controller, service, repository라고 부르던 레�
 2. Handler를 찾았으면 거기에 적합한 `HandlerAdapter` 를 찾음. 찾았으면 `HandlerAdapter` 에서 실제 Handler를 실행하고, 그 결과를 `HandlerResult` 로 바꿔서 넘겨줌.
 3. 이번에는 `HandlerResult` 를 처리할 수 있는 `HandlerResultHandler` 를 찾아서 결과값을 처리하여 view나 값을 담아 response를 보냄.
 
+### Functional endpoints
 
+spring mvc에서는 `@Controller` 와 `@RequestMapping` 을 써왔다면, spring webflux에서 완전 새롭게 추가된 방법. 물론 spring mvc처럼 컨트롤러를 작성해도 알아서 `RequestMappingHandlerMapping` 으로 변환되서 등록되기 때문에 정상작동하긴 함.
 
+직접 java lambda 등을 써서 함수형 프로그래밍처럼 하고싶다면 `RouterFunction` 과 `HandlerFunction` 을 활용해야함. `RouterFunction`은 request가 왔을 때 request의 정보를 바탕으로 로직을 수행해서 자기가 가지고 있는 `HandlerFunction` 으로 처리할 수 있는지 검사하고, `HandlerFunction` 은 실제로 request를 처리하여 response를 반환.  `RouterFunction<ServerResponse>` 형태로 bean을 생성, 등록하면 됨. 
+
+```java
+  @Bean
+  public RouterFunction<ServerResponse> index() {
+    final Map<String, ?> emptyModel = new HashMap<>();
+    return RouterFunctions.route(
+        RequestPredicates.GET("/").and(RequestPredicates.accept(MediaType.TEXT_HTML)),
+        req -> ServerResponse.ok().render("index", emptyModel)
+    );
+  }
+```
+
+index.html를 위처럼 출력 가능. 다만 webflux는 viewResolver가 자동으로 등록되지 않기 때문에 `WebFluxConfigurer` 을 사용해서 설정해주는 것이 좋음.
+
+`RouterFunction` 을 여러 개 등록하면 가장 먼저 일치하는 `HandlerFunction` 을 실행하므로 `.path("/**")` , `.path("/somePath")`처럼 중첩된 범위를 가지는 `RouterFunction` 을 여러 개 등록한다면 반드시 좀 더 자세한 범위의 `RouterFunction` 을 먼저 등록해야 함. /** 다음에 /somePath를 등록하게 되면 /somePath에 등록한 `HandlerFunction` 은 절대로 호출되지 않음.
