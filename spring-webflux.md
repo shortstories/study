@@ -190,7 +190,7 @@ Spring MVC에서 우리가 controller, service, repository라고 부르던 레�
 
 spring mvc에서는 `@Controller` 와 `@RequestMapping` 을 써왔다면, spring webflux에서 완전 새롭게 추가된 방법. 물론 spring mvc처럼 컨트롤러를 작성해도 알아서 `RequestMappingHandlerMapping` 으로 변환되서 등록되기 때문에 정상작동하긴 함.
 
-직접 java lambda 등을 써서 함수형 프로그래밍처럼 하고싶다면 `RouterFunction` 과 `HandlerFunction` 을 활용해야함. `RouterFunction`은 request가 왔을 때 request의 정보를 바탕으로 로직을 수행해서 자기가 가지고 있는 `HandlerFunction` 으로 처리할 수 있는지 검사하고, `HandlerFunction` 은 실제로 request를 처리하여 response를 반환.  `RouterFunction<ServerResponse>` 형태로 bean을 생성, 등록하면 됨. 
+직접 java lambda 등을 써서 함수형 프로그래밍처럼 하고싶다면 `RouterFunction` 과 `HandlerFunction` 을 활용해야함. `RouterFunction`은 request가 왔을 때 request의 정보를 바탕으로 로직을 수행해서 자기가 가지고 있는 `HandlerFunction` 으로 처리할 수 있는지 검사하고, `HandlerFunction` 은 실제로 request를 처리하여 response를 반환.  `RouterFunction<ServerResponse>` 형태로 bean을 생성, 등록하면 됨.
 
 ```java
   @Bean
@@ -205,4 +205,35 @@ spring mvc에서는 `@Controller` 와 `@RequestMapping` 을 써왔다면, spring
 
 index.html를 위처럼 출력 가능. 다만 webflux는 viewResolver가 자동으로 등록되지 않기 때문에 `WebFluxConfigurer` 을 사용해서 설정해주는 것이 좋음.
 
-`RouterFunction` 을 여러 개 등록하면 가장 먼저 일치하는 `HandlerFunction` 을 실행하므로 `.path("/**")` , `.path("/somePath")`처럼 중첩된 범위를 가지는 `RouterFunction` 을 여러 개 등록한다면 반드시 좀 더 자세한 범위의 `RouterFunction` 을 먼저 등록해야 함. /** 다음에 /somePath를 등록하게 되면 /somePath에 등록한 `HandlerFunction` 은 절대로 호출되지 않음.
+`RouterFunction` 을 여러 개 등록하면 가장 먼저 일치하는 `HandlerFunction` 을 실행하므로 `.path("/**")` , `.path("/somePath")`처럼 중첩된 범위를 가지는 `RouterFunction` 을 여러 개 등록한다면 반드시 좀 더 자세한 범위의 `RouterFunction` 을 먼저 등록해야 함. /\*\* 다음에 /somePath를 등록하게 되면 /somePath에 등록한 `HandlerFunction` 은 절대로 호출되지 않음.
+
+### WebSocket
+
+#### 사용법
+
+```java
+@Configuration
+public class WebSocketConfig {
+  @Bean
+  public WebSocketHandlerAdapter handlerAdapter() {
+    return new WebSocketHandlerAdapter();
+  }
+  
+  @Bean
+  public HandlerMapping webSocketMapping() {
+    Map<String, WebSocketHandler> map = Maps.newHashMap();
+    map.put("/websocket", session -> {
+      /* websocket handling */
+      return Mono.never();
+    });
+
+    SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
+    mapping.setUrlMap(map);
+    mapping.setOrder(-2);
+    return mapping;
+  }
+}
+```
+
+위처럼 `WebSocketHandlerAdapter` bean을 등록하고 `SimpleUrlHandlerMapping` 을 사용해서 websocket 요청을 매핑하면 끝. 여기서 session을 모두 사용하고나서 
+
