@@ -107,7 +107,7 @@ public class WebSocketConfig {
   public WebSocketHandlerAdapter handlerAdapter() {
     return new WebSocketHandlerAdapter();
   }
-  
+
   @Bean
   public HandlerMapping webSocketMapping() {
     Map<String, WebSocketHandler> map = Maps.newHashMap();
@@ -124,5 +124,5 @@ public class WebSocketConfig {
 }
 ```
 
-위처럼 `WebSocketHandlerAdapter` bean을 등록하고 `SimpleUrlHandlerMapping` 을 사용해서 websocket 요청을 매핑하면 끝. 여기서 session을 모두 사용하고나서 
+위처럼 `WebSocketHandlerAdapter` bean을 등록하고 `SimpleUrlHandlerMapping` 을 사용해서 websocket 요청을 매핑하면 끝. 여기서 중요한건 session의 종료 시점. connection이 생성될 때, websocket session을 따로 저장해두고 관리하는 경우가 많은데 그러면 난처한 경우를 겪을 수 있음. 왜냐하면 webflux의 websocket session은 서버에서 직접 close를 호출하지 않아도 Websocket Handler \(위예제에서는 `session -> Mono.never()`\) 가 return하는 Mono의 complete에 의해서 close 되어버리기 때문. 즉 `Mono.never()` 대신에 `Mono.empty()` 를 반환하던가 하면 아무것도 하지 않았음에도 불구하고 session이 멋대로 종료되어버리는 것을 볼 수 있음. `Mono.never()` 도 난감한게 직접 close할 방법이 없기 때문에 session을 별도로 관리하려면 `Mono.never()` 대신에 `Processor` 을 반환하고, 반환한 `Processor` 을 session과 함께 저장해둔 다음 필요할 때 `.complete()` 를 호출하는 방향으로 해야할 듯 함.
 
