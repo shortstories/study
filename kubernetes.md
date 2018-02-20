@@ -42,5 +42,3 @@ Pod은 하나의 atomic한 단위임. Deployment를 생성하면 Deployment가 P
 
 
 
-
-
