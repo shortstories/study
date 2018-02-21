@@ -52,6 +52,21 @@ Pod은 하나의 atomic한 단위임. Deployment를 생성하면 Deployment가 P
 
 Pod은 자신의 lifecycle을 가지고 있고, 언제든지 없어지거나 새로 생성될 수 있음. 그리고 같은 Node에 존재하는 Pod이라고 모두 각자 고유한 IP주소를 가짐. 따라서 서로 다른 Pod 사이에 어떤 관계를 맺을 필요성이 있다면 service discovery가 필요함. 왜냐? 각 Pod은 다른 Pod이 살아있던지 말던지 관계없이 '느슨하게' 동작해야되기 때문.
 
+## Service
+
+쿠버네티스의 Service는 pod을 모아놓고 어떻게 접근할 것인지 방법을 정해놓은 하나의 추상화 개념이다. 실질적으로 우리가 쓰게되는 단위라고 봐도 될 듯 하다. YAML, JSON 중 마음에 드는 것으로 작성할 수 있다. 보통은 `LabelSelector` 을 써서 어느 Pod이 어느 Service인지 가르키도록 한다. Pod이 모두 각자 고유한 IP 주소를 가지고 있기는 하지만 Service 없이는 클러스터 외부로 노출이 되지 않는다. 
+
+Service를 외부로 노출할 때 사용할 수 있는 수단은 다음과 같다.
+
+1. ClusterIP : 기본값. Service를 클러스터 내부 IP로 노출시키는 방법이다. 당연하지만 클러스터 외부에서 접근이 불가능하다.
+2. NodePort : Service를 클러스터에 포함된 Node의 IP와 특정 포트로 노출시키는 방법이다. NAT를 사용하며 `NodeIP:NodePort` 로 접근 가능하다. ClusterIP의 상위호환이다.
+3. LoadBalancer : 클라우드에서 제공하는 로드 밸런서를 쓰는 경우이다.  NodePort의 상위 호환이다.
+4. ExternalName : 말하자면 redirection다. 클러스터 외부에 있는 어떤 다른 서비스를 가르키기 위해서 사용한다. 이 타입을 사용하고 어떤 원하는 외부 호스트를 `extenalName` 값으로 지정해두면 DNS 서비스가 `CNAME` 레코드로 그 값을 담아서 되돌려준다. 따라서 DNS 레벨에서 redirection이 발생하고 어떤 proxying이든 forwarding이든 발생하지 않는다.
+
+그리고 Service가 있지만 selector를 사용하지 않는 경우가 두 가지 있는데 하나는 아예 스펙 자체에 selector을 지정하지 않고 사용자가 직접 Service를 특정 엔드포인트에 매핑시키는 경우이고, 나머지 하나는 ExternalName을 사용하는 경우이다.
+
+
+
 정리하면
 
 하나의 cluster는 여러 개의 node를 가질 수 고
