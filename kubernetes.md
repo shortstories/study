@@ -54,7 +54,7 @@ Pod은 자신의 lifecycle을 가지고 있고, 언제든지 없어지거나 새
 
 ## Service
 
-쿠버네티스의 Service는 pod을 모아놓고 어떻게 접근할 것인지 방법을 정해놓은 하나의 추상화 개념이다. 실질적으로 우리가 쓰게되는 단위라고 봐도 될 듯 하다. YAML, JSON 중 마음에 드는 것으로 작성할 수 있다. 보통은 `LabelSelector` 을 써서 어느 Pod이 어느 Service인지 가르키도록 한다. Pod이 모두 각자 고유한 IP 주소를 가지고 있기는 하지만 Service 없이는 클러스터 외부로 노출이 되지 않는다. 
+쿠버네티스의 Service는 pod을 모아놓고 어떻게 접근할 것인지 방법을 정해놓은 하나의 추상화 개념이다. 실질적으로 우리가 쓰게되는 단위라고 봐도 될 듯 하다. YAML, JSON 중 마음에 드는 것으로 작성할 수 있다. 보통은 `LabelSelector` 을 써서 어느 Pod이 어느 Service인지 가르키도록 한다. Pod이 모두 각자 고유한 IP 주소를 가지고 있기는 하지만 Service 없이는 클러스터 외부로 노출이 되지 않는다. 추상화된 Service를 통해서 접근하기 때문에 그 안에 실제로 작업을 수행하는 pod이 죽어있든 살아있든 또는 복제가 되건 이용자에게는 영향을 주지 않을 수 있다.
 
 Service를 외부로 노출할 때 사용할 수 있는 수단은 다음과 같다.
 
@@ -64,6 +64,10 @@ Service를 외부로 노출할 때 사용할 수 있는 수단은 다음과 같�
 4. ExternalName : 말하자면 redirection다. 클러스터 외부에 있는 어떤 다른 서비스를 가르키기 위해서 사용한다. 이 타입을 사용하고 어떤 원하는 외부 호스트를 `extenalName` 값으로 지정해두면 DNS 서비스가 `CNAME` 레코드로 그 값을 담아서 되돌려준다. 따라서 DNS 레벨에서 redirection이 발생하고 어떤 proxying이든 forwarding이든 발생하지 않는다.
 
 그리고 Service가 있지만 selector를 사용하지 않는 경우가 두 가지 있는데 하나는 아예 스펙 자체에 selector을 지정하지 않고 사용자가 직접 Service를 특정 엔드포인트에 매핑시키는 경우이고, 나머지 하나는 ExternalName을 사용하는 경우이다.
+
+## Label, Selectors
+
+Service가 Pods를 포함하게 되는 기준이라고 볼 수 있을듯. Label은 쿠버네티스 객체에 주어질 수 있는 Key/Value 값임. 여러가지 용도로 사용할 수 있는데 dev, test, real 등 프로필마다 Pods가 나누어지도록 쓸 수도 있고, 그 pod의 버전을 표시할 수도 있음. 그 외에도 갖가지 분류를 위해 사용할 수 있음.
 
 
 
@@ -76,4 +80,12 @@ Service를 외부로 노출할 때 사용할 수 있는 수단은 다음과 같�
 하나의 pod은 여러 개의 container을 가질 수 있다
 
 그리고 하나의 deployment는 여러 개의 pod을 생성한다.
+
+service 역시 여러 pod들을 포함할 수 있다.
+
+service와 deployment는 좀 상호 독립적인 관계인데,
+
+service는 pod에 어떻게 접근할 것인지를 정의하고
+
+deployment는 pod을 어떻게 생성하고 관리할 것인지를 정의한다.
 
