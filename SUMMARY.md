@@ -19,6 +19,7 @@
     * [5장](effective_java/5.md)
     * [6장 - Enum, Annotation](effective_java/6c7a5.md)
     * [7장 - Method](effective_java/7c7a5-method.md)
+    * [8장 - 프로그래밍 일반](effective_java/8c7a5-d504-b85c-adf8-b798-bc0d-c77c-bc18.md)
   * [Java8 Lambda expression](lambda-expression.md)
   * [JDBC](jdbc.md)
   * [Linux에서 WatchService 이상동작](linuxc5d0-c11c-watchservice-c774-c0c1-b3d9-c791.md)
