@@ -103,6 +103,7 @@
   * [SSH 접속](vm에-접속하기.md)
 * [Linux](linux.md)
   * [Systemd](linux/systemd.md)
+  * [Alternatives](linux/alternatives.md)
 * [Messaging protocols](messaging-protocols.md)
   * [XMPP](messaging-protocols/xmpp.md)
   * [AMQP](messaging-protocols/amqp.md)
