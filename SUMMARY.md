@@ -121,4 +121,5 @@
 * [Linux Settings](linux-settings.md)
 * [Kubernetes](kubernetes.md)
 * [Sonarqube](sonarqube.md)
+* [HTTP/2](http2.md)
 
