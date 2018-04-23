@@ -25,21 +25,30 @@ session-io의 노드간 커뮤니케이션 용도
 
 ## 구성 요소
 
-### binary framing
+### Binary framing
 
 * 성능 향상의 핵심. HTTP 메세지가 캡슐화됨.
 
-### stream
+### Stream
 
 * connection 내부 byte의 흐름. 양방향.  
 
-### message
+### Message
 
 * 논리적 하나의 request, response에 매핑되는 전체 프레임 sequence.
 
-### frame
+### Frame
 
 * HTTP/2 통신의 최소 단위. 각 frame은 하나의 frame header 포함. frame이 속하는 stream 식별용. 
+* ![](/assets/http_2_frame.png)
+* 24bit: Length 필드. 하나의 frame은 최대 2^24 bytes까지 가능
+* 8bit: Type 필드. frame의 formatl나 semantics를 나타냄
+* 8bit: Flags 필드. frame type에 따라 달라지는 boolean 값들을 표현
+* 1bit: Reserved 필드. 언제나 0으로 저장됨
+* 31bit: Stream Identifier 필드. stream을 판별하는데 사용하며 고유한 값 지정.
+* Length 필드를 최대크기로 하면 하나의 frame payload를 최대 16MB까지 쓰는게 가능하다. 하지만 HTTP/2 표준에는 payload를 우선 최대 16KB로 제한하고, 서버와 클라이언트간 negotiate를 통해서 더 큰 값으로 바꾸길 권장하고 있다. 작은 값이 multiplexing이나 hol에 유리하기 때문이다.
+
+
 
 ## 특징
 
