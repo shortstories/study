@@ -157,13 +157,38 @@ HPACK는 static table과 dynamic table로 이루어져있는데 static table은 
 2. 사전 정보가 없는 상태에서 HTTP/1.1 plaintext\(cleartext\) connection을 HTTP/2로 업그레이드
 3. 사전 정보가 있는 상태에서 HTTP/2를 plaintext\(cleartext\) connection 위에서 바로 연결
 
-찾아보니 1은 보통 `h2` 라고 부르고 2와 3은 `h2c` 라고 부르는듯 함. 여기서 c는 cleartext의 약자. 
+찾아보니 1은 보통 `h2` 라고 부르고 2와 3은 `h2c` 라고 부르는듯 함. 여기서 c는 cleartext의 약자.
 
-HTTP/2를 쓰기 위해 TLS 세팅이 필수인 것은 아니지만 대부분 브라우저가 h2c를 지원하지 않기 때문에 h2를 강요받는 것이나 다름 없다. 브라우저들이 그렇게 결정한 것은 웹 환경의 특수성 때문이다. 
+HTTP/2를 쓰기 위해 TLS 세팅이 필수인 것은 아니지만 대부분 브라우저가 h2c를 지원하지 않기 때문에 h2를 강요받는 것이나 다름 없다. 브라우저들이 그렇게 결정한 것은 웹 환경의 특수성 때문이다.
 
 흔히 생각하는 것과 달리 서비스와 유저 사이에는 프록시나 캐시 서버 그리고 게이트웨이같은 수많은 중간 단계가 존재한다. 여기에는 프로그래머가 그 존재를 알고 설정할 수 있는 '투명한'  단계들도 있지만 프로그래머가 인지하지 못하는 '불투명한' 단계들도 있다. 이러한 불투명한 단계에서 그냥 순전히 전달만 해주면 다행인데 어떤 경우에는 악의적인 공격으로 해석하고 차단해버릴 수도 있고, 또 어떤 경우에는 잘못 해석해서 엉뚱한 메세지로 변경되어버릴 수도 있다. 즉 완전히 같은 클라이언트라도 네트워크에 따라서 다른 동작을 할 수가 있다는 것이다. 웹소켓이나 HTTP/2같은 HTTP 확장 프로토콜을 적용하려고 한다면 위와 같은 사태가 발생하는 것을 막아야한다. 그러려면 TLS를 써서 서비스와 유저 사이에 HTTPS 터널을 뚫는게 가장 이상적인 방법이고, 그에 따라 브라우저가 h2c를 지원하는 경우는 찾아보기 힘들다.
 
+TLS를 쓰기로 결정했다면 HTTP/2로 업그레이드하는데 추가적인 latency나 네트워크 홉이 추가되지 않는다. 왜냐하면 TLS 핸드쉐이크 과정에서 ALPN을 거치고 그 때 HTTP/2로 결정되기 때문이다. 
 
+h2c를 쓰겠다면 보통은 HTTP Upgrade 메커니즘을 사용하게 된다. HTTP/1.1과 HTTP/2가 같은 포트를 사용하기 때문에 그런 것인데, TLS를 쓰는 경우에 비하면 좀 더 복잡하고 오랜 시간이 걸리는 셈이다.
+
+```
+// first request
+GET /index HTTP/1.1
+Host: example.com
+Connection: Upgrade, HTTP2-Settings
+Upgrade: h2c 
+HTTP2-Settings: {settings frame payload}
+
+// response from server that only supports HTTP/1.1
+HTTP/1.1 200 OK 
+Content-length: 243
+Content-type: text/html
+
+// response from server that supports h2c
+HTTP/1.1 101 Switching Protocols 
+Connection: Upgrade
+Upgrade: h2c
+```
+
+위와 같이 `Connection` 헤더와 `HTTP2-Settings` 헤더를 담아서 request를 보내면, h2c를 지원하지 않는 서버라면 그냥 200 OK를 돌려줄 것이고, h2c를 지원하는 서버라면 101 Switching Protocols를 돌려줄 것이다.
+
+물론 맨 윗부분에서 말한 것 처럼 서버가 HTTP/2를 지원하는지 사전 정보가 있다면 plaintext connection에서도 바로 HTTP/2 connection을 맺고 frame을 보낼 수 있다.
 
 
 
