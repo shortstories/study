@@ -1,9 +1,9 @@
 # HTTP/2
 
-* https://hpbn.co/http2/
-* http://www.popit.kr/%EB%82%98%EB%A7%8C-%EB%AA%A8%EB%A5%B4%EA%B3%A0-%EC%9E%88%EB%8D%98-http2/
-* https://http2.github.io/
-* https://line.github.io/armeria
+* [https://hpbn.co/http2/](https://hpbn.co/http2/)
+* [http://www.popit.kr/나만-모르고-있던-http2/](http://www.popit.kr/나만-모르고-있던-http2/)
+* [https://http2.github.io/](https://http2.github.io/)
+* [https://line.github.io/armeria](https://line.github.io/armeria)
 
 ## 고려하게 된 이유
 
@@ -11,11 +11,11 @@ session-io의 노드간 커뮤니케이션 용도
 
 기존 노드간 커뮤니케이션은 HTTP api를 통해서 하되 HTTP 1.1의 Keep Alive와 Connection Pooling을 사용해서 보완하고 있었음
 
-그렇지만 HTTP 1.1의 한계가 있는 만큼 좀 더 개선된 방법을 찾아야했고, 처음에는 여러 RPC들에 대해서 찾아보고 있었음. 예를 들면 Thrift라던가 Grpc라던가. ZeroMQ도 고려해보기도 했음. 
+그렇지만 HTTP 1.1의 한계가 있는 만큼 좀 더 개선된 방법을 찾아야했고, 처음에는 여러 RPC들에 대해서 찾아보고 있었음. 예를 들면 Thrift라던가 Grpc라던가. ZeroMQ도 고려해보기도 했음.
 
 다만 어떤 것을 쓰던 간에 RPC를 쓰게 되면 해당 프로토콜에 너무 종속되고, 버전업이 쉽지 않으며, 현재 코드를 꽤 뜯어고쳐야되는 것이 문제. 또한 뭘 쓰건 하나씩 단점은 있었음.
 
-그러다가 HTTP/2를 떠올리게 되었음. 찬찬히 따져보니 얻을 수 있는 이익이 많았는데. 
+그러다가 HTTP/2를 떠올리게 되었음. 찬찬히 따져보니 얻을 수 있는 이익이 많았는데.
 
 1. 기존 HTTP API와 하위 호환이 되기 때문에 만약 구버전 노드가 배포되어있어도 새로운 버전의 노드와 문제없이 통신할 수 있음. 
 2. 간단한 코드 추가 및 설정 변경으로 적용이 가능할 것 같음.
@@ -27,19 +27,19 @@ session-io의 노드간 커뮤니케이션 용도
 
 ### binary framing
 
-- 성능 향상의 핵심. HTTP 메세지가 캡슐화됨.
+* 성능 향상의 핵심. HTTP 메세지가 캡슐화됨.
 
 ### stream
 
-- connection 내부 byte의 흐름. 양방향.
+* connection 내부 byte의 흐름. 양방향.  
 
 ### message
 
-- 논리적 하나의 request, response에 매핑되는 전체 프레임 sequence.
+* 논리적 하나의 request, response에 매핑되는 전체 프레임 sequence.
 
 ### frame
 
-- HTTP/2 통신의 최소 단위. 각 frame은 하나의 frame header 포함. frame이 속하는 stream 식별용. 
+* HTTP/2 통신의 최소 단위. 각 frame은 하나의 frame header 포함. frame이 속하는 stream 식별용. 
 
 ## 특징
 
@@ -55,83 +55,67 @@ session-io의 노드간 커뮤니케이션 용도
 
 저 수준이 변경되어 성능개선
 
+* 모든 통신은 하나의 tcp connection 사용
 
+* 각 stream에는 양방향 메세지 전달에 사용하는 id 및 선택사항으로 order 존재
 
-- 모든 통신은 하나의 tcp connection 사용
+* 각 message는 하나의 논리적 http request 또는 response이며 하나 이상의 frame으로 구성
 
-- 각 stream에는 양방향 메세지 전달에 사용하는 id 및 선택사항으로 order 존재
-
-- 각 message는 하나의 논리적 http request 또는 response이며 하나 이상의 frame으로 구성
-
-- frame은 가장 작은 단위. 특정 유형의 데이터 \(http header, message payload\) 등을 전달. 여러 stream의 frame들을 interleaving 한 다음 frame header에 포함된 stream id를 바탕으로 frame 재조립 가능
-
-
+* frame은 가장 작은 단위. 특정 유형의 데이터 \(http header, message payload\) 등을 전달. 여러 stream의 frame들을 interleaving 한 다음 frame header에 포함된 stream id를 바탕으로 frame 재조립 가능
 
 HTTP/2 = HTTP 메세지를 binary frame으로 쪼개놓은 것. 각 frame는 특정 stream & message에 매핑되고, 모든 frame은 하나의 tcp 연결 내에서 다중화됨.
 
-
-
 HTTP/1.x는 여러 병렬 요청을 수행하기 위해서 tcp connection을 여러 개 사용.
 
-- 연결당 하나의 응답한 전달되도록 보장됨
+* 연결당 하나의 응답한 전달되도록 보장됨
 
-- HOL 차단 발생 \(좀 더 빨리 받을 수 있는 작은 파일이라도 앞부분에 큰 파일들이 connection을 모두 사용하고 있다면 기다려야함\)
+* HOL 차단 발생 \(좀 더 빨리 받을 수 있는 작은 파일이라도 앞부분에 큰 파일들이 connection을 모두 사용하고 있다면 기다려야함\)
 
-- 비효율적으로 TCP 연결 사용
-
-
+* 비효율적으로 TCP 연결 사용
 
 HTTP/2는 전체 request & response의 다중화 지원
 
-- HTTP 메세지를 frame 레벨으로 자르고 섞어서 보내버린 다음 받은 쪽에서 재조립할 수 있게 허용
+* HTTP 메세지를 frame 레벨으로 자르고 섞어서 보내버린 다음 받은 쪽에서 재조립할 수 있게 허용
 
-- HTTP/1.x의 여러 한계점 극복
+* HTTP/1.x의 여러 한계점 극복
 
+### Stream ordering
 
+* 트리 구조로 구성됨
 
-stream ordering
+* 또 다른 stream의 id를 parent으로 참조선언하는 식으로 이루어짐
 
-- 트리 구조로 구성됨
+* child stream보다 parent stream의 우선도가 더 높다는 뜻
 
-- 또 다른 stream의 id를 parent으로 참조선언하는 식으로 이루어짐
+* sibling stream 사이에서는 지정된 weight에 따라 리소스 할당
 
-- child stream보다 parent stream의 우선도가 더 높다는 뜻
+* 실제로 전송할 때에는 순서가 보장되지 않음.
 
-- sibling stream 사이에서는 지정된 weight에 따라 리소스 할당
+### A connection per host
 
-- 실제로 전송할 때에는 순서가 보장되지 않음.
+* 본질적인 기능이라고 봐도 될듯. 여러개의 TCP 연결이 필요없어짐.
 
+* 단일 connection을 재활용.
 
+* 메모리 및 cpu 사용량이 줄어듬.
 
-A connection per host
+* 네트워크 지연 시간도 줄어듬.
 
-- 본질적인 기능이라고 봐도 될듯. 여러개의 TCP 연결이 필요없어짐.
+* 특히 HTTPS 성능 개선에 유리
 
-- 단일 connection을 재활용.
+### Flow Control
 
-- 메모리 및 cpu 사용량이 줄어듬.
+* 하나의 TCP 연결 안쪽에서 여러 stream을 유지하다보니 Flow Control에 대해서는 abstraction 정도만 제공됨. 클라이언트, 서버가 직접 구현해야됨.
 
-- 네트워크 지연 시간도 줄어듬.
+  * Flow control은 양방향. 각각의 receiver들은 독립적으로 stream 및 connection에 사용할 window size 조절 가능
 
-- 특히 HTTPS 성능 개선에 유리
+  * credit 기반. receiver는 연결이 이루어질 때 최초 window size를 알림. 이후 DATA frame이 들어올 때마다 window는 계속해서 감소함. receiver가 WINDOW\_UPDATE frame을 보내면 다시 window size가 늘어남.
 
+  * Flow control은 항상 활성화되어있음. HTTP/2 연결이 구성되면 클라이언트와 서버가 SETTINGS frame을 주고받아 최초 window size를 지정하게 됨. 기본 값은 65535 byte이고, 데이터가 수신될 때마다 receiver가 WINDOW\_UPDATE frame을 사용해서 최대 2^31-1 byte까지 설정하고 유지할 수 있음
 
+  * End-to-End가 아니라 Hop-by-Hop 방식이기 때문에 router가 가운데 껴서 리소스 할당 및 사용을 조절할 수 있음
 
-Flow Control
-
-- 하나의 TCP 연결 안쪽에서 여러 stream을 유지하다보니 Flow Control에 대해서는 abstraction 정도만 제공됨. 클라이언트, 서버가 직접 구현해야됨.
-
-    - Flow control은 양방향. 각각의 receiver들은 독립적으로 stream 및 connection에 사용할 window size 조절 가능
-
-    - credit 기반. receiver는 연결이 이루어질 때 최초 window size를 알림. 이후 DATA frame이 들어올 때마다 window는 계속해서 감소함. receiver가 WINDOW\_UPDATE frame을 보내면 다시 window size가 늘어남.
-
-    - Flow control은 항상 활성화되어있음. HTTP/2 연결이 구성되면 클라이언트와 서버가 SETTINGS frame을 주고받아 최초 window size를 지정하게 됨. 기본 값은 65535 byte이고, 데이터가 수신될 때마다 receiver가 WINDOW\_UPDATE frame을 사용해서 최대 2^31-1 byte까지 설정하고 유지할 수 있음
-
-    - End-to-End가 아니라 Hop-by-Hop 방식이기 때문에 router가 가운데 껴서 리소스 할당 및 사용을 조절할 수 있음
-
-
-
-Server push
+### Server push
 
 아예 프로토콜 스펙에 추가됨
 
@@ -141,29 +125,27 @@ Server push
 
 다만 HTTP/2에서 스펙 추가됨에 따라 추가적으로 가능해진 부분은 다음과 같음
 
-- 클라이언트에 의해 캐시될 수 있음.
+* 클라이언트에 의해 캐시될 수 있음.
 
-- 다른 페이지에서 재사용될 수 있음.
+* 다른 페이지에서 재사용될 수 있음.
 
-- 다른 리소스와 함께 다중화될 수 있음.
+* 다른 리소스와 함께 다중화될 수 있음.
 
-- 서버에 의해 우선순위가 지정될 수 있음.
+* 서버에 의해 우선순위가 지정될 수 있음.
 
-- 클라이언트에 의해 거부될 수 있음.
+* 클라이언트에 의해 거부될 수 있음.
 
 서버가 먼저 PUSH\_PROMISE frame 던지고 클라이언트가 받을지 말지 판단하면 \(이미 캐싱되어있다면 굳이 받을 필요가 없으므로 RST\_STREAM frame을 보내서 stream 거절\) 바로 DATA frame을 쏘는 식
 
-
-
-Header Compression
+### Header Compression
 
 HTTP/1.x는 무조건 plain text 기반이었음
 
 HTTP/2는 HPACK 압축 형식 사용
 
-- 각각의 header field들을 Huffman code로 encoding하여 용량 줄임
+* 각각의 header field들을 static Huffman code로 encoding하여 전송 용량 줄임
 
-- 
+* 클라이언트와 서버가 서로 주고받은 헤더 필드에 대한 인덱스를 생성하고 유지하게 만듬. 이 인덱스를 이용해서 이미 보낸 헤더라면 request에서 생략하고 갱신된 헤더들만 담아서 효율적으로 보낼 수 있음. 
 
-
+HPACK는 static table과 dynamic table로 이루어져있는데 static table은 HTTP/2 스펙에서 정의하고 있는 헤더들을 관리하고 dynamic table은 사용자가 임의로 정의한 헤더를 저장하고 관리. 
 
