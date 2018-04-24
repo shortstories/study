@@ -40,15 +40,13 @@ session-io의 노드간 커뮤니케이션 용도
 ### Frame
 
 * HTTP/2 통신의 최소 단위. 각 frame은 하나의 frame header 포함. frame이 속하는 stream 식별용. 
-* ![](/assets/http_2_frame.png)
+* ![](/assets/2a9b83c6b43e961a41a847c3227dcad2.svg)![](/assets/http-2-frame.png)
 * 24bit: Length 필드. 하나의 frame은 최대 2^24 bytes까지 가능
-* 8bit: Type 필드. frame의 formatl나 semantics를 나타냄
+* 8bit: Type 필드. frame의 format나 semantics를 나타냄
 * 8bit: Flags 필드. frame type에 따라 달라지는 boolean 값들을 표현
 * 1bit: Reserved 필드. 언제나 0으로 저장됨
 * 31bit: Stream Identifier 필드. stream을 판별하는데 사용하며 고유한 값 지정.
 * Length 필드를 최대크기로 하면 하나의 frame payload를 최대 16MB까지 쓰는게 가능하다. 하지만 HTTP/2 표준에는 payload를 우선 최대 16KB로 제한하고, 서버와 클라이언트간 negotiate를 통해서 더 큰 값으로 바꾸길 권장하고 있다. 작은 값이 multiplexing이나 hol에 유리하기 때문이다.
-
-
 
 ## 특징
 
@@ -198,6 +196,4 @@ Upgrade: h2c
 위와 같이 `Connection` 헤더와 `HTTP2-Settings` 헤더를 담아서 request를 보내면, h2c를 지원하지 않는 서버라면 그냥 200 OK를 돌려줄 것이고, h2c를 지원하는 서버라면 101 Switching Protocols를 돌려줄 것이다.
 
 물론 맨 윗부분에서 말한 것 처럼 서버가 HTTP/2를 지원하는지 사전 정보가 있다면 plaintext connection에서도 바로 HTTP/2 connection을 맺고 frame을 보낼 수도 있다.
-
-
 
