@@ -208,3 +208,15 @@ Upgrade: h2c
 
 물론 맨 윗부분에서 말한 것 처럼 서버가 HTTP/2를 지원하는지 사전 정보가 있다면 plaintext connection에서도 바로 HTTP/2 connection을 맺고 frame을 보낼 수도 있다.
 
+### 데이터 전송 과정
+
+1. Handshake \(h2라면 TLS handshake + ALPN, h2c라면 Upgrade 또는 바로 연결\)
+2. 새로운 Stream 생성
+   1. Stream은 서버와 클라이언트 양쪽에서 생성하는 것이 가능. 이 때 stream ID가 겹치는 것을 막기 위해 보통 클라이언트는 홀수로 stream ID를 생성하고 서버는 짝수로 stream ID를 생성함.
+   2. 서버에서 Stream을 생성할 때는 PUSH\_PROMISE 프레임을 써서 헤더를 받아오고 전송할 데이터를 promise. PUSH\_PROMISE는 HEADERS 프레임과 거의 비슷하지만 stream dependency 및 weight에 대한 내용만 빠져있음. 왜냐하면 서버는 어떤 데이터들을 어떤 순서로 보낼지에 대해서 완전한 제어권을 가지고 있기 때문.
+3. HTTP header 전송
+4. DATA frame을 사용해서 payload 전송
+   1. payload는 여러개의 frame으로 나눠질 수 있고 END\_STREAM flag를 사용해서 payload를 구분.
+
+
+
