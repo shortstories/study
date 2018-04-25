@@ -47,6 +47,17 @@ session-io의 노드간 커뮤니케이션 용도
 * 1bit: Reserved 필드. 언제나 0으로 저장됨
 * 31bit: Stream Identifier 필드. stream을 판별하는데 사용하며 고유한 값 지정.
 * Length 필드를 최대크기로 하면 하나의 frame payload를 최대 16MB까지 쓰는게 가능하다. 하지만 HTTP/2 표준에는 payload를 우선 최대 16KB로 제한하고, 서버와 클라이언트간 negotiate를 통해서 더 큰 값으로 바꾸길 권장하고 있다. 작은 값이 multiplexing이나 hol에 유리하기 때문이다.
+* Frame type
+  * DATA: Message body
+  * HEADERS: Stream의 header field
+  * PRIORITY: Stream의 우선순위
+  * RST\_STREAM: Stream 종료 신호
+  * SETTINGS: connection의 설정 값
+  * PUSH\_PROMISE: Server Push에서 사용
+  * PING: 말 그대로 핑. 레이턴시 체크나 connection 유효성 체크에 사용
+  * GOAWAY: connection에서 새로운 stream 생성을 중지
+  * WINDOW\_UPDATE: flow control에 사용
+  * CONTINUATION: 순차적인 header block fragment를 이어나갈 때 사용
 
 ## 특징
 
