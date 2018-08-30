@@ -126,4 +126,5 @@
 * Go
   * [Go in Action](go-in-action.md)
     * [3장 패키지](go-in-action/3c7a5-d328-d0a4-c9c0.md)
+    * [4장 배열, 슬라이스, 맵](go-in-action/4c7a5-bc30-c5f42c-c2ac-b77c-c774-c2a42c-b9f5.md)
 
