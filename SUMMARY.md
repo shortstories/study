@@ -129,4 +129,6 @@
     * [4장 배열, 슬라이스, 맵](go-in-action/4c7a5-bc30-c5f42c-c2ac-b77c-c774-c2a42c-b9f5.md)
     * [5장 GO의 타입 시스템](go-in-action/5c7a5-go-c758-d0c0-c785-c2dc-c2a4-d15c.md)
     * [6장 동시성](go-in-action/6c7a5-b3d9-c2dc-c131.md)
+    * [7장 동시성 패턴](go-in-action/7c7a5-b3d9-c2dc-c131-d328-d134.md)
+    * [8장 표준 라이브러리](go-in-action/8c7a5-d45c-c900-b77c-c774-be0c-b7ec-b9ac.md)
 
