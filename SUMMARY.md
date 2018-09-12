@@ -131,4 +131,5 @@
     * [6장 동시성](go-in-action/6c7a5-b3d9-c2dc-c131.md)
     * [7장 동시성 패턴](go-in-action/7c7a5-b3d9-c2dc-c131-d328-d134.md)
     * [8장 표준 라이브러리](go-in-action/8c7a5-d45c-c900-b77c-c774-be0c-b7ec-b9ac.md)
+    * [9장 테스트와 벤치마킹](go-in-action/9c7a5-d14c-c2a4-d2b8-c640-bca4-ce58-b9c8-d0b9.md)
 
