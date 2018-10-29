@@ -6,17 +6,17 @@
 
 ```go
 func example() bool {
-	done := make(chan struct{})
-	go func() {
-		// jobs
-		close(done)
-	}()
+    done := make(chan struct{})
+    go func() {
+        // jobs
+        close(done)
+    }()
 
-	select {
-	case <-done:
-	}
+    select {
+    case <-done:
+    }
 
-	return true
+    return true
 }
 ```
 
@@ -24,23 +24,23 @@ func example() bool {
 
 ```go
 func example2() bool {
-	wg := sync.WaitGroup{}
+    wg := sync.WaitGroup{}
 
-	wg.Add(2)
+    wg.Add(2)
 
-	go func() {
-		defer wg.Done()
-		// jobs 1
-	}()
+    go func() {
+        defer wg.Done()
+        // jobs 1
+    }()
 
         go func() {
-		defer wg.Done()
-		// jobs 2
-	}()
+        defer wg.Done()
+        // jobs 2
+    }()
 
-	wg.Wait()
+    wg.Wait()
 
-	return true
+    return true
 }
 ```
 
@@ -48,19 +48,19 @@ func example2() bool {
 
 ```go
 func exampleTimeout() bool {
-	done := make(chan struct{})
-	go func() {
-		// jobs
-		close(done)
-	}()
+    done := make(chan struct{})
+    go func() {
+        // jobs
+        close(done)
+    }()
 
-	select {
-	case <-done:
-	case <-time.After(10 * time.Second)
-	  return false
-	}
+    select {
+    case <-done:
+    case <-time.After(10 * time.Second)
+      return false
+    }
 
-	return true
+    return true
 }
 ```
 
@@ -68,31 +68,87 @@ func exampleTimeout() bool {
 
 ```go
 func example2Timeout() bool {
-	wg := sync.WaitGroup{}
+    wg := sync.WaitGroup{}
 
-	wg.Add(2)
+    wg.Add(2)
 
+    go func() {
+        defer wg.Done()
+        // jobs 1
+    }()
+
+    go func() {
+        defer wg.Done()
+        // jobs 2
+    }()
+
+    done := make(chan struct{})
+    go func() {
+        wg.Wait()
+        close(done)
+    }()
+
+    select {
+    case <-done:
+    case <-time.After(10 * time.Second):
+        return false
+    }
+
+    return true
+}
+```
+
+## 데이터 수신하기
+
+### 채널 닫기로 종료
+
+```go
+func example(receiveCh <-chan string) bool {
 	go func() {
-		defer wg.Done()
-		// jobs 1
+	Loop:
+		for {
+			select {
+			case data := <-receiveCh:
+				// job with data
+			default:
+				break Loop
+			}
+		}
 	}()
 
+	return true
+}
+```
+
+```go
+func example(receiveCh <-chan string) bool {
 	go func() {
-		defer wg.Done()
-		// jobs 2
+		for data := range receiveCh {
+			// job with data
+		}
 	}()
 
-	done := make(chan struct{})
-	go func() {
-		wg.Wait()
-		close(done)
-	}()
+	return true
+}
+```
 
-	select {
-	case <-done:
-	case <-time.After(10 * time.Second):
-		return false
-	}
+`receiveCh` 를 종료해서 수신 종료
+
+### 종료를 알려주는 별도 채널 사용
+
+```go
+func example(receiveCh <-chan string, stopCh <-chan struct{}) bool {
+	go func() {
+	Loop:
+		for {
+			select {
+			case data := <-receiveCh:
+				// job with data
+			case <-stopCh:
+				break Loop
+			}
+		}
+	}()
 
 	return true
 }
