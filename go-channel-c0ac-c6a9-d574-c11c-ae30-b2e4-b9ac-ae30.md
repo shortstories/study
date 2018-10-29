@@ -104,31 +104,31 @@ func example2Timeout() bool {
 
 ```go
 func example(receiveCh <-chan string) bool {
-	go func() {
-	Loop:
-		for {
-			select {
-			case data := <-receiveCh:
-				// job with data
-			default:
-				break Loop
-			}
-		}
-	}()
+    go func() {
+    Loop:
+        for {
+            select {
+            case data := <-receiveCh:
+                // job with data
+            default:
+                break Loop
+            }
+        }
+    }()
 
-	return true
+    return true
 }
 ```
 
 ```go
 func example(receiveCh <-chan string) bool {
-	go func() {
-		for data := range receiveCh {
-			// job with data
-		}
-	}()
+    go func() {
+        for data := range receiveCh {
+            // job with data
+        }
+    }()
 
-	return true
+    return true
 }
 ```
 
@@ -137,20 +137,20 @@ func example(receiveCh <-chan string) bool {
 ### 종료를 알려주는 별도 채널 사용
 
 ```go
-func example(receiveCh <-chan string, stopCh <-chan struct{}) bool {
-	go func() {
-	Loop:
-		for {
-			select {
-			case data := <-receiveCh:
-				// job with data
-			case <-stopCh:
-				break Loop
-			}
-		}
-	}()
+func example(receiveCh <-chan string, stopCh <-chan int) bool {
+    go func() {
+    Loop:
+        for {
+            select {
+            case data := <-receiveCh:
+                // job with data
+            case <-stopCh:
+                break Loop
+            }
+        }
+    }()
 
-	return true
+    return true
 }
 ```
 
