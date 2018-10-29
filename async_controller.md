@@ -41,7 +41,6 @@ public class AsyncController {
   * Production에선 환경에 알맞게 AsyncTaskExecutor을 세팅할 필요성이 있음
   * Callable을 사용하면서 AsyncTaskExecutor을 바꾸기 위해선 RequestMappingHandlerAdapter을 직접 바꾸는 방법밖에 없음
 
-
 ## DeferredResult
 
 ### 예제
