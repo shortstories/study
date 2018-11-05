@@ -1,6 +1,8 @@
 # Go Channel 사용법
 
-## 비동기 작업 종료 기다리기
+https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html
+
+## 예제 - 비동기 작업 종료 기다리기
 
 ### 고루틴이 한개인 경우
 
