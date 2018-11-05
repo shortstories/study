@@ -17,7 +17,7 @@ alternatives [options] --auto name
 
 alternatives [options] --display name
 
-alternatives [options] --config name  
+alternatives [options] --config name
 ```
 
 link에는 보통 `/usr/bin/` 으로 시작하는 실행 주소를 넣는다.
@@ -27,8 +27,6 @@ name은 같은 프로그램들끼리는 일치하도록 정해야한다. 예를 
 path에는 실제로 실행할 파일의 위치를 입력한다.
 
 priority는 auto 모드일 때 어느 것이 우선적으로 실행될지 결정한다.
-
-
 
 일반적으로 `--install` 을 사용해서 여러 버전을 모두 등록하고 `--config` 를 사용해서 필요한 버전을 선택한다.
 

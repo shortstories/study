@@ -36,7 +36,3 @@ authencation에 성공한 모든 유저는 `system:authenticated` 그룹에 속�
 
 다른 인증 프로토콜하고 연동하려면 authenticating proxy나 authentication webhook을 쓰면 됨
 
-
-
-
-

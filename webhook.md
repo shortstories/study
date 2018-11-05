@@ -48,12 +48,12 @@
 
 #### Failure 대응
 
-##### Exponential Backoff
+**Exponential Backoff**
 
 * 같은 webhook에 대해 retry를 할 때마다 간격을 점점 늘려나가며 하는 방법
 * 일정 시간 간격 내지는 일정 횟수 제한을 두고 그 제한을 넘어가면 webhook consumer가 비정상인 것으로 간주하여 subscription 자체를 중단하게 설정
 
-##### Claim Check
+**Claim Check**
 
 * webhook에 실패할 경우 별도의 저장소에다가 저장해두고 나중에 확인할 수 있도록 하는 방법
   1. 저장된 webhook을 확인할 수 있게 별도의 URL을 미리 제공하여 webhook consumer가 필요할 때 찾아볼 수 있도록 하는 방법
@@ -93,7 +93,7 @@
 * 특정 채널에서 특정 'trigger word'가 발생하였을 때 정해진 URL로 POST request를 보내주는 webhook
 * POST body
 
-```form
+```text
 token=XXXXXXXXXXXXXXXXXX
 team_id=T0001
 team_domain=example
@@ -118,9 +118,9 @@ trigger_word=googlebot:
 * `https://www.googleapis.com/apiName/apiVersion/resourcePath/watch`
 * webhook 등록
 
-##### Request
+**Request**
 
-```json
+```javascript
 POST https://www.googleapis.com/calendar/v3/calendars/my_calendar@gmail.com/events/watch
 Authorization: Bearer auth_token_for_current_user
 Content-Type: application/json
@@ -136,9 +136,9 @@ Content-Type: application/json
 }
 ```
 
-##### response
+**response**
 
-```json
+```javascript
 {
   "kind": "api#channel",
   "id": "01234567-89ab-cdef-0123456789ab"", // ID you specified for this channel.
@@ -153,9 +153,9 @@ Content-Type: application/json
 
 * webhook이 시작되었음을 알림
 
-##### Request
+**Request**
 
-```form
+```text
 POST https://mydomain.com/notifications // Your receiving URL.
 X-Goog-Channel-ID: channel-ID-value
 X-Goog-Channel-Token: channel-token-value
@@ -171,9 +171,9 @@ X-Goog-Message-Number: 1
 * 실질적인 webhook
 * HTTPS POST
 
-##### Request
+**Request**
 
-```form
+```text
 POST https://mydomain.com/notifications // Your receiving URL.
 Content-Type: application/json; utf-8
 Content-Length: 0
@@ -191,7 +191,7 @@ X-Goog-Message-Number: 10
 * `https://www.googleapis.com/calendar/v3/channels/stop`
 * 만료되기 전에 직접 종료하는 방법
 
-```json
+```javascript
 POST https://www.googleapis.com/calendar/v3/channels/stop
 Authorization: Bearer {auth_token_for_current_user}
 Content-Type: application/json
@@ -210,7 +210,7 @@ Content-Type: application/json
 
 * `<JIRA_URL>/rest/webhooks/1.0/webhook`
 
-```json
+```javascript
 {
   "name": "my first webhook via rest",
   "url": "http://www.example.com/webhooks",
@@ -234,7 +234,7 @@ Content-Type: application/json
 
 #### Webhook
 
-```json
+```javascript
  {
     "id": 2,
      "timestamp": "2009-09-09T00:08:36.796-0500",
@@ -325,7 +325,7 @@ Content-Type: application/json
 
 #### Webhook
 
-```json
+```javascript
 {
   "id":"8PT597110X687430LKGECATA",
   "create_time":"2013-06-25T21:41:28Z",
@@ -391,7 +391,7 @@ Content-Type: application/json
 
 #### webhook
 
-```json
+```javascript
 POST /payload HTTP/1.1
 
 Host: localhost:4567
@@ -425,6 +425,4 @@ X-GitHub-Event: issues
   }
 }
 ```
-
-
 

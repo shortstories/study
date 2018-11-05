@@ -4,7 +4,7 @@
 
 AMQP 어플리케이션에서 **exchanges**은 라우팅을 수행하고, **queues** 들은 queuing을 수행한다. 데이터가 publisher에서 시작하여 queues를 거쳐 consumers에게 전달되는 흐름은 보통 다음과 같다. 먼저, queues를 exchanges에 **bind**하고 consumers들로 하여금 그 queues로부터 **consume** 해오도록 만든다. 이윽고 어떤 publisher가 exchanges로 **publish**를 수행하게 되면 queues를 통해 consumers로 데이터가 흘러가게 된다.
 
-**publisher** -`publish`-> **exchanges** -`bind`-> **queues** -`consume` -> **consumers**
+**publisher** -`publish`-&gt; **exchanges** -`bind`-&gt; **queues** -`consume` -&gt; **consumers**
 
 ## Centralised Messaging Servers
 
@@ -14,4 +14,5 @@ AMQP 어플리케이션에서 **exchanges**은 라우팅을 수행하고, **queu
 
 p2p 통신을 통해 해결하려 할 수도 있겠지만 p2p 통신은 아직 검증되지 않았고, 무엇보다도 데이터의 손실을 보장할 수 있느냐는 부분의 신뢰성이 떨어져서 엔터프라이즈 환경에서는 사용하기 힘들다.
 
-일반적으로 messaging 서버들은 여러 어플리케이션들이 동시에 쓰거나 읽을 수 있는 FIFO 자료구조의 저장소를 제공하는 편이다. AMQ에서는 이러한 데이터 저장소를 **message queues**라고 명명하며, 이러한 큐를 분산 네트워크 환경에서 신뢰성있고, 빠르고, 안전하며, 경제적으로 제공하는 것이 주요 목표이다. 
+일반적으로 messaging 서버들은 여러 어플리케이션들이 동시에 쓰거나 읽을 수 있는 FIFO 자료구조의 저장소를 제공하는 편이다. AMQ에서는 이러한 데이터 저장소를 **message queues**라고 명명하며, 이러한 큐를 분산 네트워크 환경에서 신뢰성있고, 빠르고, 안전하며, 경제적으로 제공하는 것이 주요 목표이다.
+
