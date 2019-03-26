@@ -2,7 +2,7 @@
 
 {% embed url="https://www.ardanlabs.com/blog/2017/10/the-behavior-of-channels.html" %}
 
-{% embed url="https://medium.com/justforfunc/why-are-there-nil-channels-in-go-9877cc0b230" %}
+{% embed url="https://medium.com/justforfunc/why-are-there-nil-channels-in-go-9877cc0b2308" %}
 
 채널을 일종의 큐라고 생각하기보다는 말 그대로 신호를 보내는 채널 그 자체로 생각하는게 좋은 코드를 짜는데 도움이 됨. 즉, 채널이 어떻게 만들어져있는지에 신경쓰지말고 어떻게 동작하는지만 생각하라는 것.
 
