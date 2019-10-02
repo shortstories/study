@@ -10,6 +10,8 @@
    2. 따라서 우선 namespace에 진짜 모든 리소스가 삭제된건지 확인해봐야한다. `kubectl get all` 의 경우 category all인 리소스들만 보여주므로 진짜로 모든 리소스를 보여주는게 아니다. `kubectl api-resources --namespaced=true -o name` 명령어로 체크해야될 모든 리소스의 이름을 확인할 수 있다. 확인 과정에서 삭제되지않고 있는 리소스가 있다면 그 리소스가 삭제되지 못하고 있는 이유를 확인해야한다. 보통은 `.metadata.finalizers` 에 원인이 있을 가능성이 높다.
    3.  위에서 확인해본 결과 모든 리소스가 삭제된게 맞다면 이번에는 admission webhook이나 extension api server 에서 에러가 발생했다는 이야기다. namespace가 삭제될 때 각 리소스를 삭제하기 위해서 보내는 요청은 delete가 아니라 delete-collection이므로 delete-collection에 대해서 제대로 처리했는지 다시 한번 확인해야한다.
 
+참고로 namespace의 `.spec.finalizers` 는 sub resource이기 때문에 `kubectl edit` 또는 `kubectl update` 으로 수정되지 않는다. 따라서 curl 등을 통해서 직접 finalizers sub resources api를 호출해야 한다. 
+
 ### 사용한 스크립트
 
 #### 모든 리소스 체크용 스크립트
