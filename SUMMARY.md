@@ -132,6 +132,7 @@
 * [Sonarqube](sonarqube.md)
 * [HTTP/2](http2.md)
 * [Go](go/README.md)
+  * [Go dependency injection](go/go-dependency-injection.md)
   * [Go Error handling](go/go-error-handling.md)
   * [Go in Action](go/go-in-action/README.md)
     * [3장 패키지](go/go-in-action/3c7a5-d328-d0a4-c9c0.md)
