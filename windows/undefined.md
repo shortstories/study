@@ -437,7 +437,11 @@ root = /
    2. [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
    3. [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
+### ubuntu 세팅
 
-
-
+```bash
+$ sudo update-alternatives –config editor
+$ sudo apt update && sudo apt upgrade
+$ sudo apt install build-essential
+```
 
