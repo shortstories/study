@@ -30,6 +30,7 @@ nop, build-step-credential-initializer, build-step-git-soruce 등 초기화작�
 * kubernetes native
 * credential, scm checkout과 같은 필수 기능 자체 탑재
 * 모든 init-container가 `/builder/home` , `/workspace` 를 공유하기 때문에 Builder 작성 용이
+* 사용하는 컨테이너 이미지들을 자체적으로 caching
 
 ### 단점
 
