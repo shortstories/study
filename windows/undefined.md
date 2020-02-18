@@ -7,6 +7,8 @@
 3. [windows terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) 설치
 4. [vscode](https://code.visualstudio.com/) 설치
 5. [D2Coding](https://github.com/naver/d2codingfont) 폰트 설치
+6. [Docker for windows](https://docs.docker.com/docker-for-windows/install/) 설치
+7. [Notion](https://www.notion.so/desktop) 설치
 
 ### Windows terminal config
 
@@ -430,10 +432,10 @@ root = /
 #### ZSH 세팅
 
 1. [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) 설치
-2. [powerline10k](https://github.com/romkatv/powerlevel10k) 설치 
-3. zsh plugin 설치
-   1. [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-   2. [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+2. zsh plugin 설치
+   1. [powerline10k](https://github.com/romkatv/powerlevel10k)
+   2. [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+   3. [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
 
 
