@@ -413,7 +413,7 @@
 }
 ```
 
-### WSL Ubuntu 설정
+### WSL설정
 
 #### /etc/wsl.conf
 
