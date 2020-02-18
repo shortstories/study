@@ -18,11 +18,11 @@ KO_DOCKER_REPO=registry.navercorp.com/ncc/knative-pipeline ko apply -f config/
 kubectl get all -n knative-build-pipeline
 ```
 
-![](../.gitbook/assets/image.png)
+![](../.gitbook/assets/image%20%283%29.png)
 
 ## 구성요소
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 ### Task
 

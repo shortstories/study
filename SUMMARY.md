@@ -114,6 +114,7 @@
   * [Windows10 Hyper-V와 Virtual Box가 충돌을 일으켰을 때](windows/windows10_hyper-vc640_virtual_box_ac00_cda9_b3cc_c.md)
   * [Hyper-V 기반 docker에서 Shared Drives 설정 실패할 때](windows/hyper-v-ae30-bc18-dockerc5d0-c11c-shared-drives-c124-c815-c2e4-d328-d560-b54c.md)
   * [윈도우 개발환경 설정](windows/undefined.md)
+  * [UWP 앱을 항상 관리자권한으로 실행하는 바로가기 만들기](windows/uwp.md)
 * [Spring camp 2017](spring-camp-2017/README.md)
   * [Project Reactive](spring-camp-2017/project-reactive.md)
   * [이벤트 소싱](spring-camp-2017/c774-bca4-d2b8-c18c-c2f1.md)
