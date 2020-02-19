@@ -424,11 +424,21 @@ enabled = true
 root = /
 ```
 
+파일 생성 이후 admin 권한으로 실행한 PowerShell에서 `Restart-Service LxssManager` 실행하고 WSL 재시작
+
 #### /etc/passwd
 
-유저 목록에서 현재 계정 찾은 다음 home path를 `/c/Users/{user name}` 으로 수정
+`mkdir /c/Users/{user name}/ubuntu-home`
 
-그리고 위 두가지 수정이 모두 끝나면 admin 권한으로 실행한 PowerShell에서 `Restart-Service LxssManager` 실행하고 WSL 재시작
+실행 이후 `/etc/passwd` 에서 {user name}의 home path를 `/c/Users/{user name}/ubuntu-home` 으로 수정
+
+### ubuntu 세팅
+
+```bash
+$ sudo update-alternatives –config editor
+$ sudo apt update && sudo apt upgrade
+$ sudo apt install build-essential zsh
+```
 
 #### ZSH 세팅
 
@@ -438,11 +448,5 @@ root = /
    2. [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
    3. [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
-### ubuntu 세팅
 
-```bash
-$ sudo update-alternatives –config editor
-$ sudo apt update && sudo apt upgrade
-$ sudo apt install build-essential
-```
 
