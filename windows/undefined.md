@@ -435,7 +435,7 @@ root = /
 ### ubuntu 세팅
 
 ```bash
-$ sudo update-alternatives –config editor
+$ sudo update-alternatives --config editor
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential zsh
 ```
