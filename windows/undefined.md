@@ -422,6 +422,7 @@
 [automount]
 enabled = true
 root = /
+options = "metadata"
 ```
 
 파일 생성 이후 admin 권한으로 실행한 PowerShell에서 `Restart-Service LxssManager` 실행하고 WSL 재시작
