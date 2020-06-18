@@ -22,7 +22,7 @@ kubectl get all -n knative-build-pipeline
 
 ## 구성요소
 
-![](../.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%281%29%20%281%29.png)
 
 ### Task
 
