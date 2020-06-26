@@ -21,7 +21,7 @@
 
 `docker manifest inspect <image name>` 을 통해서 값을 확인할 수 있다. 이미지의 config와 layer 정보, 그리고 이미지 자체에 대한 메타데이터들을 가지고 있다. 여기에 나오는 layer의 digest와 config의 layer id가 다른 이유가 궁금할 수 있는데 이건 layer의 mediaType을 확인하면 원인을 파악할 수 있다. `application/vnd.docker.image.rootfs.diff.tar.gzip` 이런 식으로 끝 부분이 gzip인 것은 gzip으로 압축되어있단 뜻으로 실제로 이미지를 받아서 gzip 압축해제한 다음 다시 digest를 계산해보면 image config에 들어있는 값과 동일한 값을 확인할 수 있다.
 
-docker 1.10 이전에는 각 layer의 ID가 layer의 내용과 전혀 상관 없는 그냥 랜덤값이었고 그에 따라서 registry에서 따로 테이블을 만들어서 layer와 이미지를 관리해야했다. 뿐만 아니라 완전히 동일한 내용의 layer라도 랜덤 id이기 때문에 중복해서 받아다가 저장하는 일도 있었다. 이런 비효율적인 부분을 개선하기 위해서 새로운 이미지 스펙을 만들어야했고 이것이 manifest이다.  manifest의 digest는 모두 내용을 기반으로 해싱한 content-addressable 값이다.
+docker 1.10 이전에는 각 layer의 ID가 layer의 내용과 전혀 상관 없는 그냥 랜덤값이었고 하나의 layer가 하나의 이미지라고 볼 수 있었다. 왜냐면 모든 layer는 각자의 config를 가지고 있었기 때문이다. 그에 따라서 registry에서 따로 테이블을 만들어서 layer와 이미지를 관리해야했다. 만약 어떤 이미지를 모두 받아오고자 한다면 그 특정 이미지의 layer들을 보고 모든 parent들을 받아오는 식이었다. 여기에는 또 다른 단점도 있었는데, 완전히 동일한 내용의 layer라도 id가 다르면 중복해서 받아다가 저장하는 일도 있었다. 이런 비효율적인 부분을 개선하기 위해서 새로운 이미지 스펙을 만들어야했고 이것이 manifest이다.  manifest가 생기면서 한번에 필요한 모든 layer들을 참조하는게 가능해졌다. 즉, 이미지와 layer가 같은 의미가 아니게 되었다. manifest의 digest는 모두 내용을 기반으로 해싱한 content-addressable 값이다. 따라서 내용이 같다면 서로 다른 시점에 빌드된 layer라도 사용할 수 있게 되었다. 또한 이제는 이미지의 ID도 이미지의 내용으로 결정되게 바뀌었다.
 
 ### Config
 
