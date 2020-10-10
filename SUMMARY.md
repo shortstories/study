@@ -87,7 +87,6 @@
   * [Image 개요](container/image.md)
   * [cri-o](container/cri-o.md)
   * [kata containers](container/kata-containers.md)
-  * [Image 개요](container/todo-docker.md)
   * [Open Container Initiative Image](container/open-container-initiative-image.md)
 * [Github pages](github_pages.md)
 * [Static Website](static_website_generator.md)
