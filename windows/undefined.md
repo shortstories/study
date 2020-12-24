@@ -437,6 +437,10 @@ options = "metadata"
 
 ```bash
 $ sudo update-alternatives --config editor
+$ sudo visudo # %sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+$ sudo vi /etc/apt/sources.list
+# :%s/archive.ubuntu.com/mirror.kakao.com/g
+# :%s/security.ubuntu.com/mirror.kakao.com/g
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential zsh
 ```
