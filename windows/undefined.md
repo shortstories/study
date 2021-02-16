@@ -9,6 +9,7 @@
 5. [D2Coding](https://github.com/naver/d2codingfont) 폰트 설치
 6. [Docker for windows](https://docs.docker.com/docker-for-windows/install/) 설치
 7. [Notion](https://www.notion.so/desktop) 설치
+8. 키보드 shift+space, 한영키 둘 다 먹히게 만들기
 
 ### Windows terminal config
 
@@ -452,6 +453,12 @@ $ sudo apt install build-essential zsh
    1. [powerline10k](https://github.com/romkatv/powerlevel10k)
    2. [https://github.com/zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
    3. [https://github.com/zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+#### 키보드 shift space, 한영키 동시에 먹히게 만들기
+
+{% file src="../.gitbook/assets/shift-space\_default-.reg" %}
+
+
 
 
 
