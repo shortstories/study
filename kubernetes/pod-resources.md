@@ -2,18 +2,18 @@
 
 pod의 resources에는 node의 리소스자원을 할당받기위한 설정이 들어감. 이 때, resources에 하부 설정에는 requests, limits 두가지가 존재함. 각 리소스 종류마다 실질적으로 동작하는 방식은 다르지만 대체적으로 이 두 하부 설정은 아래와 같은 개념임.
 
-1. requests: pod container가 성공적으로 실행되기 위해서 반드시 확보해야하는 리소스 값. pod이 처음에 스케쥴링될 때 스케쥴러가 이 값을 사용해서 node를 선택함. request 값은 node에서 사용가능한 값보다 커질 수 없음
-2. limits: pod container가 차지할 수 있는 리소스의 최대값. 이 값을 넘어가면 pod이 evict되거나 컨테이너가 OOM kill 당할 수 있음. limits 무제한으로 늘어날 수 있음.
+1. requests: pod container가 성공적으로 실행되기 위해서 반드시 확보해야하는 리소스 값. pod이 처음에 스케쥴링될 때 스케쥴러가 이 값을 사용해서 node를 선택함. request 값의 총합은 node에서 사용가능한 리소스의 값보다 커질 수 없음
+2. limits: pod container가 차지할 수 있는 리소스의 최대값. 이 값을 넘어가면 pod이 evict되거나 컨테이너가 OOM kill 당할 수 있음. limits는 무제한으로 늘어날 수 있음.
 
 ### CPU resources
 
-`Compressible Resource Guarantees`
+`Compressible Resource Guarantees` : 어떤 상황에서도 pod이나 container 정리되지는 않음.
 
 
 
 ### Memory resources
 
-`Incompressible Resource Guarantees` 
+`Incompressible Resource Guarantees` : 특정 상황에서는 pod이나 container를 일부 정리하는 방향으로 동작
 
 메모리의 requests는 kubelet과 스케쥴러에 의해 동작하고 limits는 cgroup에 의해 동작하게 됨. memory resources의 설정에 따라 pod container가 OOMKilled 상태에 빠질 수 있음.
 
