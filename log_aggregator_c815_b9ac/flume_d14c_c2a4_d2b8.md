@@ -39,7 +39,7 @@ flume-ng version
 
 #### Consumer Agent
 
- **Spooling Directory Sources --- Memory Channel ----&gt; Avro Sink \(Load balancing Sink Processor\)** 
+** Spooling Directory Sources --- Memory Channel ----> Avro Sink (Load balancing Sink Processor) **
 
 * Spooling Directory Sources
   * 특정 directory를 지정하면 그 안에 있는 파일과 생기는 파일들을 일괄 읽어 line 단위 Event로 만드는 Source
@@ -60,7 +60,7 @@ flume-ng version
 
 #### Listener Agent
 
- **Avro Source --- File Channel ----&gt; HDFS Sink \(\|\| File Roll Sink\)** 
+** Avro Source --- File Channel ----> HDFS Sink (|| File Roll Sink) **
 
 * Avro Sources
   * Consumer Agent에서 Avro Sink를 목표로 보내는 event들을 source로 이용
@@ -70,36 +70,36 @@ flume-ng version
   * 전달받은 event를 바탕으로 text, sequence 파일을 생성해서 HDFS에 sync.
   * 혹시라도 이 Sink에서 문제가 생기면 그냥 File Roll Sink를 이용하여 파일로 쓰고 기존 Listener 서버의 스크립트를 이용하는 방법도 고려
 
-### 테스트 1 \(물리 서버 -&gt; 가상 서버\)
+### 테스트 1 (물리 서버 -> 가상 서버)
 
-> xdevnnidb02.npush CPU v12, Mem 16GB 256MB File x10, 약 2490000 lines \(line : 약 1k\)
+> xdevnnidb02.npush CPU v12, Mem 16GB 256MB File x10, 약 2490000 lines (line : 약 1k)
 
-#### Consumer \[xdevnnidb02.npush\] -&gt; Listener \[dev-ohchang.ncl\]
+#### Consumer \[xdevnnidb02.npush] -> Listener \[dev-ohchang.ncl]
 
- **Batch size** 
+** Batch size **
 
-| batch size | avg CPU \(%\) | time \(s\) | TPS | MBps |
-| :--- | :--- | :--- | :--- | :--- |
-| 100 | 1.43% | 599s | 4156 | 4.27 MB/s |
-| 500 | 1.72% | 447s | 5570 | 5.72 MB/s |
-| 1000 | 2.10% | 345s | 7217 | 7.42 MB/s |
-| 3000 | 2.87% | 310s | 8032 | 8.26 MB/s |
-| 10000 | 3.77% | 259s | 9613 | 9.88 MB/s |
+| batch size | avg CPU (%) | time (s) | TPS  | MBps      |
+| ---------- | ----------- | -------- | ---- | --------- |
+| 100        | 1.43%       | 599s     | 4156 | 4.27 MB/s |
+| 500        | 1.72%       | 447s     | 5570 | 5.72 MB/s |
+| 1000       | 2.10%       | 345s     | 7217 | 7.42 MB/s |
+| 3000       | 2.87%       | 310s     | 8032 | 8.26 MB/s |
+| 10000      | 3.77%       | 259s     | 9613 | 9.88 MB/s |
 
-### 테스트 2 \(물리 서버 -&gt; 물리 서버\)
+### 테스트 2 (물리 서버 -> 물리 서버)
 
-#### Consumer \[xdevnnidb02.npush\] -&gt; Listener \[xdevnnidb01.npush\]
+#### Consumer \[xdevnnidb02.npush] -> Listener \[xdevnnidb01.npush]
 
- **Batch size** 
+** Batch size **
 
-| batch size | avg CPU \(%\) | time \(s\) | TPS | MBps | 비고 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 10 | 5.01% | 193s | 12901 | 13.26 MB/s | 메모리 사용량 약 10배 이상, 파일을 채널에 쓰는 과정에서 심하면 CPU 50%까지 튀기도 함 |
-| 100 | 4.83% | 121s | 20578 | 21.2 MB/s |  |
-| 1000 | 4.81% | 119s | 20924 | 21.5 MB/s |  |
-| 3000 | 4.93% | 119s | 20924 | 21.5 MB/s |  |
-| 10000 | 4.90% | 123s | 20243 | 20.8 MB/s |  |
-| 20000 | 5.18% | 123s | 20244 | 20.8 MB/s |  |
+| batch size | avg CPU (%) | time (s) | TPS   | MBps       | 비고                                                    |
+| ---------- | ----------- | -------- | ----- | ---------- | ----------------------------------------------------- |
+| 10         | 5.01%       | 193s     | 12901 | 13.26 MB/s | 메모리 사용량 약 10배 이상, 파일을 채널에 쓰는 과정에서 심하면 CPU 50%까지 튀기도 함 |
+| 100        | 4.83%       | 121s     | 20578 | 21.2 MB/s  |                                                       |
+| 1000       | 4.81%       | 119s     | 20924 | 21.5 MB/s  |                                                       |
+| 3000       | 4.93%       | 119s     | 20924 | 21.5 MB/s  |                                                       |
+| 10000      | 4.90%       | 123s     | 20243 | 20.8 MB/s  |                                                       |
+| 20000      | 5.18%       | 123s     | 20244 | 20.8 MB/s  |                                                       |
 
 #### 참고
 
@@ -111,7 +111,7 @@ flume-ng version
 
 * 20000 TPS 소화 가능
 
-#### CPU 5% ~ 10%
+#### CPU 5% \~ 10%
 
 * 20000 TPS에서 5% 수준
 
@@ -160,7 +160,7 @@ flume-ng version
 
 ### Zookeeper 설정
 
-```text
+```
 /
 ├── {flumeNode}
    ├── {agentName}
@@ -173,14 +173,13 @@ flume-ng version
 ### 실행 방법
 
 * 실행할 때 -z, -p 옵션을 주어서 실행.
-  *  **-z**  : Zookeeper 쿼럼의 주소:포트. 여러 개 등록 가능.
-  *  **-p**  : Flume Config node가 올라갈 Zookeeper 내부 path
+  * ** -z ** : Zookeeper 쿼럼의 주소:포트. 여러 개 등록 가능.
+  *   ** -p ** : Flume Config node가 올라갈 Zookeeper 내부 path
 
-    `flume-ng agent --conf {ConfPath} -z {host:port}[,{host:port}] -p {flumeNode} --name {agentName} -Dflume.root.logger=INFO,console`
+      `flume-ng agent --conf {ConfPath} -z {host:port}[,{host:port}] -p {flumeNode} --name {agentName} -Dflume.root.logger=INFO,console`
 
 ### 비고
 
 * 각 agentName 노드의 data에 변경이 생기면 모든 agent가 다시 reload.
   * 새로운 agent를 추가할 때 자동 갱신 가능
 * agent에 장애가 발생했을 때 Zookeeper로 관리해주지 않음. 무한 재시도.
-

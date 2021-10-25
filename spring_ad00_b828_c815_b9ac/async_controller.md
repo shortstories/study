@@ -26,14 +26,14 @@ public class AsyncController {
 
 ### 내부 동작
 
-![](../.gitbook/assets/async.png)  
-1. Request가 들어옴  
-2. DispatcherServlet가 해당 path에 알맞는 Controller method를 찾아 요청하고, Callable을 돌려받음  
-3. DispatcherServlet은 Callable을 비동기 처리하도록 WebAsyncManager에 요청함  
-4. WebAsyncManager는 Callable을 특정 TaskExecutor에 할당하여 비동기 처리  
-5. Callable의 작업이 완료되면 WebAsyncManager로 결과값을 돌려줌  
-6. WebAsyncManager는 DispathcerServlet에게 dispatch 요청  
-7. DispatcherServlet은 WebAsyncManager에게서 결과값을 받은 다음 적절하게 처리하여 Response를 돌려줌
+![](../.gitbook/assets/async.png)\
+1\. Request가 들어옴\
+2\. DispatcherServlet가 해당 path에 알맞는 Controller method를 찾아 요청하고, Callable을 돌려받음\
+3\. DispatcherServlet은 Callable을 비동기 처리하도록 WebAsyncManager에 요청함\
+4\. WebAsyncManager는 Callable을 특정 TaskExecutor에 할당하여 비동기 처리\
+5\. Callable의 작업이 완료되면 WebAsyncManager로 결과값을 돌려줌\
+6\. WebAsyncManager는 DispathcerServlet에게 dispatch 요청\
+7\. DispatcherServlet은 WebAsyncManager에게서 결과값을 받은 다음 적절하게 처리하여 Response를 돌려줌
 
 ### 유의점
 
@@ -87,7 +87,7 @@ public class AsyncService {
 ```
 
 1. DeferredResult를 만들어서 return
-2. 비동기 작업을 처리하고나서 직접 DeferredResult 객체에 DeferredResult.setResult\(\)로 결과값을 넘겨주면 Response로 돌려줌
+2. 비동기 작업을 처리하고나서 직접 DeferredResult 객체에 DeferredResult.setResult()로 결과값을 넘겨주면 Response로 돌려줌
 
 ## WebAsyncTask
 
@@ -114,4 +114,3 @@ public class AsyncController {
 ## Interceptor
 
 * HandlerInterceptor의 postHandle, afterCompletion은 비동기 작업이 모두 끝나고 호출됨. 대신에 AsyncHandlerInterceptor 인터페이스의 afterConcurrentHandlingStarted 메소드를 구현하여 사용할 수 있음
-

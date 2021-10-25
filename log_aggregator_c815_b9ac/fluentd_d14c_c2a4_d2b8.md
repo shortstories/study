@@ -40,59 +40,59 @@ fluentd -c $FLUENT_HOME/listener.conf -vv
 
 ## Consumer
 
-### Tail -&gt; Memory buffer -&gt; Forward
+### Tail -> Memory buffer -> Forward
 
- **in\_tail** 
+** in\_tail **
 
 * 특정 디렉토리/파일을 지정, 각 라인 단위로 잘라서 버퍼로 저장하는 역할
 * 같은 파일을 여러번 읽지 않도록 pos\_file을 지정할 수 있음
 * 다 읽은 파일을 처리하는 옵션이 없어 별도의 스크립트 등으로 처리해야함
 
- **memory buffer** 
+** memory buffer **
 
 * buffer chunk를 저장하기 위해 메모리를 사용
 * default인 file buffer에 비해 빠른 성능을 가짐
 * fluentd 인스턴스가 종료되었을 때, 버퍼에 들어있던 데이터가 사라짐
 * 필요한 데이터가 이미 파일로 남아있으므로 두번 파일로 저장할 필요가 없어 memory buffer 사용
 
- **out\_forward** 
+** out\_forward **
 
 * 보통 Fluentd에서 다층 구조를 구현하기위해 사용하는 옵션
 * 자동적으로 Load balancing과 fail over 지원
 
 ## Listener
 
-### Forward -&gt; File buffer -&gt; HDFS\(\|\| File\)
+### Forward -> File buffer -> HDFS(|| File)
 
- **in\_forward** 
+** in\_forward **
 
 * 보통 Fluentd에서 다층 구조를 구현하기위해 사용하는 옵션
 * 자동적으로 Load balancing과 fail over 지원
 
- **file buffer** 
+** file buffer **
 
 * buffer chunk를 저장하기 위해서 파일을 이용
 * default 값으로, 각종 장애에 우수한 신뢰도를 보여줌
 
- **out\_webhdfs** 
+** out\_webhdfs **
 
 * HDFS에 파일을 저장하기 위해서 사용
 * 경우에 따라서는 이것을 사용하지 않고 그냥 file로 저장한 후 현재 listener에서 사용중인 스크립트를 쓰는 것도 고려해볼 수 있음
 
 ## 테스트
 
-## 테스트 2 \(물리 서버 -&gt; 물리 서버\)
+## 테스트 2 (물리 서버 -> 물리 서버)
 
-### Consumer \[xdevnnidb02.npush\] -&gt; Listener \[xdevnnidb01.npush\]
+### Consumer \[xdevnnidb02.npush] -> Listener \[xdevnnidb01.npush]
 
- **Buffer size** 
+** Buffer size **
 
-| Buffer size, Queue length | avg CPU \(%\) | time \(s\) | TPS | MBps | 비고 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 5MB, 1 | 4.25% | 106s | 23490 | 24.15 MB/s |  |
-| 16MB, 3 | 4.26% | 105s | 23714 | 24.38 MB/s |  |
-| 64MB, 6 | 4.26% | 105s | 23714 | 24.38 MB/s |  |
-| 256MB, 12 | 4.25% | 107s | 23271 | 23.92 MB/s |  |
+| Buffer size, Queue length | avg CPU (%) | time (s) | TPS   | MBps       | 비고 |
+| ------------------------- | ----------- | -------- | ----- | ---------- | -- |
+| 5MB, 1                    | 4.25%       | 106s     | 23490 | 24.15 MB/s |    |
+| 16MB, 3                   | 4.26%       | 105s     | 23714 | 24.38 MB/s |    |
+| 64MB, 6                   | 4.26%       | 105s     | 23714 | 24.38 MB/s |    |
+| 256MB, 12                 | 4.25%       | 107s     | 23271 | 23.92 MB/s |    |
 
 ## 장점
 
@@ -125,4 +125,3 @@ fluentd -c $FLUENT_HOME/listener.conf -vv
 ### 루비
 
 * 사내에서 잘 쓰이지 않는 언어라서 내부적으로 수정해서 쓸 일이 있거나 할 때 불리
-

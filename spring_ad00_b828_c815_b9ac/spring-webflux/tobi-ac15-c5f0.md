@@ -4,12 +4,12 @@
 
 ### 사전 지식
 
-* 스프링은 DI가 런타임에 결정되므로 별도의 컨테이너가 있어야함 -&gt; 3
+* 스프링은 DI가 런타임에 결정되므로 별도의 컨테이너가 있어야함 -> 3
 * 동기 비동기는 2+
   * 동기는 시간을 맞추고
   * 비동기는 시간을 안 맞추고
   * 중요한건 대상, 시간
-  * A, B 시작시간 == 종료시간 -&gt; 동기. 
+  * A, B 시작시간 == 종료시간 -> 동기.&#x20;
   * 멀티쓰레드라도 두 쓰레드가  동시에 작업을 시작하면 동기
   * 메소드 리턴 시간과 결과를 전달받는 시간이 일치하면 동기
   * A가 끝나는 시간과 B가 시작하는 시간이 같아도 동기
@@ -22,7 +22,8 @@
 * CompletableFuture, CompletionStage
   * ListenableFuture의 개선인가?
 * 스프링 웹 처리
-  * * 리퀘스트 매핑 \(라우팅\): 어느 핸들러로 보낼지
+  *
+    * 리퀘스트 매핑 (라우팅): 어느 핸들러로 보낼지
     * 리퀘스트 바인딩: 핸들러에 전달할 argument 준비
     * 핸들러 실행: 로직 수행
     * 핸들러 리턴 결과로 응답 생성: response 생성 json 변환 뷰리졸버 등
@@ -37,15 +38,15 @@
 ### 관련 API
 
 * RouterFunction
-  * 리퀘스트를 바탕으로 어느 HandlerFunction이 처리할지 찾음 \(디스패처?\)
+  * 리퀘스트를 바탕으로 어느 HandlerFunction이 처리할지 찾음 (디스패처?)
 * HandlerFunction
-  * 리퀘스트를 처리해서 결과값 반환 \(= 컨트롤러\)
+  * 리퀘스트를 처리해서 결과값 반환 (= 컨트롤러)
 * 좀 노드 js같기도
-* RouteFunctions.route\(조건, HandlerFunction\)
+* RouteFunctions.route(조건, HandlerFunction)
 * RouterFunction 등록
   * @Bean으로 만들기
-  * 여러 조건을 and\(\), or\(\) 등으로 엮을 수 있고
-  * @RequestMapping을 클래스레벨로 걸고 메소드레벨로 걸던 것을 nest\(\)로 중복되게 할 수 있고
+  * 여러 조건을 and(), or() 등으로 엮을 수 있고
+  * @RequestMapping을 클래스레벨로 걸고 메소드레벨로 걸던 것을 nest()로 중복되게 할 수 있고
 
 ### 장점
 
@@ -57,8 +58,8 @@
 ### WebFlux + Spring Mvc
 
 * 그냥 어노테이션 기반 대부분 그대로 쓰고 값을 리턴할 때만 Reactor 클래스에 담아서 리턴해야됨
-* @RequestBody의 경우 Mono&lt;T&gt;, Flux&lt;T&gt; 안에 들어가있는 형식으로 받을 수도 있다.
-  * HTTP Stream 스펙을 쓸 때, Flux&lt;T&gt;를 쓰면 스트리밍 형태로 계속 하나하나 받아서 리턴할 수도 있다.
+* @RequestBody의 경우 Mono\<T>, Flux\<T> 안에 들어가있는 형식으로 받을 수도 있다.
+  * HTTP Stream 스펙을 쓸 때, Flux\<T>를 쓰면 스트리밍 형태로 계속 하나하나 받아서 리턴할 수도 있다.
 * @ResponseBody는 Mono, Flux, ServerSideEvent?
 
 ### 성능 개선?
@@ -81,4 +82,3 @@
 * 연산을 조합해서 추상회되어 동시성 정보를 노출하지 않음
 * 데이터 흐름의 속도 제어 가능
   * 이게 아마 백프레셔였던가...
-

@@ -2,20 +2,20 @@
 
 {% embed url="https://github.com/opencontainers/image-spec" %}
 
- oci image = manifest + image index \(optional\) + fs layers + configuration
+&#x20;oci image = manifest + image index (optional) + fs layers + configuration
 
 ### OCI Image media types
 
-* application/vnd.oci.descriptor.v1+json: Content Descriptor 
-* application/vnd.oci.layout.header.v1+json: OCI Layout 
-* application/vnd.oci.image.index.v1+json: Image Index 
+* application/vnd.oci.descriptor.v1+json: Content Descriptor&#x20;
+* application/vnd.oci.layout.header.v1+json: OCI Layout&#x20;
+* application/vnd.oci.image.index.v1+json: Image Index&#x20;
 * application/vnd.oci.image.manifest.v1+json: Image manifest
-* application/vnd.oci.image.config.v1+json: Image config 
-* application/vnd.oci.image.layer.v1.tar: "Layer", as a tar archive 
-* application/vnd.oci.image.layer.v1.tar+gzip: "Layer", as a tar archive compressed with gzip 
-* application/vnd.oci.image.layer.v1.tar+zstd: "Layer", as a tar archive compressed with zstd 
-* application/vnd.oci.image.layer.nondistributable.v1.tar: "Layer", as a tar archive with distribution restrictions 
-* application/vnd.oci.image.layer.nondistributable.v1.tar+gzip: "Layer", as a tar archive with distribution restrictions compressed with gzip 
+* application/vnd.oci.image.config.v1+json: Image config&#x20;
+* application/vnd.oci.image.layer.v1.tar: "Layer", as a tar archive&#x20;
+* application/vnd.oci.image.layer.v1.tar+gzip: "Layer", as a tar archive compressed with gzip&#x20;
+* application/vnd.oci.image.layer.v1.tar+zstd: "Layer", as a tar archive compressed with zstd&#x20;
+* application/vnd.oci.image.layer.nondistributable.v1.tar: "Layer", as a tar archive with distribution restrictions&#x20;
+* application/vnd.oci.image.layer.nondistributable.v1.tar+gzip: "Layer", as a tar archive with distribution restrictions compressed with gzip&#x20;
 * application/vnd.oci.image.layer.nondistributable.v1.tar+zstd: "Layer", as a tar archive with distribution restrictions compressed with zstd
 
 image index는 여러개의 image manifest를 가질 수 있음
@@ -26,7 +26,7 @@ manifest를 통해 달성하려 하는 목표는 크게 봐서 3가지이다. �
 
 ### OCI Image Manifest
 
-image manifest는 image configuration과 fs layers에 대한 정보들을 가지고 있다. 이 때 이 정보는 특정 architecture, os에 국한된 것이다. 
+image manifest는 image configuration과 fs layers에 대한 정보들을 가지고 있다. 이 때 이 정보는 특정 architecture, os에 국한된 것이다.&#x20;
 
 #### Media Type
 
@@ -108,7 +108,7 @@ image index는 상위 레벨의 manifest라고 생각하면 된다. 여러 개�
 
 ### Layer
 
-정확히는 "Image Layer Filesystem Changeset" 말 그대로 파일 시스템 변경 내역이 바로 이미지의 레이어이다. 이 레이어들이 차곡차곡 쌓여서 하나의 완전한 파일시스템을 이룬다. 
+정확히는 "Image Layer Filesystem Changeset" 말 그대로 파일 시스템 변경 내역이 바로 이미지의 레이어이다. 이 레이어들이 차곡차곡 쌓여서 하나의 완전한 파일시스템을 이룬다.&#x20;
 
 #### Media Type
 
@@ -151,15 +151,15 @@ layer의 payload가 [zstd](https://github.com/facebook/zstd)으로 압축
 
 #### File Attributes
 
-* Modification Time \(`mtime`\)
-* User ID \(`uid`\)
-  * User Name \(`uname`\) _secondary to `uid`_
-* Group ID \(`gid` \)
-  * Group Name \(`gname`\) _secondary to `gid`_
-* Mode \(`mode`\)
-* Extended Attributes \(`xattrs`\)
-* Symlink reference \(`linkname` + symbolic link type\)
-* [Hardlink](https://github.com/opencontainers/image-spec/blob/master/layer.md#hardlinks) reference \(`linkname`\)
+* Modification Time (`mtime`)
+* User ID (`uid`)
+  * User Name (`uname`) _secondary to `uid`_
+* Group ID (`gid `)
+  * Group Name (`gname`) _secondary to `gid`_
+* Mode (`mode`)
+* Extended Attributes (`xattrs`)
+* Symlink reference (`linkname` + symbolic link type)
+* [Hardlink](https://github.com/opencontainers/image-spec/blob/master/layer.md#hardlinks) reference (`linkname`)
 
 #### Creating
 
@@ -187,4 +187,3 @@ whiteout 파일은 이름이 `.wh.` 으로 시작하는 빈 파일로 부모 레
 #### Non-Distributable Layers
 
 법이나 기타등등 여러가지 사정으로 인하여 일반적으로 사용하는 것 처럼 배포할 수 없는 레이어들이다. 예를 들면 마이크로소프트의 윈도우 베이스 이미지 같은게 있다. 이러한 "non-distributable" 레이어들은 인증받은 특정 url에서 직접 다운로드 받아야하고 레지스트리에 업로드되면 안된다. 따라서 non-distributable 레이어의 Descriptor에는 보통 이러한 레이어를 직접적으로 받을 수 있는 url이 `urls` 필드에 기록되어있는 경우가 많다.
-

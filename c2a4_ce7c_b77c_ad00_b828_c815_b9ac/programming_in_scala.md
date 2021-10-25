@@ -12,13 +12,13 @@
 
 ### List
 
-* list의 제일 앞에 원소 추가하는건 O\(1\), 뒤에 추가하는건 O\(n\)
+* list의 제일 앞에 원소 추가하는건 O(1), 뒤에 추가하는건 O(n)
 * 그러므로 앞에 추가하는게 좋음. 만약에 뒤에 추가하고 싶다면 우선 뒤집고 앞에 추가한 다음에 다시 뒤집거나 `ListBuffer` 사용
 
 ### Tuple
 
 * tuple은 `tuple._i` 같은 형태로 원소 호출
-* i는 1부터 시작 \(하스켈, ML 등 정적 타입 언어의 영향\)
+* i는 1부터 시작 (하스켈, ML 등 정적 타입 언어의 영향)
 * list와 tuple의 차이점은 여러 자료형을 한번에 담을 수 있느냐의 차이
 
 ### Map
@@ -38,33 +38,31 @@
 * Scala의 모든 필드는 기본적으로 public
 * 메소드 패러미터는 기본적으로 val
 * return을 되도록 쓰지말고, 쓰더라도 1번 이상 쓰지 않을 것. 각 메소드가 한 값을 계산하는 표현식이 되도록 구현
-* side effect을 위한 메소드라면 결과타입을 생략하고 = 도 떼어서 프로시저처럼 보이는게 좋음
+*   side effect을 위한 메소드라면 결과타입을 생략하고 = 도 떼어서 프로시저처럼 보이는게 좋음
 
-  ```scala
-  def procedure(params: Any) {
-    {// something
-  }
-  ```
-
-* =를 빼먹으면 무조건 `Unit`을 반환하므로 주의
+    ```scala
+    def procedure(params: Any) {
+      {// something
+    }
+    ```
+* \=를 빼먹으면 무조건 `Unit`을 반환하므로 주의
 
 ### Semicolon
 
-* 한 줄을 여러 개로 나누려면 사용 ex\) `val s = "hello"; println(s)`
+* 한 줄을 여러 개로 나누려면 사용 ex) `val s = "hello"; println(s)`
 * 기본적으론 쓸 필요 없음
-* 그런데 연산자가 있을 때 오류가 나올 수 있음
+*   그런데 연산자가 있을 때 오류가 나올 수 있음
 
-  ```scala
-  x
-  + y //// 이 경우 x + y가 아니라 x와 +y로 파싱됨
-  ```
+    ```scala
+    x
+    + y //// 이 경우 x + y가 아니라 x와 +y로 파싱됨
+    ```
+*   이럴 땐 괄호로 감싸도 되지만 일반적으론 연산자를 줄 맨 끝에 붙이는걸 추천함
 
-* 이럴 땐 괄호로 감싸도 되지만 일반적으론 연산자를 줄 맨 끝에 붙이는걸 추천함
-
-  ```scala
-  x +
-  y
-  ```
+    ```scala
+    x +
+    y
+    ```
 
 ### Singleton object
 
@@ -105,13 +103,13 @@
 
 ### 클래스 패러미터 조건 검사
 
-* `require` 사용
+*   `require` 사용
 
-  ```scala
-  class Rational(n: Int, d: Int) {
-    require(d != 0)
-  }
-  ```
+    ```scala
+    class Rational(n: Int, d: Int) {
+      require(d != 0)
+    }
+    ```
 
 ### 필드 추가
 
@@ -128,22 +126,22 @@
 * 기본적으로 Camel case
 * 띄워쓰기를 \_로 구분할 수 있긴 한데 되도록 말길
 * $로 시작할 수도 있긴 한데 스칼라 내부에서만 사용하니까 쓰지말길
-* 상수는 첫글자만 대문자로 \(자바의 `final String SOME_VAR` 이렇게 쓰는게 아니라 `val SomeVar`\)
+* 상수는 첫글자만 대문자로 (자바의 `final String SOME_VAR` 이렇게 쓰는게 아니라 `val SomeVar`)
 
 #### 연산자 식별자
 
-* +, -, :, ?, ~, \# 등 출력 가능한 아스키 문자
+* \+, -, :, ?, \~, # 등 출력 가능한 아스키 문자
 * 내부적으로 $를 이용하여 해체하고 적합한 자바 식별자로 재생성함
-  * ++는 $plus$plus로 바꿈
+  * \++는 $plus$plus로 바꿈
 
 #### 혼합 식별자
 
 * 영어, 숫자 뒤에 밑줄이 오고 연산자 식별자가 옴
-  * ex\) `unary_+`, `myvar_=`
+  * ex) `unary_+`, `myvar_=`
 
 ### 리터럴 식별자
 
-* ```...```   같은 형식
+* `` `...`  ``  같은 형식
 * 예약어를 포함해서 모든 문자열을 쓸 수 있음
 
 ## 7장
@@ -156,59 +154,58 @@
 #### 컬렉션 순회
 
 * 제네레이터 문법: `for (element <- collection)`
-  * Range 타입도 사용 가능 ex\) `i <- 1 to 5`, `i <- 1 until 6`
+  * Range 타입도 사용 가능 ex) `i <- 1 to 5`, `i <- 1 until 6`
   * 물론 스칼라에선 인덱스를 바탕으로 순회하는 일은 잘 없음
 
 #### 필터링
 
-* collection에 if문을 넣어서 필터링 가능 ex\) `for (element <- collection if ...)`
+* collection에 if문을 넣어서 필터링 가능 ex) `for (element <- collection if ...)`
 
 #### 중첩 순회
 
 * 여러 개의 제네레이터를 세미콜론이나 중괄호로 추가하면 중첩 순회도 가능
-* ex\) 
+*   ex)&#x20;
 
-  ```scala
-  for (
-    element <- collection
-    if ...;
-    subElement <- element.getSubCollection()
-    if ...
-  ) { 
-    sumFunc(subElement)
-  }
-  ```
+    ```scala
+    for (
+      element <- collection
+      if ...;
+      subElement <- element.getSubCollection()
+      if ...
+    ) { 
+      sumFunc(subElement)
+    }
+    ```
 
 #### 루프문 도중에 변수 바인딩하기
 
 * 별도의 val이나 var 없이 선언하면 됨
-* ex\)
+*   ex)
 
-  ```scala
-  for (
-    element <- collection
-    if ...;
-    subElement <- element.getSubCollection(
-    affectedSubElement = affect(subElement)
-    if ...
-  ) { 
-    sumFunc(affectedSubElement)
-  }
-  ```
+    ```scala
+    for (
+      element <- collection
+      if ...;
+      subElement <- element.getSubCollection(
+      affectedSubElement = affect(subElement)
+      if ...
+    ) { 
+      sumFunc(affectedSubElement)
+    }
+    ```
 
 #### 새로운 collection 반환하기
 
 * for 루프문 코드 블록의 중괄호 앞에 `yield` 선언
-* ex\) `for (...) yield {...}`, `for () yield ...`
+* ex) `for (...) yield {...}`, `for () yield ...`
 
 ### try-catch-finally
 
 * 자바랑 다르게 checked excetpion도 별도의 throws를 붙이거나 반드시 catch할 필요가 없음
 * 결과로 값을 반환. try가 성공하면 당연히 try의 반환값이고, 만약에 도중에 예외가 발생하였다면 case 수행 결과가 반환값
-* finally에서 return을 명시적으로 호출하지 않는 이상 반환값은 버려짐. finally에서 try나 catch의 결과를 바꾸지 않도록 주의해야 함
+*   finally에서 return을 명시적으로 호출하지 않는 이상 반환값은 버려짐. finally에서 try나 catch의 결과를 바꾸지 않도록 주의해야 함
 
-  **패턴 매치로 예외 처리**
-
+    **패턴 매치로 예외 처리**
 * `try {...} catch {case ex: Exception => {...} ...}`
 
 ### match-case
@@ -230,16 +227,16 @@
 
 * `private` 키워드를 메소드 정의 앞에 붙이는 방법
 * local function으로 만드는 방법도 있음
-  * 이 경우 클로져 이용 가능
+  *   이 경우 클로져 이용 가능
 
-    ```scala
-    def outerFunc() : Unit = {
-      val outer = "outer"
-      def innerFunc() : Unit = {
-        println(outer)
+      ```scala
+      def outerFunc() : Unit = {
+        val outer = "outer"
+        def innerFunc() : Unit = {
+          println(outer)
+        }
       }
-    }
-    ```
+      ```
 
 ### 위치 표시자
 
@@ -281,15 +278,14 @@
 
 ### 꼬리 재귀
 
-* 스칼라에서 재귀 호출로 함수가 끝나면 꼬리 재귀를 사용
+*   스칼라에서 재귀 호출로 함수가 끝나면 꼬리 재귀를 사용
 
-  ```scala
-  def myFunc(x: Int): Int = {
-    if (x <= 0) 0
-    else myFunc(x - 1)
-  }
-  ```
-
+    ```scala
+    def myFunc(x: Int): Int = {
+      if (x <= 0) 0
+      else myFunc(x - 1)
+    }
+    ```
 * 루프문을 사용하는 것과 비용 측면에서 별 차이가 없음
 * 다만 스택 트레이스에서 추적할 때에도 한 스택밖에 안 보이므로 `-g:notailcalls` 옵션으로 꼬리 재귀 끄는 것도 가능
 * 간접 재귀 호출에선 꼬리 재귀를 이용할 수 없음. 다시 말해 마지막 연산으로 자기 자신을 직접 호출할 때만 가능
@@ -298,8 +294,8 @@
 
 ### 커링
 
-* loan pattern: 함수를 제공하는 쪽에서 resource의 open, close 등 라이프사이클은 관리하고, 사용할 수 있게끔 빌려주는 패턴 
-* 스칼라에서는 패러미터가 한 개인 함수를 호출할 때 중괄호로 감싸서 호출할 수 있음. 
+* loan pattern: 함수를 제공하는 쪽에서 resource의 open, close 등 라이프사이클은 관리하고, 사용할 수 있게끔 빌려주는 패턴&#x20;
+* 스칼라에서는 패러미터가 한 개인 함수를 호출할 때 중괄호로 감싸서 호출할 수 있음.&#x20;
   * 이를 이용하여 사용자가 마치 기본 문법인 것처럼 사용하는 것이 가능
 
 ```scala
@@ -316,7 +312,7 @@ customFunc { x: Int => {
 ### 이름에 의한 호출 사용
 
 * `()` 없이 바로 `=>` 사용
-* ex\) `=> Boolean`, `=> Int`
+* ex) `=> Boolean`, `=> Int`
 * 바로 Boolean을 패러미터로 쓸 때와 차이점은 계산 시점의 차이이다
 
 ```scala
@@ -383,7 +379,7 @@ class MyClass {
 ### 특징
 
 * 일반적인 클래스에서 할 수 있는 대부분이 가능함
-* 클래스 변수를 가질 수 없음 ex\) `trait MyTrait(x: Int) // 컴파일 에러`
+* 클래스 변수를 가질 수 없음 ex) `trait MyTrait(x: Int) // 컴파일 에러`
 * 믹스인 할 때 클래스에 따라 `super` 가 동적으로 바인딩됨
 
 ### 믹스인
@@ -590,18 +586,18 @@ val copyEx = ex.copy(pa2 = 3)
 
 * 자바의 switch 문과 유사한 기능
 * `Selector match {case ...}` 형태로 사용
-* 각 case는 =&gt;로 패턴과 계산식 분리
+* 각 case는 =>로 패턴과 계산식 분리
 * 코드에 쓰인 순서대로 패턴을 하나씩 검사 후 매치되는 첫 번째 패턴을 선택하여 화살표 뒤의 계산식 수행
 
 #### 와일드카드 패턴
 
-* `_` 와일드카드 패턴은 모든 값과 매치되지만 계산식 안에서 사용할 수 
+* `_` 와일드카드 패턴은 모든 값과 매치되지만 계산식 안에서 사용할 수&#x20;
 * 주로 필요없는 부분을 무시하기위해 사용
 
 #### 상수 패턴
 
 * `"+"`, `1` 같은 상수 패턴은 == 연산자 적용하여 매치
-* val이나 싱글톤 object도 매치됨 ex\) `Nil`
+* val이나 싱글톤 object도 매치됨 ex) `Nil`
 
 #### 변수 패턴
 
@@ -613,7 +609,7 @@ val copyEx = ex.copy(pa2 = 3)
 #### 생성자 패턴
 
 * `MyCaseClass('test', e)` 같은 생성자 패턴은 먼저 타입을 체크하고 패러미터를 하나하나 체크하여 패턴 매칭
-  * 패러미터도 패턴의 일부\(deep match\)인 덕분에 `MyCaseClass('test', MyCaseClass('nested', e))` 처럼 중첩이 가능함
+  * 패러미터도 패턴의 일부(deep match)인 덕분에 `MyCaseClass('test', MyCaseClass('nested', e))` 처럼 중첩이 가능함
 
 #### 시퀀스 패턴
 
@@ -683,21 +679,19 @@ val (number, string) = myTuple
 * 함수 리터럴이 쓰일 수 있는 모든 곳에 사용 가능
 * case 시퀀스는 PartialFunction
   * 매칭되지 않는 패러미터를 넘기면 `MatchError` 발생
-* 타입이 PartialFuntion이면 컴파일러에 의해서 PartialFuntion으로 변환됨
+*   타입이 PartialFuntion이면 컴파일러에 의해서 PartialFuntion으로 변환됨
 
-  ```scala
-  new PartialFunction[/* parameter type */, /* return type */] {
-    def apply(xs: /* parameter type */) = xs match {
-      case x => //...
-      case y => //...
+    ```scala
+    new PartialFunction[/* parameter type */, /* return type */] {
+      def apply(xs: /* parameter type */) = xs match {
+        case x => //...
+        case y => //...
+      }
+      def isDefinedAt(xs: /* parameter type */) = xs match {
+        case x => true
+        case y => true
+        case _ => false
+      }
     }
-    def isDefinedAt(xs: /* parameter type */) = xs match {
-      case x => true
-      case y => true
-      case _ => false
-    }
-  }
-  ```
-
+    ```
 * 타입이 없거나 Function1이면 isDefinedAt을 빼고 일반적인 함수 리터럴로 변환됨
-
