@@ -18,11 +18,11 @@ KO_DOCKER_REPO=registry.navercorp.com/ncc/knative-pipeline ko apply -f config/
 kubectl get all -n knative-build-pipeline
 ```
 
-![](../.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image.png)
 
 ## 구성요소
 
-![](../.gitbook/assets/image%20%281%29%20%281%29.png)
+![](<../.gitbook/assets/image (1).png>)
 
 ### Task
 
@@ -44,13 +44,11 @@ task의 그래프.
 
 TaskRun, PipelineRun
 
-TaskRun을 생성해서 Task를 실행. TaskRun은 Task에 정의된 input과 output에 대한 실제 정보를 모두 가지고 있어야 함. 
+TaskRun을 생성해서 Task를 실행. TaskRun은 Task에 정의된 input과 output에 대한 실제 정보를 모두 가지고 있어야 함.&#x20;
 
 PipelineRun을 생성하면 pipeline의 각 task마다 모두 TaskRun을 생성해서 실행
 
 ### PipelineResources
 
 pipeline 안에 포함된 리소스들. Task의 input 또는 output이 될 수 있음.
-
-
 
