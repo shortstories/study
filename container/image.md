@@ -1,6 +1,6 @@
 # Image 개요
 
-![https://github.com/google/go-containerregistry](<../.gitbook/assets/image (8).png>)
+![https://github.com/google/go-containerregistry](<../.gitbook/assets/image (7).png>)
 
 
 

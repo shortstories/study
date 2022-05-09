@@ -4,7 +4,7 @@
 
 LLB = low-level builder LLB는 빌드 중간과정의 바이너리 포맷. LLVM이랑 비슷한 개념으로 생각하면 될듯.
 
-![](<../.gitbook/assets/image (12).png>)
+![](<../.gitbook/assets/image (11).png>)
 
 LLB는 위와 같이 content-addressable dependency graph 로 정의된다고 볼 수 있음. 덕분에 캐싱 모델도 기존 Dockerfile builder와 완전히 달라짐. 관습적으로 이미지를 비교하는 대신에 LLB에 정의된 build graph 각 node의 checksum과 mount된 content들을 바탕으로 비교하게 됨.
 

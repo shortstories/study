@@ -16,7 +16,7 @@ Docker같은 컨테이너들이 여러 개 있을 때, 효율적으로 관리하
 * 컨테이너화된 어플리케이션을 어느 누구에게 배포하겠다고 지시할 필요 없이 그냥 클러스터에다가 바로 배포할 수 있게 도와줌
 * 쿠버네티스는 여러 클러스터 사이에서 효율적으로 컨테이너를 분배하고 스케쥴링할 수 있도록 자동화함.
 * Master + Node
-* ![](../.gitbook/assets/clusterDiagram.png)
+* ![](../.gitbook/assets/clusterdiagram.png)
 
 ### Master
 

@@ -33,7 +33,7 @@ flume-ng version
 
 ### 구성
 
-![](<../.gitbook/assets/flume 구성.png>)
+![](../.gitbook/assets/flume.png)
 
 ### Agents
 

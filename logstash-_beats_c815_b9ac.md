@@ -43,7 +43,7 @@
 
 ### Execution Model
 
-![](<.gitbook/assets/filebeat execution model.png>) Input Threads + Worker Threads Synchronous Queue에서는 이벤트를 즉각적으로 비어있는 워커 쓰레드로 보내는 역할. 만약 모든 워커 쓰레드가 바쁜 상황이라면 가능해질 때까지 작업을 중지함. Worker Thread에서 Filter, Output 작업 수행
+![](.gitbook/assets/filebeat-execution-model.png) Input Threads + Worker Threads Synchronous Queue에서는 이벤트를 즉각적으로 비어있는 워커 쓰레드로 보내는 역할. 만약 모든 워커 쓰레드가 바쁜 상황이라면 가능해질 때까지 작업을 중지함. Worker Thread에서 Filter, Output 작업 수행
 
 파이프라인 설정 1. _--pipeline-workers_ - 쓰레드 갯수 지정 2. _--pipeline-batch-size_ - 각 워커 쓰레드가 한번에 가져갈 수 있는 이벤트의 최대 양 지정 3. _--pipeline-batch-delay_ - 이벤트를 받아서 처리하는 사이의 시간 지정
 
@@ -147,7 +147,7 @@ filebeat:
 
 **5. log rolling을 할 때, 파일 이름이 계속 바뀌게 되는데 새로운 파일로 인식하지 말아야 함.** -> filebeat가 파일을 이미 읽은 상태에서 파일 이름을 변경하여 같은 내용이 아웃풋에 쌓이는지 확인 -> filebeat가 열고 있는 상황에서는 파일의 변경, 삭제가 불가능. (Text busy file) -> ignore\_older을 짧게(1s)로 설정하여 변경 가능하게끔 만듬 -> 파일 이름을 변경하고, `echo "test line" >> ./ignored_log_file.log` 등을 통해 테스트 해본 결과 ignore 되었던 파일의 이름이 수정되더라도 변경된 부분만 인식하는 걸 확인.
 
-**6. filebeat에서 파일을 읽고 있을 때, log rolling이 정상적으로 일어날 수 있어야 함.** -> 테스트 log4j rolling property MaxFileSize=5KB, MaxBackupIndex=5 -> 정상적인 상황 ![](.gitbook/assets/정상.PNG) -> filebeat를 실행해놓은 상황 ~~-> filebeat에서 파일을 읽고 있을 때에는 log4j의 log rolling이 정상적으로 일어나지 않고, 기존의 파일에다가 계속해서 써넣는 것을 확인할 수 있음.~~
+**6. filebeat에서 파일을 읽고 있을 때, log rolling이 정상적으로 일어날 수 있어야 함.** -> 테스트 log4j rolling property MaxFileSize=5KB, MaxBackupIndex=5 -> 정상적인 상황 ![](.gitbook/assets/undefined.PNG) -> filebeat를 실행해놓은 상황 ~~-> filebeat에서 파일을 읽고 있을 때에는 log4j의 log rolling이 정상적으로 일어나지 않고, 기존의 파일에다가 계속해서 써넣는 것을 확인할 수 있음.~~
 
 #### 문제점
 
