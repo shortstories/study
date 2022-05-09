@@ -42,20 +42,20 @@ fluentd -c $FLUENT_HOME/listener.conf -vv
 
 ### Tail -> Memory buffer -> Forward
 
-&#x20;**in\_tail**&#x20;
+** in\_tail **
 
 * 특정 디렉토리/파일을 지정, 각 라인 단위로 잘라서 버퍼로 저장하는 역할
 * 같은 파일을 여러번 읽지 않도록 pos\_file을 지정할 수 있음
 * 다 읽은 파일을 처리하는 옵션이 없어 별도의 스크립트 등으로 처리해야함
 
-&#x20;**memory buffer**&#x20;
+** memory buffer **
 
 * buffer chunk를 저장하기 위해 메모리를 사용
 * default인 file buffer에 비해 빠른 성능을 가짐
 * fluentd 인스턴스가 종료되었을 때, 버퍼에 들어있던 데이터가 사라짐
 * 필요한 데이터가 이미 파일로 남아있으므로 두번 파일로 저장할 필요가 없어 memory buffer 사용
 
-&#x20;**out\_forward**&#x20;
+** out\_forward **
 
 * 보통 Fluentd에서 다층 구조를 구현하기위해 사용하는 옵션
 * 자동적으로 Load balancing과 fail over 지원
@@ -64,17 +64,17 @@ fluentd -c $FLUENT_HOME/listener.conf -vv
 
 ### Forward -> File buffer -> HDFS(|| File)
 
-&#x20;**in\_forward**&#x20;
+** in\_forward **
 
 * 보통 Fluentd에서 다층 구조를 구현하기위해 사용하는 옵션
 * 자동적으로 Load balancing과 fail over 지원
 
-&#x20;**file buffer**&#x20;
+** file buffer **
 
 * buffer chunk를 저장하기 위해서 파일을 이용
 * default 값으로, 각종 장애에 우수한 신뢰도를 보여줌
 
-&#x20;**out\_webhdfs**&#x20;
+** out\_webhdfs **
 
 * HDFS에 파일을 저장하기 위해서 사용
 * 경우에 따라서는 이것을 사용하지 않고 그냥 file로 저장한 후 현재 listener에서 사용중인 스크립트를 쓰는 것도 고려해볼 수 있음
@@ -85,7 +85,7 @@ fluentd -c $FLUENT_HOME/listener.conf -vv
 
 ### Consumer \[xdevnnidb02.npush] -> Listener \[xdevnnidb01.npush]
 
-&#x20;**Buffer size**&#x20;
+** Buffer size **
 
 | Buffer size, Queue length | avg CPU (%) | time (s) | TPS   | MBps       | 비고 |
 | ------------------------- | ----------- | -------- | ----- | ---------- | -- |

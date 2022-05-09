@@ -1,6 +1,6 @@
 # Image 개요
 
-![https://github.com/google/go-containerregistry](<../.gitbook/assets/image (7).png>)
+![https://github.com/google/go-containerregistry](../.gitbook/assets/image%20%287%29.png)
 
 
 
@@ -36,3 +36,4 @@ layer는 read-only이다. 컨테이너 안에서 아무리 파일을 생성하�
 이미지를 빌드할 때 하나의 Dockerfile 커맨드를 실행하는 것은 새로운 컨테이너를 생성하고, 그 안에서 정의된 동작을 수행하고, 결과를 `docker diff` 및 `docker commit` 하는 것과 같다.
 
 docker v1.10 이전에는 layer의 ID가 곧 이미지의 ID였고 이 값은 랜덤이었다. 그러나 v1.10 이후부터는 layer의 내용물을 해싱해서 ID로 사용한다.
+

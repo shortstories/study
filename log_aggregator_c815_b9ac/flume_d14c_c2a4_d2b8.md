@@ -39,7 +39,7 @@ flume-ng version
 
 #### Consumer Agent
 
-&#x20;**Spooling Directory Sources --- Memory Channel ----> Avro Sink (Load balancing Sink Processor)**&#x20;
+** Spooling Directory Sources --- Memory Channel ----> Avro Sink (Load balancing Sink Processor) **
 
 * Spooling Directory Sources
   * 특정 directory를 지정하면 그 안에 있는 파일과 생기는 파일들을 일괄 읽어 line 단위 Event로 만드는 Source
@@ -60,7 +60,7 @@ flume-ng version
 
 #### Listener Agent
 
-&#x20;**Avro Source --- File Channel ----> HDFS Sink (|| File Roll Sink)**&#x20;
+** Avro Source --- File Channel ----> HDFS Sink (|| File Roll Sink) **
 
 * Avro Sources
   * Consumer Agent에서 Avro Sink를 목표로 보내는 event들을 source로 이용
@@ -76,7 +76,7 @@ flume-ng version
 
 #### Consumer \[xdevnnidb02.npush] -> Listener \[dev-ohchang.ncl]
 
-&#x20;**Batch size**&#x20;
+** Batch size **
 
 | batch size | avg CPU (%) | time (s) | TPS  | MBps      |
 | ---------- | ----------- | -------- | ---- | --------- |
@@ -90,7 +90,7 @@ flume-ng version
 
 #### Consumer \[xdevnnidb02.npush] -> Listener \[xdevnnidb01.npush]
 
-&#x20;**Batch size**&#x20;
+** Batch size **
 
 | batch size | avg CPU (%) | time (s) | TPS   | MBps       | 비고                                                    |
 | ---------- | ----------- | -------- | ----- | ---------- | ----------------------------------------------------- |
@@ -173,8 +173,8 @@ flume-ng version
 ### 실행 방법
 
 * 실행할 때 -z, -p 옵션을 주어서 실행.
-  * &#x20;**-z** : Zookeeper 쿼럼의 주소:포트. 여러 개 등록 가능.
-  *   &#x20;**-p** : Flume Config node가 올라갈 Zookeeper 내부 path
+  * ** -z ** : Zookeeper 쿼럼의 주소:포트. 여러 개 등록 가능.
+  *   ** -p ** : Flume Config node가 올라갈 Zookeeper 내부 path
 
       `flume-ng agent --conf {ConfPath} -z {host:port}[,{host:port}] -p {flumeNode} --name {agentName} -Dflume.root.logger=INFO,console`
 

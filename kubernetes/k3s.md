@@ -8,7 +8,7 @@
 
 ```bash
 INSTALL_K3S_VERSION='v1.16.15+k3s1'
-**curl -sfL <https://get.k3s.io> | sh -**
+curl -sfL <https://get.k3s.io> | sh -
 ```
 
 ## 삽질
@@ -30,8 +30,8 @@ Waiting for containerd startup: rpc error: code = Unimplemented desc = unknown s
 ```bash
 $ sudo cat /etc/systemd/system/k3s.service
 # ...
-ExecStart=/usr/local/bin/k3s \\
-    server --docker \\
+ExecStart=/usr/local/bin/k3s \
+    server --docker \
 
 $ sudo systemctl daemon-reload && sudo systemctl restart k3s
 # ...
@@ -77,8 +77,8 @@ k3s의 경우 k3s의 data 와 kubelet root를 모두 설정해야하는데 아�
 ```bash
  $ sudo cat /etc/systemd/system/k3s.service
 # ...
-ExecStart=/usr/local/bin/k3s \\
-    server --docker --data-dir=/home1/irteamsu/k3s-home --kubelet-arg=root-dir=/home1/irteamsu/kubelet-home \\
+ExecStart=/usr/local/bin/k3s \
+    server --docker --data-dir=/home1/irteamsu/k3s-home --kubelet-arg=root-dir=/home1/irteamsu/kubelet-home \
 ```
 
 이후 systemctl로 서비스 재시작하면 적용 완료

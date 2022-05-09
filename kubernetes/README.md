@@ -94,3 +94,4 @@ deployment는 pod을 어떻게 생성하고 관리할 것인지를 정의한다.
 배포는 deployment - pod - container
 
 아키텍쳐는 front service - middle service - back service - ... 기타 등등 아무튼 서비스와 서비스간의 관계로 구성
+
