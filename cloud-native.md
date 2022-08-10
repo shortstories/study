@@ -22,7 +22,7 @@
 
 ## Beyond the Twelve-Factor App ([https://github.com/ffisk/books/blob/master/beyond-the-twelve-factor-app.pdf](https://github.com/ffisk/books/blob/master/beyond-the-twelve-factor-app.pdf))
 
-처음에 Heroku에서 2012년에 12 Factors([https://12factor.net/](https://12factor.net))라는걸 만들어냄.
+처음에 Heroku에서 2012년에 12 Factors([https://12factor.net/](https://12factor.net/))라는걸 만들어냄.
 
 1. Codebase: 코드는 반드시 버전 컨트롤 시스템을 통해 관리되어야 함. 하나의 코드베이스는 하나의 앱과 1:1 관계가 성립해야 함. 버전이나 환경에 따라 하나의 코드베이스에 대해 배포는 여러개가 될 수 있음.
 2. Dependencies: 모든 디펜던시는 명시적으로 선언되어야 함. 또한 이러한 디펜던시들을 엄격하게 분리해서 매번 실행할 때마다 특정 디펜던시의 버전이 바뀌거나 하는 일들을 막아야 함.

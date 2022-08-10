@@ -1,29 +1,125 @@
 # Buildkit
 
-### LLB
+1.  buildkit
 
-LLB = low-level builder LLB는 빌드 중간과정의 바이너리 포맷. LLVM이랑 비슷한 개념으로 생각하면 될듯.
+    moby 프로젝트의 일환으로 2017년부터 분리하여 개발 시작. 2018년 도커 18.09버전부터 도커엔진에 정식으로 탑재됨. 모비 엔진 빌드 기능의 성능, 스토리지 관리, 확장성 개선을 목표로 함. 기존의 `docker build`를 완전히 대체하는 것을 목표로 개발되고 있음 ([https://github.com/moby/moby/issues/40379](https://github.com/moby/moby/issues/40379))
 
-![](../.gitbook/assets/image%20%2811%29.png)
+    `DOCKER_BUILDKIT=1 docker build .`
 
-LLB는 위와 같이 content-addressable dependency graph 로 정의된다고 볼 수 있음. 덕분에 캐싱 모델도 기존 Dockerfile builder와 완전히 달라짐. 관습적으로 이미지를 비교하는 대신에 LLB에 정의된 build graph 각 node의 checksum과 mount된 content들을 바탕으로 비교하게 됨.
-
-또한 LLB는 Dockerfile에서 지원하지 않는 추가기능들을 제공함. 예를들면 direct data mounting이나 nested invocation등이 있음.
-
- LLB는 golang client로 생성할 수 있음. 근데 보통 사용자들은 LLB를 직접 생성하기보다는 frontend를 사용하게 됨.
-
- frontend는 human-readable build format을 받아서 이걸 LLB로 만들어주는 역할을 수행하는 컴포넌트임. frontend들은 image로 배포되기 때문에 사용자들이 원하는 버전과 종류를 골라서 사용할 수 있음.
-
-LLB의 특징은 다음과 같음.
-
-1. Protobuf message로 marshaled 됨
-2. 동시 실행이 가능
-3. 효율적인 캐싱 가능
-4. 벤더에 중립적임. 즉 Dockerfile이 아닌 다른 언어로도 만드는게 가능해짐
+    `docker buildx build`
 
 
+2.  LLB (Low-Level Builder)
 
+    ```bash
+    {
+      "Op": {
+        "Op": {
+          "source": {
+            "identifier": "docker-image://docker.io/library/alpine:latest"
+          }
+        },
+        "platform": {
+          "Architecture": "amd64",
+          "OS": "linux"
+        },
+        "constraints": {}
+      },
+      "Digest": "sha256:665ba8b2cdc0cb0200e2a42a6b3c0f8f684089f4cd1b81494fbb9805879120f7",
+      "OpMetadata": {
+        "caps": {
+          "source.image": true
+        }
+      }
+    }
+    ```
 
+    LLB는 저수준 바이너리 포맷으로, 빌드에 필요한 의존성 그래프를 그리는 것에 사용됨. LLB와 Dockerfile의 관계가 LLVM IR과 C언어의 관계와 동일하다고 보면 됨. LLB의 경우 특정 플랫폼에 구애받지 않아 다양한 문법으로 구현할 수 있음. Dockerfile 외에도 Mockerfile이라던가 Gockerfile, HLB와 같은 LLB를 지원하는 여러 문법들이 존재하고 있고, 아예 코드를 짜서 이미지를 빌드하는것도 가능함.
+3. 개선점
+   1.  자동화된 GC
 
+       주어진 gcpolicy에 따라 저장된 layer들을 자동으로 정리하는 기능이 추가됨
 
+       ```bash
+       [worker.oci]
+         [[worker.oci.gcpolicy]]
+           keepBytes = 512000000
+           keepDuration = 172800
+           filters = [ "type==source.local", "type==exec.cachemount", "type==source.git.checkout"]
+         [[worker.oci.gcpolicy]]
+           all = true
+           keepBytes = 1024000000
+       ```
+   2.  손쉬운 Multi-Platform 빌드 지원
 
+       `platform=linux/amd64,linux/arm64`와 같이 platform을 지정해서 이미지를 빌드할 수 있게 추가되었음. 단, 사용자의 Dockerfile에 이미 관련 내용이 추가되어있어야 함. `FROM **--platform=$BUILDPLATFORM** golang:1.17-alpine AS build`
+   3.  병렬 빌드 지원
+
+       multi-staged 빌드의 경우 각 stage가 모두 병렬로 실행되며 만약 서로 다른 두 \*\*stage 사이에 의존 관계가 있는 경우에만 완료를 기다림.
+   4.  개선된 캐시 기능
+
+       LLB 각 operation의 checksum과 마운트된 데이터를 비교해서 사용하는 새로운 캐싱 시스템이 적용됨. 이에 따라 좀 더 빠르고 정확한 캐싱이 가능함. 또한 캐시의 export/import를 지원함. 캐시를 로컬 저장소 뿐만 아니라 registry에 저장하여 여러 buildkit daemon들이 cache를 공유하게 하는 것도 가능해짐.
+   5.  새로운 빌드 기능 제공
+
+       이미지를 빌드할 때 캐시 전용 공간이나 secret 등을 mount 할 수 있는 기능이 추가되었고, network mode나 security context를 설정하는 기능등 다양한 기능들을 새로운 Dockerfile 문법과 함께 제공 중.
+   6. rootless로 사용 가능
+4. buildkit에 최적화된 Dockerfile 작성방법
+   1.  최대한 stage를 잘게 나눠서 사용하기
+
+       stage를 나눠서 구성했을 때 buildkit의 병렬 빌드 기능을 최대한 활용할 수 있음. 뿐만 아니라 완성된 이미지의 크기를 좀 더 작게 관리할 수 있음.
+
+       1.  base stage를 만들어 여러 stage에서 공유하기
+
+           ```docker
+           FROM ubuntu AS base
+           RUN apt-get update && apt-get install git
+
+           FROM base AS src1
+           RUN git clone …
+
+           FROM base AS src2
+           RUN git clone …
+           ```
+       2.  불필요한 stage는 건너뛸 수 있게 구성하기
+
+           ```docker
+           ARG BUILD_VERSION=1
+
+           FROM alpine AS base
+           RUN …
+
+           FROM base AS branch-version-1
+           RUN touch version1
+
+           FROM base AS branch-version-2
+           RUN touch version2
+
+           FROM branch-version-${BUILD_VERSION} AS after-condition
+
+           FROM after-condition
+           RUN …
+           ```
+   2.  dependency를 저장할 때는 `--mount=cache`를 활용하기
+
+       ```docker
+       # syntax=docker/dockerfile:1.2
+       # Build Stage
+       FROM reg.navercorp.com/base/centos7/jdk11/maven:3.6.3 as builder
+
+       COPY pom.xml /home1/irteam/pom.xml
+       # uid=500(irteam), gid=500(irteam) 
+       RUN --mount=type=cache,target=/home1/irteam/.m2,id=java-sample-cache,uid=500,gid=500 \
+           mvn -Dmaven.repo.local=/home1/irteam/.m2/repository dependency:go-offline
+
+       COPY src /home1/irteam/src
+       RUN --mount=type=cache,target=/home1/irteam/.m2,id=java-sample-cache,uid=500,gid=500 \
+           mvn -Dmaven.repo.local=/home1/irteam/.m2/repository install
+
+       # Main Stage
+       ARG DEPENDENCY=/home1/irteam/build/dependency
+       COPY --from=builder ${DEPENDENCY}/BOOT-INF/lib /home1/irteam/apps/spring-boot-app/lib
+       COPY --from=builder ${DEPENDENCY}/META-INF /home1/irteam/apps/spring-boot-app/META-INF
+
+       COPY entrypoint.sh /home1/irteam/entrypoint.sh
+       ENTRYPOINT ["/home1/irteam/entrypoint.sh"]
+       ```
