@@ -419,7 +419,7 @@
 
 #### /etc/wsl.conf
 
-```text
+```
 [automount]
 enabled = true
 root = /
@@ -456,9 +456,19 @@ $ sudo apt install build-essential zsh
 
 #### 키보드 shift space, 한영키 동시에 먹히게 만들기
 
-{% file src="../.gitbook/assets/shift-space\_default-.reg" %}
+{% file src="../.gitbook/assets/shift-space_default-.reg" %}
 
+#### Golang 환경 세팅&#x20;
 
+1. [https://go.dev/dl/](https://go.dev/dl/) 다운로드
+   1. windows의 경우 그냥 msi버전 다운로드 받아서  설치하고 끝
+   2. linux의 경우 압축 해제 후 $GOROOT, $GOPATH 및 $PATH 등록&#x20;
+
+```
+$ git config core.fileMode false
+$ git config --global credential.helper store
+$ git config --global url.ssh://git@oss.navercorp.com/.insteadOf https://oss.navercorp.com/
+```
 
 
 
