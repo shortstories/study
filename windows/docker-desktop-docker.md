@@ -66,6 +66,45 @@ echo \
 sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
+`sudo vi /etc/docker/daemon.json` 명령어로  아래와 같이 daemon config을 만든 다음&#x20;
+
+```json
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": true,
+  "features": {
+    "buildkit": true
+  },
+  "hosts": [
+    "fd://",
+    "unix:///var/run/docker.sock",
+    "tcp://0.0.0.0:2375"
+  ]
+}
+```
+
+
+
+`sudo vi /lib/systemd/system/docker.service` 명령어를 실행하여 아래와 같이 수정.
+
+```systemd
+# ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+ExecStart=/usr/bin/dockerd --containerd=/run/containerd/containerd.sock
+```
+
+그 다음 아래 명령어로 재시작 및 실행 확인
+
+```shell
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+sudo netstat -lntp | grep dockerd
+```
+
 ### 3. k3s 설치
 
 ```bash
