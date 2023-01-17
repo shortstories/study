@@ -48,6 +48,8 @@ netsh.exe interface portproxy add v4tov4 listenport=2375 connectport=2375 connec
 netsh.exe interface portproxy add v4tov4 listenport=6443 connectport=6443 connectaddress=$wsl_ip
 ```
 
+다음부터 docker가 필요하면 터미널에서 새로 만든 ubuntu를 실행하면 됨. 단, 관리자 계정으로 실행하도록 설정 수정 필요.
+
 ### 2. docker daemon 설치
 
 ```bash
@@ -118,6 +120,8 @@ curl -sfL https://get.k3s.io | sh -s - --docker
 ```bash
 wsl_ip=$(ip addr show eth0 | grep -oP "(?<=inet\s)\d+(\.\d+){3}")
 export DOCKER_HOST=tcp://$wsl_ip:2375
+netsh.exe interface portproxy add v4tov4 listenport=2375 connectport=2375 connectaddress=$wsl_ip
+netsh.exe interface portproxy add v4tov4 listenport=6443 connectport=6443 connectaddress=$wsl_ip
 ```
 
 ### 5. k3s 서버 정보 및 인증 정보 가져오기
