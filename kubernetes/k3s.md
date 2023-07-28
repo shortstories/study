@@ -50,7 +50,7 @@ buildkitd: /builder/home/.local/share/buildkit/runc-overlayfs/snapshots does not
 확인해보니까 내 서버의 파일시스템이 xfs인데.. 파일시스템이 xfs이면 ftype이라는 옵션이 1이어야한다는 것. 근데 centos 구버전에서는 이 옵션의 기본값이 0으로 설정됨.
 
 ```bash
-[irteamsu@dev-ohchang-k8s-ncl ~]$ sudo /sbin/xfs_info /
+$ sudo /sbin/xfs_info /
 meta-data=/dev/xvda1             isize=256    agcount=4, agsize=655360 blks
          =                       sectsz=512   attr=2, projid32bit=1
          =                       crc=0        finobt=0 spinodes=0
@@ -78,7 +78,7 @@ k3s의 경우 k3s의 data 와 kubelet root를 모두 설정해야하는데 아�
  $ sudo cat /etc/systemd/system/k3s.service
 # ...
 ExecStart=/usr/local/bin/k3s \
-    server --docker --data-dir=/home1/irteamsu/k3s-home --kubelet-arg=root-dir=/home1/irteamsu/kubelet-home \
+    server --docker --data-dir=~/k3s-home --kubelet-arg=root-dir=~/kubelet-home \
 ```
 
 이후 systemctl로 서비스 재시작하면 적용 완료

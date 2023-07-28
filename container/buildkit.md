@@ -104,22 +104,21 @@
        ```docker
        # syntax=docker/dockerfile:1.2
        # Build Stage
-       FROM reg.navercorp.com/base/centos7/jdk11/maven:3.6.3 as builder
+       FROM maven as builder
 
-       COPY pom.xml /home1/irteam/pom.xml
-       # uid=500(irteam), gid=500(irteam) 
-       RUN --mount=type=cache,target=/home1/irteam/.m2,id=java-sample-cache,uid=500,gid=500 \
+       COPY pom.xml ~/pom.xml
+       RUN --mount=type=cache,target=~/.m2,id=java-sample-cache,uid=500,gid=500 \
            mvn -Dmaven.repo.local=/home1/irteam/.m2/repository dependency:go-offline
 
-       COPY src /home1/irteam/src
-       RUN --mount=type=cache,target=/home1/irteam/.m2,id=java-sample-cache,uid=500,gid=500 \
-           mvn -Dmaven.repo.local=/home1/irteam/.m2/repository install
+       COPY src ~/src
+       RUN --mount=type=cache,target=~/.m2,id=java-sample-cache,uid=500,gid=500 \
+           mvn -Dmaven.repo.local=~/.m2/repository install
 
        # Main Stage
-       ARG DEPENDENCY=/home1/irteam/build/dependency
-       COPY --from=builder ${DEPENDENCY}/BOOT-INF/lib /home1/irteam/apps/spring-boot-app/lib
-       COPY --from=builder ${DEPENDENCY}/META-INF /home1/irteam/apps/spring-boot-app/META-INF
+       ARG DEPENDENCY=~/build/dependency
+       COPY --from=builder ${DEPENDENCY}/BOOT-INF/lib ~/apps/spring-boot-app/lib
+       COPY --from=builder ${DEPENDENCY}/META-INF ~/apps/spring-boot-app/META-INF
 
-       COPY entrypoint.sh /home1/irteam/entrypoint.sh
-       ENTRYPOINT ["/home1/irteam/entrypoint.sh"]
+       COPY entrypoint.sh ~/entrypoint.sh
+       ENTRYPOINT ["~/entrypoint.sh"]
        ```
