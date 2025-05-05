@@ -128,6 +128,7 @@
 * [리액티브 프로그래밍](bc18-c751-d615-d504-b85c-adf8-b798-bc0d3f.md)
 * [Linux Settings](linux-settings/README.md)
   * [홈서버 백업 및 복구기](linux-settings/undefined.md)
+  * [홈서버 트러블슈팅](linux-settings/undefined-1.md)
 * [Kubernetes](kubernetes/README.md)
   * [k3s 설치 및 삽질](kubernetes/k3s.md)
   * [pod resources](kubernetes/pod-resources.md)
