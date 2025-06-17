@@ -141,6 +141,7 @@
   * [Aggrerated API server](kubernetes/aggrerated-api-server.md)
   * [Accessing the API](kubernetes/accessing-the-api/README.md)
     * [Authenticating](kubernetes/accessing-the-api/authenticating.md)
+  * [APF](kubernetes/apf.md)
 * [Sonarqube](sonarqube.md)
 * [HTTP/2](http2.md)
 * [Go](go/README.md)
